@@ -91,10 +91,15 @@ public class QuestionPage extends HttpServlet {
             else{
                 QuestionDao questionDao = new QuestionDao();
                 List<Question> questions = questionDao.getQuestionByExamId(examId,conn);
-                for (Question q : questions)
-                    System.out.println("question --> "+q.getTitle());
                 String courseSession = (String)session.getAttribute("courseSession");
-                
+                Course course = (Course)session.getAttribute("course");
+                String courseTitle = course.getTitle();
+                Exam exam = (Exam)session.getAttribute("exam");
+                String examTitle = exam.getTitle();
+                String path = "Questions\\"+courseSession+"\\"+courseTitle+"\\"+examTitle+"\\";
+                for (Question q : questions){
+                    
+                }
             }
         }
         else 
