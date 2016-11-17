@@ -93,6 +93,8 @@ public class QuestionPage extends HttpServlet {
                 List<Question> questions = questionDao.getQuestionByExamId(examId,conn);
                 for (Question q : questions)
                     System.out.println("question --> "+q.getTitle());
+                String courseSession = (String)session.getAttribute("courseSession");
+                
             }
         }
         else 
