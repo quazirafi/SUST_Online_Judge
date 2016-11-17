@@ -1,0 +1,8 @@
+session.setAttribute("conn", conn);
+session.setAttribute("teacher", teacher);
+session.setAttribute("tracker", "teacher");
+session.setAttribute("courseSession", "2012");
+session.setAttribute("student", student);
+session.setAttribute("tracker", "student");
+session.setAttribute("course", course);
+session.setAttribute("exam",exmDao.getExamById(examId,conn));
