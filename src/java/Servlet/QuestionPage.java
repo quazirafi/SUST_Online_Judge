@@ -98,7 +98,7 @@ public class QuestionPage extends HttpServlet {
                 String examTitle = exam.getTitle();
                 String path = "Questions\\"+courseSession+"\\"+courseTitle+"\\"+examTitle+"\\";
                 for (Question q : questions){
-                    
+                    q.setPath(path+"\\"+q.getTitle());
                 }
             }
         }
