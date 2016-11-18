@@ -110,7 +110,7 @@
                                     <c:forEach items="${questions}" var="questions">
                                 	<tr>
 						<td>${questions.getCounter()}</td>
-                                                <td><a onclick="goTo(${questions.getPath()})" id="${questions.getCounter()}" value="${questions.getPath()}" data-toggle="modal" data-target="#myModal" >${questions.getTitle()}</a></td>					
+                                                <td><a onclick="goTo('Questions\\q2.txt')" id="${questions.getCounter()}" value="${questions.getPath()}" data-toggle="modal" data-target="#myModal" >${questions.getTitle()}</a></td>					
 						<td>${questions.getScore()}</td>
 						<td><a class="btn btn-info btn-sm removebutton" onclick="" title="Remove"><i
 									class="glyphicon glyphicon-remove "></i></a>
@@ -157,17 +157,16 @@ $(document).ready(function(){
     $('#taskTable').DataTable();
     
         
-        function goTo(path){
-            alert(path);
-//             $.ajax({
-//                    url: path,
-//                    dataType: "text",
-//                    success: function (data) {
-//                        $("#text1").html(data);
-//                    }
-//                });
-        }
-      
+        
+             $.ajax({
+                    url: path,
+                    dataType: "text",
+                    success: function (data) {
+                        $("#text1").html(data);
+                    }
+                });
+        
+}      
            
                 
             
