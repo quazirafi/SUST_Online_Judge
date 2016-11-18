@@ -67,9 +67,11 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        int userId = Integer.parseInt(request.getParameter("user_name"));
+          int flag=0;// flag is for detecting weather the input is student's regNo or Teacher's codename 
+
+        String userId = (request.getParameter("user_name")).toString();
         String password = request.getParameter("password");
+        
         
         DatabaseConnector dc = new DatabaseConnector();
         Connection conn = dc.setConnectionWithMySql();
@@ -80,10 +82,21 @@ public class Login extends HttpServlet {
         CourseDao courseDao = new CourseDao();
         Student student;
         StudentDao studentDao = new StudentDao();
+        for(int i=0;i<userId.length();i++)
+        {
+            if((userId.charAt(i)>='a'&&userId.charAt(i)<='z')||(userId.charAt(i)>='A'&&userId.charAt(i)<='Z'))
+            {
+              
+                
+                flag=1;
+                 break;
+            }
+        }
         
-        if (userId<2000000000){
+        if (flag==1){
             teacher = (Teacher)teacherDao.getTeacherByUserIdPassword(userId,password,conn);
             if (teacher == null){
+             
                 request.setAttribute("message", "Invalid userid or password");
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
@@ -94,7 +107,8 @@ public class Login extends HttpServlet {
                 session.setAttribute("teacher", teacher);
                 session.setAttribute("tracker", "teacher");
                 session.setAttribute("courseSession", "2012");
-                courses = courseDao.getCourseByTeacherId(userId,conn,2012);
+                courses = courseDao.getCourseByTeacherId(teacher.getTeacherId(),conn,2012);
+              
                 for (Course c :  courses){
                     System.out.println(c.getTitle());
                 }
@@ -104,7 +118,8 @@ public class Login extends HttpServlet {
             }   
         }
         else{
-            student = (Student)studentDao.getStudentByRegnoPassword(userId,password,conn);
+         int   studentRegId = Integer.parseInt(request.getParameter("user_name")); //Change it to studentRegId from userId
+            student = (Student)studentDao.getStudentByRegnoPassword(studentRegId,password,conn);
             if (student == null){
                 request.setAttribute("message", "Invalid userid or password");
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");

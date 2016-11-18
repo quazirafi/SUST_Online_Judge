@@ -10,15 +10,16 @@ package Entity;
  * @author DANA
  */
 public class Teacher {
-   private int teacherId;
+   private String codeName;
    private String password;
+   int id;
 
-    public int getTeacherId() {
-        return teacherId;
+    public String getTeacherCodeName() {
+        return codeName;
     }
 
-    public void setTeacherId(int teacherId) {
-        this.teacherId = teacherId;
+    public void setTeacherCodeName(String codeName) {
+        this.codeName = codeName;
     }
 
     public String getPassword() {
@@ -28,7 +29,17 @@ public class Teacher {
     public void setPassword(String password) {
         this.password = password;
     }
-
+     public int getTeacherId()
+      {
+          
+          return id;
+      }
+     public void setTeacherId(int id)
+     {
+         this.id=id;
+         
+     }
+    
     public String getFullName() {
         return fullName;
     }

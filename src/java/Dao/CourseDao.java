@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CourseDao {
-    public List<Course> getCourseByTeacherId(int userId, Connection conn,int courseSession) {
+    public List<Course> getCourseByTeacherId(int teacher_id, Connection conn,int courseSession) {
         ArrayList<Course> courses = new ArrayList<Course>();
         ArrayList<Integer> courseIds = new ArrayList<Integer>();
         Course course;
@@ -20,7 +20,9 @@ public class CourseDao {
             
             Statement stmt = conn.createStatement();
             String sql;
-            sql = "SELECT * from course_teacher where teacher_id=" + userId;
+            
+            sql = "SELECT * from course_teacher where teacher_id="+teacher_id ;
+            
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
@@ -67,6 +69,7 @@ public class CourseDao {
             return null;
         }
     }
+    
     
     public List<Course> getCourseByStudentId(int userId, Connection conn,int courseSession) {
         ArrayList<Course> courses = new ArrayList<Course>();
@@ -129,8 +132,7 @@ public class CourseDao {
         
         int count = 0;
         try {
-            
-            Statement stmt = conn.createStatement();
+             Statement stmt = conn.createStatement();
             String sql;
             sql = "SELECT * from course_teacher where course_id=" + courseId+" and teacher_id="+teacherId;
             ResultSet rs = stmt.executeQuery(sql);
