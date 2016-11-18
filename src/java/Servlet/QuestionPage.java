@@ -98,8 +98,12 @@ public class QuestionPage extends HttpServlet {
                 String examTitle = exam.getTitle();
                 String path = "Questions\\"+courseSession+"\\"+courseTitle+"\\"+examTitle+"\\";
                 for (Question q : questions){
-                    q.setPath(path+"\\"+q.getTitle());
+                    q.setPath(path+"Q"+q.getCounter()+"\\"+q.getQuestionFileName());
+                    System.out.println("path --> "+q.getPath());
                 }
+                request.setAttribute("questions", questions);
+                RequestDispatcher rd = request.getRequestDispatcher("QuestionPage.jsp");
+                rd.forward(request, response);
             }
         }
         else 
