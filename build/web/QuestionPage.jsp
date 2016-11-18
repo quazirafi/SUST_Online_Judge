@@ -159,13 +159,13 @@ $(document).ready(function(){
         
         function goTo(path){
             alert(path);
-             $.ajax({
-                    url: path,
-                    dataType: "text",
-                    success: function (data) {
-                        $("#text1").html(data);
-                    }
-                });
+//             $.ajax({
+//                    url: path,
+//                    dataType: "text",
+//                    success: function (data) {
+//                        $("#text1").html(data);
+//                    }
+//                });
         }
       
            
