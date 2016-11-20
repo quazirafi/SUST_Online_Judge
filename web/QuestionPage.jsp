@@ -110,7 +110,7 @@
                                     <c:forEach items="${questions}" var="questions">
                                 	<tr>
 						<td>${questions.getCounter()}</td>
-                                                <td><a onclick="goTo('Questions\\q2.txt')" id="${questions.getCounter()}" value="${questions.getPath()}" data-toggle="modal" data-target="#myModal" >${questions.getTitle()}</a></td>					
+                                                <td><button style="border: none;cursor: pointer" data-toggle="modal" data-target="#myModal" value="${questions.getPath()}" onclick="loadDoc(this.value)">${questions.getTitle()}</button></td>					
 						<td>${questions.getScore()}</td>
 						<td><a class="btn btn-info btn-sm removebutton" onclick="" title="Remove"><i
 									class="glyphicon glyphicon-remove "></i></a>
@@ -135,7 +135,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Question</h4>
       </div>
       <div class="modal-body">
            <textarea id="text1" cols="80" rows="20" ></textarea>
@@ -152,36 +152,13 @@
 	<!-- body container -->
 </body>
 
-<script>
-$(document).ready(function(){
-    $('#taskTable').DataTable();
-    
-        
-        
-             $.ajax({
-                    url: path,
-                    dataType: "text",
-                    success: function (data) {
-                        $("#text1").html(data);
-                    }
-                });
-        
-}      
-           
-                
-            
-        
-});
-function goToUpdateTaskPage(taskId){
-	//alert("whoops!!!!");
-	window.location.href = "goToUpdateTaskPage?taskId="+taskId;
-}
-function goToAddTaskPage(){
-	//alert("whoops!!!!");
-	window.location.href = "goToAddTaskPage";
-}
-function fun1(){
-    $('#myText2').load("myText.txt");
-}
+<script>   
+function loadDoc(path) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", path, false);
+    xhttp.send();
+    document.getElementById("text1").innerHTML = xhttp.responseText;
+}    
 </script>
 </html>
+<!-- data-toggle="modal" data-target="#myModal" -->
