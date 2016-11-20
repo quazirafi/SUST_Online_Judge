@@ -3,13 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/G:/Study/4-1/Web%20Project/SUST_Online_Judge/src/java/Dao/TeacherDao.java</file>
-            <file>file:/G:/Study/4-1/Web%20Project/SUST_Online_Judge/src/java/Dao/CourseDao.java</file>
-            <file>file:/G:/Study/4-1/Web%20Project/SUST_Online_Judge/src/java/Servlet/CourseBySession.java</file>
-            <file>file:/G:/Study/4-1/Web%20Project/SUST_Online_Judge/src/java/Servlet/ExamPage.java</file>
-            <file>file:/G:/Study/4-1/Web%20Project/SUST_Online_Judge/src/java/Servlet/QuestionPage.java</file>
-            <file>file:/G:/Study/4-1/Web%20Project/SUST_Online_Judge/src/java/Entity/Teacher.java</file>
-            <file>file:/G:/Study/4-1/Web%20Project/SUST_Online_Judge/src/java/Servlet/Login.java</file>
+            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/web/login.jsp</file>
+            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/web/QuestionPage.jsp</file>
         </group>
     </open-files>
 </project-private>
