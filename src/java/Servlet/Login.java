@@ -119,6 +119,7 @@ public class Login extends HttpServlet {
         }
         else{
          int   studentRegId = Integer.parseInt(request.getParameter("user_name")); //Change it to studentRegId from userId
+         int student_session=studentRegId/1000000;
             student = (Student)studentDao.getStudentByRegnoPassword(studentRegId,password,conn);
             if (student == null){
                 request.setAttribute("message", "Invalid userid or password");
@@ -130,6 +131,7 @@ public class Login extends HttpServlet {
                 session.setAttribute("conn", conn);
                 session.setAttribute("student", student);
                 session.setAttribute("tracker", "student");
+                session.setAttribute("courseSession", ""+student_session);
                 courses = courseDao.getCourseByStudentId(student.getStudentId(),conn,2012);
 //                for (Course c :  courses){
 //                    System.out.println(c.getIsRunning());

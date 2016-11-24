@@ -79,6 +79,7 @@
                     <div class="col-xs-8">
                     </div>
                     <div class="col-xs-2">
+                        <c:if test="${tracker == 'teacher'}">
                         <select id="filter_session" class="form-control">
                             <option value="2010">2010</option>
                             <option value="2011">2011</option>
@@ -91,6 +92,7 @@
                             <i class="glyphicon glyphicon-plus-sign"></i> Go
                         </button>
                     </div>
+                        </c:if>
                 </div>
 
                 <!-- <input type="submit" value="go"> </input> -->

@@ -70,9 +70,11 @@ public class ExamPage extends HttpServlet {
         HttpSession session = request.getSession();
         String tracker = (String) session.getAttribute("tracker");
         Teacher teacher = (Teacher) session.getAttribute("teacher");
+        Student student=(Student) session.getAttribute("student");
         Connection conn = (Connection) session.getAttribute("conn");
         if (tracker.equals("teacher")) {
             System.out.println("INSIDE TEACHER LOGIC");
+            
             if (courseDao.findCourseByTeacherId(teacher.getTeacherId(), courseId, conn)) {
                 System.out.println("INIDE COURSE TEAHER LOGIC");
                 exams = (ArrayList<Exam>)examDao.getExamsByCourseId(courseId, conn);
@@ -120,6 +122,60 @@ public class ExamPage extends HttpServlet {
                 System.out.println("inside login.jsp exception");
                 response.sendRedirect("login.jsp");
             }
+        }
+        else if(tracker.equals("student")){
+           int student_id=  student.getStudentId();
+           exams=(ArrayList<Exam>) examDao.getExamsByCourseId(courseId, conn);
+           for(int i=0;i<exams.size();i++){
+               
+               boolean feedback=examDao.verifyExambystudentId(student_id, exams.get(i).getExamId(),conn);
+               if(!feedback)
+               {
+                   exams.remove(i);
+               }
+               
+           }
+            for (Exam e : exams) {
+                    System.out.println("INSIDE EXAM LOOP");
+                    String startDateString = e.getStartTime();
+                    //String endDateString = e.getEndTime();
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                   
+                    Date startDate,endDate;
+                    Date currentDate = new Date();
+                    System.out.print(df.format(currentDate)+" --> ");
+                    String newDateString="",newDateString2="";
+                    try {
+                        startDate = df.parse(startDateString);
+                        //endDate = df.parse(endDateString);
+                        newDateString = df.format(startDate);
+                        //newDateString2 = df.format(endDate);
+                        
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(startDate);
+                        calendar.add(Calendar.MINUTE,200);
+                        endDate = calendar.getTime();
+                        if (currentDate.before(startDate) && !e.getTitle().equals("no data available"))
+                            e.setStatus("upcoming");
+                        else if (currentDate.getTime() > endDate.getTime() && !e.getTitle().equals("no data available"))
+                            e.setStatus("finished");
+                        else if (!e.getTitle().equals("no data available"))
+                            e.setStatus("ongoing");
+                    } catch (Exception e2) {
+                        System.out.println("INSIDE THE EXCEPTION");
+                        e2.printStackTrace();
+                    }
+                }
+             Course course = courseDao.getCourseById(courseId, conn);
+                request.setAttribute("exams", exams);
+                request.setAttribute("courseTitle", course.getTitle());
+                session.setAttribute("course", course);
+                RequestDispatcher rd = request.getRequestDispatcher("ExamPage.jsp");
+                rd.forward(request, response);
+           
+           
+            
+            
         }
     }
 

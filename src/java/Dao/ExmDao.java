@@ -111,4 +111,31 @@ public class ExmDao {
                 }
         return exam;
     }
+    
+    public boolean verifyExambystudentId(int student_id,int examId,Connection conn)
+    {
+         int count = 0;
+         try {
+           
+
+                    Statement stmt = conn.createStatement();
+                    String sql;
+                    sql = "SELECT * from student_exam where exam_id=" + examId+"and student_id="+student_id;
+                    ResultSet rs = stmt.executeQuery(sql);
+
+                    while (rs.next()) {
+                        ++count;
+                    
+                    }
+
+                    rs.close();
+                    stmt.close();
+                } catch (Exception se) {
+                    se.printStackTrace();
+                }
+         if(count>0)
+        return true;
+         return false;
+        
+    }
 }

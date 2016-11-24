@@ -82,14 +82,19 @@
             <c:choose>
                 <c:when test="${course.getIsRunning() eq 1}">
                     <div class="col-xs-2">
-                        <button id="button_add_task" class="btn btn-success col-xs-12" onClick="goToAddTaskPage()">
+                        <c:if test="${tracker == 'teacher'}">
+
+                       <button id="button_add_task" class="btn btn-success col-xs-12" onClick="goToAddTaskPage()">
                             <i class="glyphicon glyphicon-plus-sign"></i> Add New Exam
-                        </button>		
+                        </button>
+                                 </c:if>
                     </div>
                     <div class="col-xs-2">
-                        <button id="button_add_task" class="btn btn-success col-xs-12" onClick="goToAddTaskPage()">
+                        <c:if test="${tracker == 'teacher'}">
+                            <button id="button_add_task" class="btn btn-success col-xs-12" onClick="goToAddTaskPage()">
                             <i class="glyphicon glyphicon-plus-sign"></i> Add From Previous
-                        </button>		
+                        </button>
+                            </c:if>
                     </div>
                 </c:when>
             </c:choose>
