@@ -123,10 +123,23 @@
 
                             <tr>
                                 <td><c:out value="${exams.getExamCount()}" /></td>
-                                <td><a
+                                <td>
+                                    <c:if test="${tracker=='student'}">
+                                        <c:set var="idNo"  value="${exams.getExamId()}"/>
+                                        <button style="border: none;cursor: pointer" data-toggle="modal"  class="btn" data-id=${exams.getExamId()}>
+                                            <c:out value="${exams.getTitle()}" />
+                                                
+                                            
+                                        </button>
+                                    </c:if>
+                                    <c:if test="${tracker=='teacher'}">
+                                    <a
                                         href="${pageContext.request.contextPath}/QuestionPage?examId=${exams.getExamId()}">
                                         <c:out value="${exams.getTitle()}" />
-                                    </a></td>					
+                                    </a>
+                                    </c:if>
+                                
+                                </td>					
                                 <td><c:out value="${exams.getStartTime()}" /></td>
                                 <td><c:out value="${exams.getDuration()}" /></td>
                                 <td><c:out value="${exams.getScore()}" /></td>
@@ -381,6 +394,29 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Exam Password</h4>
+        </div>
+        <div class="modal-body">
+            <form action="QuestionPage" method="post">
+             <input type="hidden" id="hid" name="examId" value=""><br>
+             
+  Password: <input type="password" name="password"><br>
+  <input type="submit" value="Submit">
+</form>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
             <!-- Modal delete -->
             <a href="${pageContext.request.contextPath}/courseback">Previous Page</a>
         </div>
@@ -389,8 +425,16 @@
 
     <script>
         //alert("alert");
+        var id="";
         $(document).ready(function () {
             $('#taskTable').DataTable();
+            $(".btn").click(function(){
+                var id=$(this).data('id');
+                document.getElementById('hid').value=id;
+               $('#myModal').modal('show'); 
+            });
         });
+        
+       
     </script>
 </html>

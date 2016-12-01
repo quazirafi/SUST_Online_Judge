@@ -47,7 +47,7 @@ public class ExmDao {
 
                     Statement stmt = conn.createStatement();
                     String sql;
-                    sql = "SELECT * from exam where exam_id=" + i.intValue();
+                    sql = "SELECT * from exam where exam_id = " + i.intValue();
                     ResultSet rs = stmt.executeQuery(sql);
 
                     while (rs.next()) {
@@ -120,7 +120,9 @@ public class ExmDao {
 
                     Statement stmt = conn.createStatement();
                     String sql;
-                    sql = "SELECT * from student_exam where exam_id=" + examId+"and student_id="+student_id;
+                    System.out.println("ExamId"+examId+"studentId"+student_id);
+                    sql="SELECT * from student_exam where student_id = "+student_id+" and exam_id = "+examId;
+                    //sql = "SELECT * from student_exam where exam_id=" + examId+"and student_id="+student_id;
                     ResultSet rs = stmt.executeQuery(sql);
 
                     while (rs.next()) {
@@ -131,11 +133,43 @@ public class ExmDao {
                     rs.close();
                     stmt.close();
                 } catch (Exception se) {
+                    System.out.println("Ekhane ");
                     se.printStackTrace();
                 }
          if(count>0)
         return true;
          return false;
         
+    }
+    public boolean VerifyExamPassword(String password,int examId, Connection conn){
+        
+         int count = 0;
+         try {
+             System.out.println("-->"+examId+"password-->"+password);
+           
+
+                    Statement stmt = conn.createStatement();
+                    String sql;
+                    String realPassword="";
+                    sql = "SELECT password from exam where exam_id = "+examId;
+                    ResultSet rs = stmt.executeQuery(sql);
+
+                    while (rs.next()) {
+                        realPassword=rs.getString("password").toString();
+                
+                    }        
+                    rs.close();
+                    stmt.close();
+                    
+                    if(realPassword.equals(password))
+                          return true;
+                    
+                    
+                    } catch (Exception se) {
+                    System.out.println("VerifyPassword er shot");
+                    se.printStackTrace();
+                }
+         return false;
+    
     }
 }

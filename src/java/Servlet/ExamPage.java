@@ -64,6 +64,7 @@ public class ExamPage extends HttpServlet {
         int courseId = Integer.parseInt(request.getParameter("courseId"));
         System.out.println("INSIDE EXAMPAEGE.java");
         ArrayList<Exam> exams;
+        ArrayList<Exam> exams2=new ArrayList<Exam>();
         ExmDao examDao = new ExmDao();
         CourseDao courseDao = new CourseDao();
 
@@ -125,17 +126,20 @@ public class ExamPage extends HttpServlet {
         }
         else if(tracker.equals("student")){
            int student_id=  student.getStudentId();
+          
            exams=(ArrayList<Exam>) examDao.getExamsByCourseId(courseId, conn);
-           for(int i=0;i<exams.size();i++){
-               
-               boolean feedback=examDao.verifyExambystudentId(student_id, exams.get(i).getExamId(),conn);
-               if(!feedback)
+          
+          
+             for(Exam e : exams){
+             boolean feedback=examDao.verifyExambystudentId(student_id,e.getExamId(),conn);
+               if(feedback==true)
                {
-                   exams.remove(i);
+                   exams2.add(e);
                }
                
            }
-            for (Exam e : exams) {
+           System.out.println("Size...."+exams2.size());
+            for (Exam e : exams2) {
                     System.out.println("INSIDE EXAM LOOP");
                     String startDateString = e.getStartTime();
                     //String endDateString = e.getEndTime();
@@ -167,8 +171,8 @@ public class ExamPage extends HttpServlet {
                     }
                 }
              Course course = courseDao.getCourseById(courseId, conn);
-                request.setAttribute("exams", exams);
-                request.setAttribute("courseTitle", course.getTitle());
+                session.setAttribute("exams", exams2);
+                session.setAttribute("courseTitle", course.getTitle());
                 session.setAttribute("course", course);
                 RequestDispatcher rd = request.getRequestDispatcher("ExamPage.jsp");
                 rd.forward(request, response);

@@ -65,10 +65,13 @@
                             <li><a>${student.getRegno()}</a></li>
                                 </c:when>
                             </c:choose>
+                                <c:if test="${tracker=='teacher'}">
                                 <li><a href="#">Questions</a></li>
 				<li><a href="#">Student Performance</a></li>
-				<li><a href="sign-in.html">Log out</a></li>
-			</ul>
+				</c:if>
+                                <li><a href="sign-in.html">Log out</a></li>
+			       
+                            </ul>
 		</div>
 	</div>
 	</nav>
@@ -77,15 +80,19 @@
 		<div class="row searchbar">
 			<div class="col-xs-8">
                             <p class="table-headertext">
+                                <c:if test="${tracker=='test'}">
 				Summary: <span id="course_code">54 Students attended,101 submissions</span>
-                            </p>
+                            </c:if>
+                              </p>
 			</div>
 			<c:choose>
                 <c:when test="${course.getIsRunning() eq 1}">
                     <div class="col-xs-2">
+                        <c:if test="${tracker=='teacher'}">
                         <button id="button_add_task" class="btn btn-success col-xs-12" onClick="goToAddTaskPage()">
                             <i class="glyphicon glyphicon-plus-sign"></i> Add New Question
-                        </button>		
+                        </button>
+                        </c:if>
                     </div>
                     
                 </c:when>
@@ -110,15 +117,23 @@
                                     <c:forEach items="${questions}" var="questions">
                                 	<tr>
 						<td>${questions.getCounter()}</td>
-                                                <td><button style="border: none;cursor: pointer" data-toggle="modal" data-target="#myModal" value="${questions.getPath()}" onclick="loadDoc(this.value)">${questions.getTitle()}</button></td>					
+                                                <td><button style="border: none;cursor: pointer" data-toggle="modal" data-target="#myModal" value="${questions.getPath()}" onclick="loadDoc(this.value)">${questions.getTitle()}</button>				
 						<td>${questions.getScore()}</td>
-						<td><a class="btn btn-info btn-sm removebutton" onclick="" title="Remove"><i
+                                               
+						<td>
+                                                     <c:if test="${tracker=='teacher'}">
+                                                    <a class="btn btn-info btn-sm removebutton" onclick="" title="Remove"><i
 									class="glyphicon glyphicon-remove "></i></a>
                                                             <a class="btn btn-info btn-sm editbutton" onclick="" title="Edit Test Case File"><i
 									class="glyphicon glyphicon-edit "></i></a>
                                                             <a class="btn btn-info btn-sm editbutton" onclick="" title="Edit Question File"><i
 									class="glyphicon glyphicon-edit "></i></a>
-						</td>
+						</c:if>
+                                                     <c:if test="${tracker=='student'}">
+                                                         <c:out value="Not Allowed"/>
+                                                     </c:if>
+                                                     </td>
+                                                
 					</tr>
                                      </c:forEach>   
 				</tbody>

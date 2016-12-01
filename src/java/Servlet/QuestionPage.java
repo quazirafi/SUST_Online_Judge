@@ -121,7 +121,46 @@ public class QuestionPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+     
+     int examId=Integer.parseInt(request.getParameter("examId"));
+     String password=request.getParameter("password");
+   //  System.out.println("-->"+examId+"-->"+password);
+    HttpSession session = request.getSession();
+    String tracker=session.getAttribute("tracker").toString();
+    Connection conn= (Connection)session.getAttribute("conn");
+   ExmDao examDao= new ExmDao();
+    session.setAttribute("exam",examDao.getExamById(examId,conn));
+   boolean verified =examDao.VerifyExamPassword(password, examId, conn);
+   
+   
+   if(tracker.equals("")||tracker==null) 
+         response.sendRedirect("login.jsp");
+    else if(verified==false)
+    {   RequestDispatcher rd = request.getRequestDispatcher("ExamPage.jsp");
+                rd.forward(request, response);
+    }
+    else 
+    {
+        
+         QuestionDao questionDao = new QuestionDao();
+                List<Question> questions = questionDao.getQuestionByExamId(examId,conn);
+                String courseSession = (String)session.getAttribute("courseSession");
+                Course course = (Course)session.getAttribute("course");
+                String courseTitle = course.getTitle();
+                Exam exam = (Exam)session.getAttribute("exam");
+                String examTitle = exam.getTitle();
+                String path = "Questions\\"+courseSession+"\\"+courseTitle+"\\"+examTitle+"\\";
+                for (Question q : questions){
+                    q.setPath(path+"Q"+q.getCounter()+"\\"+q.getQuestionFileName());
+                    System.out.println("path --> "+q.getPath());
+                }
+                request.setAttribute("questions", questions);
+                RequestDispatcher rd = request.getRequestDispatcher("QuestionPage.jsp");
+                rd.forward(request, response);
+        
+    }
+    
+    
     }
 
     /**
