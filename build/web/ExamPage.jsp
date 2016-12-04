@@ -84,7 +84,7 @@
                     <div class="col-xs-2">
                         <c:if test="${tracker == 'teacher'}">
 
-                       <button id="button_add_task" class="btn btn-success col-xs-12" onClick="goToAddTaskPage()">
+                       <button id="button_add_task" data-toggle="modal" data-target="#myModal1" class="btn btn-success col-xs-12" onClick="goToAddTaskPage()">
                             <i class="glyphicon glyphicon-plus-sign"></i> Add New Exam
                         </button>
                                  </c:if>
@@ -421,6 +421,55 @@
             <a href="${pageContext.request.contextPath}/courseback">Previous Page</a>
         </div>
         <!-- body container -->
+        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Add New Exam</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" action="AddNewExam" method="get">
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label">Exam Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="title" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Start Time</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="startTime" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Duration</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="duration" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Score</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="score" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-default">Add</button>
+                    </div>
+                  </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
     </body>
 
     <script>

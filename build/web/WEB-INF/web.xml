@@ -29,6 +29,10 @@
         <servlet-name>QuestionPage</servlet-name>
         <servlet-class>Servlet.QuestionPage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddNewExam</servlet-name>
+        <servlet-class>Servlet.AddNewExam</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -44,6 +48,10 @@
     <servlet-mapping>
         <servlet-name>QuestionPage</servlet-name>
         <url-pattern>/QuestionPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewExam</servlet-name>
+        <url-pattern>/AddNewExam</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

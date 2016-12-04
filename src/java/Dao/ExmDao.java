@@ -172,4 +172,53 @@ public class ExmDao {
          return false;
     
     }
+    
+    public void addExam(String password, String title, String startTime, String duration, int score, int courseId, Connection conn) {
+        int count = 0;
+        PreparedStatement ps;
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("insert into exam(password,start_time,duration,score,title) values(?,?,?,?,?)");
+            stmt.setString(1, password);
+            stmt.setString(2, startTime);
+            stmt.setString(3, duration);
+            stmt.setInt(4, score);
+            stmt.setString(5, title);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+         int examId=0;
+        try {
+
+           
+            PreparedStatement stmt = conn.prepareStatement("select exam_id from exam where password = ? and start_time = ? and duration = ? and score = ? and title = ?");
+            stmt.setString(1, password);
+            stmt.setString(2, startTime);
+            stmt.setInt(3, Integer.parseInt(duration));
+            stmt.setInt(4, score);
+            stmt.setString(5, title);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                examId = rs.getInt("exam_id");
+                System.out.println("This is the exam id --> "+examId);
+            }
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+        try {
+
+           
+            PreparedStatement stmt = conn.prepareStatement("insert into course_exam values(?,?)");
+            stmt.setInt(1, courseId);
+            stmt.setInt(2, examId);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+        
+    }
 }

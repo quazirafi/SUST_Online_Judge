@@ -168,6 +168,10 @@
 </body>
 
 <script>   
+    $(document).ready(function () {
+            $('#taskTable').DataTable();
+            
+        });
 function loadDoc(path) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", path, false);
