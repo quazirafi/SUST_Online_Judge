@@ -33,6 +33,10 @@
         <servlet-name>AddNewExam</servlet-name>
         <servlet-class>Servlet.AddNewExam</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UploadFile</servlet-name>
+        <servlet-class>Servlet.UploadFile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -53,6 +57,17 @@
         <servlet-name>AddNewExam</servlet-name>
         <url-pattern>/AddNewExam</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UploadFile</servlet-name>
+        <url-pattern>/UploadFile</url-pattern>
+    </servlet-mapping>
+    <context-param> 
+    <description>Location to store uploaded file</description> 
+    <param-name>file-upload</param-name> 
+    <param-value>
+         G:\UploadFIles\\
+     </param-value> 
+</context-param>
     <session-config>
         <session-timeout>
             30

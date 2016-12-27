@@ -17,6 +17,7 @@ public class CourseDao {
         Course course;
         int count = 0;
         try {
+          
             
             Statement stmt = conn.createStatement();
             String sql;

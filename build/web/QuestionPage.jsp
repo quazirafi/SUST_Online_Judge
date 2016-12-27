@@ -130,7 +130,10 @@
 									class="glyphicon glyphicon-edit "></i></a>
 						</c:if>
                                                      <c:if test="${tracker=='student'}">
-                                                         <c:out value="Not Allowed"/>
+                                                       <form action="UploadFile" method="post" enctype="multipart/form-data">
+              <input type="file" name="file" size="50" />
+<input type="submit" value="Submit" />
+          </form> 
                                                      </c:if>
                                                      </td>
                                                 
@@ -156,7 +159,6 @@
            <textarea id="text1" cols="80" rows="20" ></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         
       </div>
     </div>
