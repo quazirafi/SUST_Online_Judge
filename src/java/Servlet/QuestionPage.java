@@ -44,7 +44,7 @@ public class QuestionPage extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
         }
     }
 
@@ -61,53 +61,53 @@ public class QuestionPage extends HttpServlet {
             throws ServletException, IOException {
         int examId = Integer.parseInt(request.getParameter("examId"));
         ExmDao exmDao = new ExmDao();
-        
+
         HttpSession session = request.getSession();
         Connection conn = (Connection) session.getAttribute("conn");
         Teacher teacher = (Teacher) session.getAttribute("teacher");
         String tracker = (String) session.getAttribute("tracker");
-        session.setAttribute("exam",exmDao.getExamById(examId,conn));
-        System.out.println("Exam Info -> "+exmDao.getExamById(examId,conn).getTitle());
-        CourseExamDao courseExamDao =  new CourseExamDao();
+        session.setAttribute("exam", exmDao.getExamById(examId, conn));
+        System.out.println("Exam Info -> " + exmDao.getExamById(examId, conn).getTitle());
+        CourseExamDao courseExamDao = new CourseExamDao();
         CourseDao courseDao = new CourseDao();
-        
+
         boolean flag = false;
-        
-        System.out.println("Exam Id "+examId);
-        
-        if (tracker.equals("teacher")){
-            List<Course> courses = courseExamDao.findCourseByExamId(examId,conn);
-            for (Course cr : courses){
-               System.out.println(cr.getTitle());
+
+        System.out.println("Exam Id " + examId);
+
+        if (tracker.equals("teacher")) {
+            List<Course> courses = courseExamDao.findCourseByExamId(examId, conn);
+            for (Course cr : courses) {
+                System.out.println(cr.getTitle());
             }
-            for (Course cr : courses){
-                if (courseDao.findCourseByTeacherId(teacher.getTeacherId(), cr.getCourseId(), conn)){
+            for (Course cr : courses) {
+                if (courseDao.findCourseByTeacherId(teacher.getTeacherId(), cr.getCourseId(), conn)) {
                     flag = true;
                     break;
-                }              
+                }
             }
-            if (flag == false)
+            if (flag == false) {
                 response.sendRedirect("login.jsp");
-            else{
+            } else {
                 QuestionDao questionDao = new QuestionDao();
-                List<Question> questions = questionDao.getQuestionByExamId(examId,conn);
-                String courseSession = (String)session.getAttribute("courseSession");
-                Course course = (Course)session.getAttribute("course");
+                List<Question> questions = questionDao.getQuestionByExamId(examId, conn);
+                String courseSession = (String) session.getAttribute("courseSession");
+                Course course = (Course) session.getAttribute("course");
                 String courseTitle = course.getTitle();
-                Exam exam = (Exam)session.getAttribute("exam");
+                Exam exam = (Exam) session.getAttribute("exam");
                 String examTitle = exam.getTitle();
-                String path = "Questions\\"+courseSession+"\\"+courseTitle+"\\"+examTitle+"\\";
-                for (Question q : questions){
-                    q.setPath(path+"Q"+q.getCounter()+"\\"+q.getQuestionFileName());
-                    System.out.println("path --> "+q.getPath());
+                String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";
+                for (Question q : questions) {
+                    q.setPath(path + "Q" + q.getCounter() + "\\" + q.getQuestionFileName());
+                    System.out.println("path --> " + q.getPath());
                 }
                 request.setAttribute("questions", questions);
                 RequestDispatcher rd = request.getRequestDispatcher("QuestionPage.jsp");
                 rd.forward(request, response);
             }
-        }
-        else 
+        } else {
             response.sendRedirect("login.jsp");
+        }
     }
 
     /**
@@ -121,46 +121,67 @@ public class QuestionPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
-     int examId=Integer.parseInt(request.getParameter("examId"));
-     String password=request.getParameter("password");
-   //  System.out.println("-->"+examId+"-->"+password);
-    HttpSession session = request.getSession();
-    String tracker=session.getAttribute("tracker").toString();
-    Connection conn= (Connection)session.getAttribute("conn");
-   ExmDao examDao= new ExmDao();
-    session.setAttribute("exam",examDao.getExamById(examId,conn));
-   boolean verified =examDao.VerifyExamPassword(password, examId, conn);
-   
-   
-   if(tracker.equals("")||tracker==null) 
-         response.sendRedirect("login.jsp");
-    else if(verified==false)
-    {   RequestDispatcher rd = request.getRequestDispatcher("ExamPage.jsp");
-                rd.forward(request, response);
-    }
-    else 
-    {
-        
-         QuestionDao questionDao = new QuestionDao();
-                List<Question> questions = questionDao.getQuestionByExamId(examId,conn);
-                String courseSession = (String)session.getAttribute("courseSession");
-                Course course = (Course)session.getAttribute("course");
+
+        int examId = Integer.parseInt(request.getParameter("examId"));
+        String password = request.getParameter("password");
+
+        HttpSession session = request.getSession();
+        String tracker = session.getAttribute("tracker").toString();
+        Connection conn = (Connection) session.getAttribute("conn");
+        Student student = (Student) session.getAttribute("student");
+        ExmDao examDao = new ExmDao();
+        session.setAttribute("exam", examDao.getExamById(examId, conn));
+        StudentExamDao studentExamDao = new StudentExamDao();
+        boolean verified = examDao.VerifyExamPassword(password, examId, conn);
+
+        if (tracker.equals("") || tracker == null) {
+            response.sendRedirect("login.jsp");
+        } else if (verified == false) {
+            RequestDispatcher rd = request.getRequestDispatcher("ExamPage.jsp");
+            rd.forward(request, response);
+        } else if (tracker.equals("student")) {
+            if (studentExamDao.getExamStudentIsAllowed(conn, student.getStudentId(), examId) == 1) {
+                QuestionDao questionDao = new QuestionDao();
+                List<Question> questions = questionDao.getQuestionByExamId(examId, conn);
+                String courseSession = (String) session.getAttribute("courseSession");
+                Course course = (Course) session.getAttribute("course");
                 String courseTitle = course.getTitle();
-                Exam exam = (Exam)session.getAttribute("exam");
+                Exam exam = (Exam) session.getAttribute("exam");
                 String examTitle = exam.getTitle();
-                String path = "Questions\\"+courseSession+"\\"+courseTitle+"\\"+examTitle+"\\";
-                for (Question q : questions){
-                    q.setPath(path+"Q"+q.getCounter()+"\\"+q.getQuestionFileName());
-                    System.out.println("path --> "+q.getPath());
+                String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";
+                for (Question q : questions) {
+                    q.setPath(path + "Q" + q.getCounter() + "\\" + q.getQuestionFileName());
+                    System.out.println("path --> " + q.getPath());
                 }
                 request.setAttribute("questions", questions);
                 RequestDispatcher rd = request.getRequestDispatcher("QuestionPage.jsp");
                 rd.forward(request, response);
-        
-    }
-    
-    
+            } else {
+                List<Question> questions = new ArrayList<Question>();
+                request.setAttribute("questions", questions);
+                RequestDispatcher rd = request.getRequestDispatcher("QuestionPage.jsp");
+                rd.forward(request, response);
+            }
+        } else {
+
+            QuestionDao questionDao = new QuestionDao();
+            List<Question> questions = questionDao.getQuestionByExamId(examId, conn);
+            String courseSession = (String) session.getAttribute("courseSession");
+            Course course = (Course) session.getAttribute("course");
+            String courseTitle = course.getTitle();
+            Exam exam = (Exam) session.getAttribute("exam");
+            String examTitle = exam.getTitle();
+            String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";
+            for (Question q : questions) {
+                q.setPath(path + "Q" + q.getCounter() + "\\" + q.getQuestionFileName());
+                System.out.println("path --> " + q.getPath());
+            }
+            request.setAttribute("questions", questions);
+            RequestDispatcher rd = request.getRequestDispatcher("QuestionPage.jsp");
+            rd.forward(request, response);
+
+        }
+
     }
 
     /**
