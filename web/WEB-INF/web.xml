@@ -34,8 +34,13 @@
         <servlet-class>Servlet.AddNewExam</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< Updated upstream
         <servlet-name>UploadFile</servlet-name>
         <servlet-class>Servlet.UploadFile</servlet-class>
+=======
+        <servlet-name>StudentPerformancePage</servlet-name>
+        <servlet-class>Servlet.StudentPerformancePage</servlet-class>
+>>>>>>> Stashed changes
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -58,6 +63,7 @@
         <url-pattern>/AddNewExam</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+<<<<<<< Updated upstream
         <servlet-name>UploadFile</servlet-name>
         <url-pattern>/UploadFile</url-pattern>
     </servlet-mapping>
@@ -68,6 +74,11 @@
          G:\UploadFIles\\
      </param-value> 
 </context-param>
+=======
+        <servlet-name>StudentPerformancePage</servlet-name>
+        <url-pattern>/StudentPerformancePage</url-pattern>
+    </servlet-mapping>
+>>>>>>> Stashed changes
     <session-config>
         <session-timeout>
             30
