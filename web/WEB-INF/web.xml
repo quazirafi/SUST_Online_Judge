@@ -37,6 +37,10 @@
         <servlet-name>UploadFile</servlet-name>
         <servlet-class>Servlet.UploadFile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StudentListPage</servlet-name>
+        <servlet-class>Servlet.StudentListPage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -61,13 +65,17 @@
         <servlet-name>UploadFile</servlet-name>
         <url-pattern>/UploadFile</url-pattern>
     </servlet-mapping>
-    <context-param> 
-    <description>Location to store uploaded file</description> 
-    <param-name>file-upload</param-name> 
-    <param-value>
+    <context-param>
+        <description>Location to store uploaded file</description>
+        <param-name>file-upload</param-name>
+        <param-value>
          F:\UploadFIles\\
-     </param-value> 
-</context-param>
+     </param-value>
+    </context-param>
+    <servlet-mapping>
+        <servlet-name>StudentListPage</servlet-name>
+        <url-pattern>/StudentListPage</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

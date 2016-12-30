@@ -3,7 +3,7 @@
 /*HTTP 1.1*/ response.setHeader("Pragma","no-cache"); 
 /*HTTP 1.0*/ response.setDateHeader ("Expires", 0);
 %> 
-
+<%@ page import="Entity.*" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -66,7 +66,8 @@
                                 </c:when>
                             </c:choose>
                                 <c:if test="${tracker=='teacher'}">
-                                <li><a href="#">Questions</a></li>
+                                <li><a href="QuestionPage?examId=${exam.getExamId()}">Questions</a></li>
+                                <li><a href="QuestionPage?examId=${exam.getExamId()}">Student's List</a></li>
 				<li><a href="#">Student Performance</a></li>
 				</c:if>
                                 <li><a href="sign-in.html">Log out</a></li>
