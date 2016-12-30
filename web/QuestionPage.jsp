@@ -67,7 +67,7 @@
                             </c:choose>
                                 <c:if test="${tracker=='teacher'}">
                                 <li><a href="QuestionPage?examId=${exam.getExamId()}">Questions</a></li>
-                                <li><a href="QuestionPage?examId=${exam.getExamId()}">Student's List</a></li>
+                                <li><a href="StudentListPage?examId=${exam.getExamId()}">Student's List</a></li>
 				<li><a href="#">Student Performance</a></li>
 				</c:if>
                                 <li><a href="sign-in.html">Log out</a></li>

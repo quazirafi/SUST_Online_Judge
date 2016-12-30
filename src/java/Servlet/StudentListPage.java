@@ -11,6 +11,25 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import Entity.*;
+import Dao.*;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -56,7 +75,13 @@ public class StudentListPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int examId = Integer.parseInt(request.getParameter("examId"));
+        HttpSession session = request.getSession();
+        Connection conn = (Connection)session.getAttribute("conn");
+        StudentExamDao studentExamDao = new StudentExamDao();
+        ArrayList<Student> students = (ArrayList<Student>)studentExamDao.findEnteredStudents(conn, examId);
+        for (Student s : students)
+            System.out.println(s.getRegno());
     }
 
     /**
@@ -70,7 +95,8 @@ public class StudentListPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
+        
     }
 
     /**
