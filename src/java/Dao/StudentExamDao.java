@@ -65,14 +65,16 @@ public class StudentExamDao {
         } catch (Exception se) {
             se.printStackTrace();
         }
+        int counter = 0;
         for (Integer id : idList) {
             try {
-
+                ++counter;
                 PreparedStatement stmt = conn.prepareStatement("select * from student where student_id = ?");
                 stmt.setInt(1, id.intValue());
                 ResultSet rs = stmt.executeQuery();
                 while (rs.next()) {
                     Student student = new Student();
+                    student.setCounter(counter);
                     student.setRegno(rs.getInt("regno"));
                     student.setStudentId(rs.getInt("student_id"));
                     students.add(student);

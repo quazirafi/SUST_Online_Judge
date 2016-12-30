@@ -37,4 +37,14 @@ public class Student {
     private int studentId;
     private String password;
     private int regno;
+    private int counter;
+
+    public int getCounter() {
+        return counter;
+    }
+
+    public void setCounter(int counter) {
+        this.counter = counter;
+    }
+    
 }

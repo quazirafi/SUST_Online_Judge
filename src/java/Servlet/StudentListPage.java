@@ -54,7 +54,7 @@ public class StudentListPage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StudentListPage</title>");            
+            out.println("<title>Servlet StudentListPage</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet StudentListPage at " + request.getContextPath() + "</h1>");
@@ -77,11 +77,18 @@ public class StudentListPage extends HttpServlet {
             throws ServletException, IOException {
         int examId = Integer.parseInt(request.getParameter("examId"));
         HttpSession session = request.getSession();
-        Connection conn = (Connection)session.getAttribute("conn");
+        String tracker = (String)session.getAttribute("tracker");
+        Connection conn = (Connection) session.getAttribute("conn");
         StudentExamDao studentExamDao = new StudentExamDao();
-        ArrayList<Student> students = (ArrayList<Student>)studentExamDao.findEnteredStudents(conn, examId);
-        for (Student s : students)
-            System.out.println(s.getRegno());
+        ArrayList<Student> students = (ArrayList<Student>) studentExamDao.findEnteredStudents(conn, examId);
+        if (tracker.equals("teacher")){
+            request.setAttribute("studentsEntered", students);
+            RequestDispatcher rd = request.getRequestDispatcher("StudentListPage.jsp");
+            rd.forward(request, response);
+        }
+        else{
+            response.sendRedirect("login.jsp");
+        }
     }
 
     /**
@@ -95,8 +102,10 @@ public class StudentListPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        
+        String[] studentIdsString = request.getParameterValues("studentsIds");
+        System.out.println("HERE!!!");
+        for (int i=0;i<studentIdsString.length;++i)
+            System.out.println(studentIdsString[i]);
     }
 
     /**
