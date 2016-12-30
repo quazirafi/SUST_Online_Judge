@@ -104,8 +104,16 @@ public class StudentListPage extends HttpServlet {
             throws ServletException, IOException {
         String[] studentIdsString = request.getParameterValues("studentsIds");
         System.out.println("HERE!!!");
-        for (int i=0;i<studentIdsString.length;++i)
+        HttpSession session = request.getSession();
+        Connection conn = (Connection) session.getAttribute("conn");
+        Student student = (Student) session.getAttribute("student");
+        Exam exam = (Exam) session.getAttribute("exam");
+        StudentExamDao studentExamDao = new StudentExamDao();
+        for (int i=0;i<studentIdsString.length;++i){
             System.out.println(studentIdsString[i]);
+            studentExamDao.setAllowedResetEntered(conn, Integer.parseInt(studentIdsString[i]), exam.getExamId());
+        }
+        
     }
 
     /**

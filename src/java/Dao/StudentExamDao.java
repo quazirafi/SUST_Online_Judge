@@ -87,4 +87,20 @@ public class StudentExamDao {
         }
         return students;
     }
+    
+    public void setAllowedResetEntered(Connection conn, int sId, int eId){
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("update student_exam set entered = ?,allowed = ? where "
+                    + "student_id = ? and exam_id = ?");
+            stmt.setInt(1, 0);
+            stmt.setInt(2, 1);
+            stmt.setInt(3, sId);
+            stmt.setInt(4, eId);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+    }
 }
