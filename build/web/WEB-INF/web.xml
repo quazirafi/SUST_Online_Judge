@@ -65,7 +65,7 @@
     <description>Location to store uploaded file</description> 
     <param-name>file-upload</param-name> 
     <param-value>
-         G:\UploadFIles\\
+         F:\UploadFIles\\
      </param-value> 
 </context-param>
     <session-config>
