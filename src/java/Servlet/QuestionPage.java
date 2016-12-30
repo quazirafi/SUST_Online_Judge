@@ -159,6 +159,7 @@ public class QuestionPage extends HttpServlet {
             } else {
                 List<Question> questions = new ArrayList<Question>();
                 request.setAttribute("questions", questions);
+                studentExamDao.setEntered(conn, student.getStudentId(), examId);
                 RequestDispatcher rd = request.getRequestDispatcher("QuestionPage.jsp");
                 rd.forward(request, response);
             }

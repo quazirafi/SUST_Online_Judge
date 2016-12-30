@@ -29,4 +29,20 @@ public class StudentExamDao {
         }
         return allowed;
     }
+    
+    public void setEntered(Connection conn, int sId, int eId){
+        PreparedStatement ps;
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("update student_exam set entered=? where student_id=?"
+                    + " and exam_id=?");
+            stmt.setInt(1, 1);
+            stmt.setInt(2, sId);
+            stmt.setInt(3, eId);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+    }
 }
