@@ -44,7 +44,7 @@ public class UploadFile extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UploadFile</title>");            
+            out.println("<title>Servlet UploadFile</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet UploadFile at " + request.getContextPath() + "</h1>");
@@ -79,53 +79,54 @@ public class UploadFile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         File file;
-        int maxMemory=1024*100000;
-        int maxFileSize=1024*100000;
-        ServletContext  context= request.getSession().getServletContext();
-        String filePath=context.getInitParameter("file-upload");
+        int maxMemory = 1024 * 100000;
+        int maxFileSize = 1024 * 100000;
+        ServletContext context = request.getSession().getServletContext();
+        String filePath = context.getInitParameter("file-upload");
         System.out.println(filePath);
-        String contentType=request.getContentType();
-        if(contentType.indexOf("multipart/form-data")>=0){
-            
-            DiskFileItemFactory factory= new DiskFileItemFactory();
+        String contentType = request.getContentType();
+        if (contentType.indexOf("multipart/form-data") >= 0) {
+
+            DiskFileItemFactory factory = new DiskFileItemFactory();
             factory.setSizeThreshold(maxMemory);
             factory.setRepository(new File("F:\\"));
-            ServletFileUpload upload= new ServletFileUpload(factory);
-            upload.setSizeMax( maxFileSize );
-            try{
-                List fileItems= upload.parseRequest(request);
+            ServletFileUpload upload = new ServletFileUpload(factory);
+            upload.setSizeMax(maxFileSize);
+            try {
+                List fileItems = upload.parseRequest(request);
                 Iterator i = fileItems.iterator();
-                while(i.hasNext()){
-                    FileItem fi = (FileItem)i.next();
-                    if(!fi.isFormField()){
+                while (i.hasNext()) {
+                    FileItem fi = (FileItem) i.next();
+                    if (!fi.isFormField()) {
                         String fieldName = fi.getFieldName();
-            String fileName = fi.getName();
-            System.out.println(fileName);
-            boolean isInMemory = fi.isInMemory();
-            long sizeInBytes = fi.getSize();
-             if( fileName.lastIndexOf("\\") >= 0 ){
-            file = new File( filePath + 
-            fileName.substring( fileName.lastIndexOf("\\"))) ;
-            }else{
-            file = new File( filePath + 
-            fileName.substring(fileName.lastIndexOf("\\")+1)) ;
-            }
-            fi.write( file ) ;
-            
-            
-                    
+                        String fileName = fi.getName();
+                        System.out.println(fileName);
+                        boolean isInMemory = fi.isInMemory();
+                        long sizeInBytes = fi.getSize();
+                        if (fileName.lastIndexOf("\\") >= 0) {
+                            file = new File(filePath
+                                    + fileName.substring(fileName.lastIndexOf("\\")));
+                        } else {
+                            file = new File(filePath
+                                    + fileName.substring(fileName.lastIndexOf("\\") + 1));
+                        }
+                        fi.write(file);
+                    } else {
+                        if (fi.getFieldName().equals("qId")) {
+                            String id = fi.getString();
+                            System.out.println("id --- > "+id);
+                        }
                     }
                 }
-                
-            }catch(Exception e){
-            System.out.println(e);}
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
 
         }
-        
-        
-        
+
     }
 
     /**

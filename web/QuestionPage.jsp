@@ -133,6 +133,7 @@
                                                      <c:if test="${tracker=='student'}">
                                                        <form action="UploadFile" method="post" enctype="multipart/form-data">
               <input type="file" name="file" size="50" />
+              <input type="hidden" name="qId" value="${questions.getQuestionId()}" />
 <input type="submit" value="Submit" />
           </form> 
                                                      </c:if>
