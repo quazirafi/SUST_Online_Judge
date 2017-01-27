@@ -17,7 +17,7 @@ import org.apache.commons.fileupload.*;
 import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
+import CompExec.*;
 import org.apache.commons.fileupload.disk.*;
 import org.apache.commons.io.output.*;
 
@@ -87,6 +87,9 @@ public class UploadFile extends HttpServlet {
         String filePath = context.getInitParameter("file-upload");
         System.out.println(filePath);
         String contentType = request.getContentType();
+        String fieldName ;
+        String fileName ;
+        String id ;
         if (contentType.indexOf("multipart/form-data") >= 0) {
 
             DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -94,14 +97,15 @@ public class UploadFile extends HttpServlet {
             factory.setRepository(new File("F:\\"));
             ServletFileUpload upload = new ServletFileUpload(factory);
             upload.setSizeMax(maxFileSize);
+            
             try {
                 List fileItems = upload.parseRequest(request);
                 Iterator i = fileItems.iterator();
                 while (i.hasNext()) {
                     FileItem fi = (FileItem) i.next();
                     if (!fi.isFormField()) {
-                        String fieldName = fi.getFieldName();
-                        String fileName = fi.getName();
+                        fieldName = fi.getFieldName();
+                        fileName = fi.getName();
                         System.out.println(fileName);
                         boolean isInMemory = fi.isInMemory();
                         long sizeInBytes = fi.getSize();
@@ -115,7 +119,7 @@ public class UploadFile extends HttpServlet {
                         fi.write(file);
                     } else {
                         if (fi.getFieldName().equals("qId")) {
-                            String id = fi.getString();
+                            id = fi.getString();
                             System.out.println("id --- > "+id);
                         }
                     }
@@ -126,6 +130,9 @@ public class UploadFile extends HttpServlet {
             }
 
         }
+        Tester2 codeCompileExecuter = new Tester2();
+        System.out.println(codeCompileExecuter.compile("c"));
+        System.out.println(codeCompileExecuter.execute("c","input",5000));
 
     }
 
