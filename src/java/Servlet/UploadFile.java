@@ -18,8 +18,16 @@ import org.apache.commons.fileupload.FileUpload;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import CompExec.*;
+import Dao.*;
+import Entity.*;
 import org.apache.commons.fileupload.disk.*;
 import org.apache.commons.io.output.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+import javax.servlet.http.HttpSession;
+import org.apache.commons.io.FileUtils;
 
 /**
  *
@@ -80,16 +88,27 @@ public class UploadFile extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        File file;
+        File file = null;
         int maxMemory = 1024 * 100000;
         int maxFileSize = 1024 * 100000;
         ServletContext context = request.getSession().getServletContext();
         String filePath = context.getInitParameter("file-upload");
         System.out.println(filePath);
         String contentType = request.getContentType();
-        String fieldName ;
-        String fileName ;
-        String id ;
+        String fieldName = "";
+        String fileName = "";
+        String id = "";
+
+        HttpSession session = request.getSession();
+        String courseSession = (String) session.getAttribute("courseSession");
+        Course course = (Course) session.getAttribute("course");
+        String courseTitle = course.getTitle();
+        Exam exam = (Exam) session.getAttribute("exam");
+        String examTitle = exam.getTitle();
+        Student student = (Student) session.getAttribute("student");
+        String finalPath = "F:\\UploadFIles\\Submissions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";
+        String fileRename = "";
+
         if (contentType.indexOf("multipart/form-data") >= 0) {
 
             DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -97,30 +116,49 @@ public class UploadFile extends HttpServlet {
             factory.setRepository(new File("F:\\"));
             ServletFileUpload upload = new ServletFileUpload(factory);
             upload.setSizeMax(maxFileSize);
-            
+
             try {
                 List fileItems = upload.parseRequest(request);
                 Iterator i = fileItems.iterator();
                 while (i.hasNext()) {
                     FileItem fi = (FileItem) i.next();
                     if (!fi.isFormField()) {
+
                         fieldName = fi.getFieldName();
                         fileName = fi.getName();
                         System.out.println(fileName);
                         boolean isInMemory = fi.isInMemory();
                         long sizeInBytes = fi.getSize();
                         if (fileName.lastIndexOf("\\") >= 0) {
+                            fileRename = filePath
+                                    + fileName.substring(fileName.lastIndexOf("\\")) + student.getRegno();
                             file = new File(filePath
-                                    + fileName.substring(fileName.lastIndexOf("\\")));
+                                    + fileName.substring(fileName.lastIndexOf("\\")) + student.getRegno());
                         } else {
+                            fileRename = filePath
+                                    + fileName.substring(fileName.lastIndexOf("\\") + 1) + student.getRegno();
                             file = new File(filePath
-                                    + fileName.substring(fileName.lastIndexOf("\\") + 1));
+                                    + fileName.substring(fileName.lastIndexOf("\\") + 1) + student.getRegno());
                         }
                         fi.write(file);
+                        Path source = Paths.get(fileRename);
+                        Files.move(source, source.resolveSibling("Main.c"));
+
                     } else {
                         if (fi.getFieldName().equals("qId")) {
                             id = fi.getString();
-                            System.out.println("id --- > "+id);
+                            System.out.println("id --- > " + id);
+                            finalPath += "Q" + id + "\\" + student.getRegno()+"\\";
+                            File ff = new File(finalPath);
+                            ff.mkdirs();
+                            System.out.println(fileRename);
+                            File source = new File(fileRename);
+                            File dest = new File(finalPath+"Main.c");
+                            try {
+                                FileUtils.copyDirectory(source, dest);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
@@ -130,9 +168,10 @@ public class UploadFile extends HttpServlet {
             }
 
         }
+
         Tester2 codeCompileExecuter = new Tester2();
         System.out.println(codeCompileExecuter.compile("c"));
-        System.out.println(codeCompileExecuter.execute("c","input",5000));
+        System.out.println(codeCompileExecuter.execute("c", "input", 5000));
 
     }
 

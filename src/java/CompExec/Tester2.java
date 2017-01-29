@@ -7,7 +7,6 @@ package CompExec;
 
 import java.io.*;
 import java.util.concurrent.TimeUnit;
-
 /**
  *
  * @author DELL
