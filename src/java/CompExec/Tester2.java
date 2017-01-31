@@ -99,14 +99,14 @@ public class Tester2 {
         return "successfully";
     }
     
-    public String match(){
+    public String match(String source,String destination){
         BufferedReader b1 = null, b2 = null;
         File f1, f2;
         try {
             System.out.println("Matching process started.");
-            f1 = new File("F:\\java codes\\CommandLineTest\\Sources\\out.txt");
+            f1 = new File(source + "out.txt");
             
-            f2 = new File("F:\\java codes\\CommandLineTest\\Sources\\out2.txt");
+            f2 = new File(destination + "out.txt");
             
             b1 = new BufferedReader(new FileReader(f1));
             b2 = new BufferedReader(new FileReader(f2));
@@ -156,6 +156,6 @@ public class Tester2 {
         Tester2 t = new Tester2();
         System.out.println(t.compile("cpp","a"));
         System.out.println(t.execute("cpp","input",1,"a","a"));
-        System.out.println(t.match());
+        System.out.println(t.match("a","a"));
     }
 }

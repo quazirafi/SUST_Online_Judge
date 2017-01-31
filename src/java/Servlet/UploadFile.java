@@ -107,7 +107,7 @@ public class UploadFile extends HttpServlet {
         String examTitle = exam.getTitle();
         Student student = (Student) session.getAttribute("student");
         String finalPath = "F:\\UploadFIles\\Submissions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";
-        String questionPath = ".\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";;
+        String questionPath = "F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";;
         String fileRename = "";
 
         if (contentType.indexOf("multipart/form-data") >= 0) {
@@ -189,14 +189,17 @@ public class UploadFile extends HttpServlet {
         if (fileRename.endsWith(".c")){
             System.out.println(codeCompileExecuter.compile("c",finalPath));
             System.out.println(codeCompileExecuter.execute("c", "input", 5000,finalPath,questionPath));
+            System.out.println(codeCompileExecuter.match(finalPath, questionPath));
         }
         else if (fileRename.endsWith(".cpp")){
             System.out.println(codeCompileExecuter.compile("cpp",finalPath));
             System.out.println(codeCompileExecuter.execute("cpp", "input", 5000,finalPath,questionPath));
+            System.out.println(codeCompileExecuter.match(finalPath, questionPath));
         }
         else if (fileRename.endsWith(".java")){
             System.out.println(codeCompileExecuter.compile("java",finalPath));
             System.out.println(codeCompileExecuter.execute("java", "input", 5000,finalPath,questionPath));
+            System.out.println(codeCompileExecuter.match(finalPath, questionPath));
         }
         
 
