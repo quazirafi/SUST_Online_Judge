@@ -177,6 +177,7 @@
             
         });
 function loadDoc(path) {
+    alert(path);
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", path, false);
     xhttp.send();

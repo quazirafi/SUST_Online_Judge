@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * @author DELL
  */
 public class Tester2 {
-    public String compile(String l) {
+    public String compile(String l,String path) {
         System.out.println("Code compilation started...");
         ProcessBuilder p;
          
@@ -25,7 +25,8 @@ public class Tester2 {
             p = new ProcessBuilder("g++","-std=c++0x","-w","-o", "Main", "Main.cpp");
         }
         //p.directory("./Sources");
-        p.directory(new File("F:\\UploadFIles"));
+        //p.directory(new File("F:\\UploadFIles"));
+        p.directory(new File(path));
         p.redirectErrorStream(true);
 
         try {
@@ -54,24 +55,25 @@ public class Tester2 {
         return "comerror";
     }
     
-    public String execute(String l, String n, long timeInMillis) {
+    public String execute(String l, String n, long timeInMillis,String path,String qPath) {
         System.out.println("Code started executing.");
         ProcessBuilder p;
         if (l.equals("java")) {
             p = new ProcessBuilder("java", "Main");
         } else if (l.equals("c")) {
-            p = new ProcessBuilder("F:\\UploadFIles\\Main");
+            //p = new ProcessBuilder("F:\\UploadFIles\\Main");
+            p = new ProcessBuilder(path+"Main");
         } else {
-            p = new ProcessBuilder("F:\\UploadFIles\\Main");
+            p = new ProcessBuilder(path+"Main");
         }
-        p.directory(new File("F:\\UploadFIles"));
-//        File in = new File("F:\\UploadFIles\\in.txt");
-//        p.redirectInput(in);
+        p.directory(new File(path));
+        File in = new File(qPath+"in.txt");
+        p.redirectInput(in);
         /*if(in.exists())
             System.out.println("Input file " + in.getAbsolutePath());*/
         p.redirectErrorStream(true);
         //System.out.println("Current directory " + System.getProperty("user.dir"));
-        File out = new File("F:\\UploadFIles\\out.txt");
+        File out = new File(path+"out.txt");
 
         p.redirectOutput(out);
         if(out.exists())
@@ -152,8 +154,8 @@ public class Tester2 {
     
     public static void main(String args[]){
         Tester2 t = new Tester2();
-        System.out.println(t.compile("cpp"));
-        System.out.println(t.execute("cpp","input",1));
+        System.out.println(t.compile("cpp","a"));
+        System.out.println(t.execute("cpp","input",1,"a","a"));
         System.out.println(t.match());
     }
 }

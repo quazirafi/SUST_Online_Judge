@@ -107,6 +107,7 @@ public class UploadFile extends HttpServlet {
         String examTitle = exam.getTitle();
         Student student = (Student) session.getAttribute("student");
         String finalPath = "F:\\UploadFIles\\Submissions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";
+        String questionPath = ".\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";;
         String fileRename = "";
 
         if (contentType.indexOf("multipart/form-data") >= 0) {
@@ -130,35 +131,50 @@ public class UploadFile extends HttpServlet {
                         boolean isInMemory = fi.isInMemory();
                         long sizeInBytes = fi.getSize();
                         if (fileName.lastIndexOf("\\") >= 0) {
-                            fileRename = filePath
-                                    + fileName.substring(fileName.lastIndexOf("\\")) + student.getRegno();
-                            file = new File(filePath
-                                    + fileName.substring(fileName.lastIndexOf("\\")) + student.getRegno());
+                            fileRename = filePath + student.getStudentId()
+                                    + fileName.substring(fileName.lastIndexOf("\\"));
+                            file = new File(filePath+ student.getStudentId()
+                                    + fileName.substring(fileName.lastIndexOf("\\")));
                         } else {
-                            fileRename = filePath
-                                    + fileName.substring(fileName.lastIndexOf("\\") + 1) + student.getRegno();
-                            file = new File(filePath
-                                    + fileName.substring(fileName.lastIndexOf("\\") + 1) + student.getRegno());
+                            fileRename = filePath+ student.getStudentId()
+                                    + fileName.substring(fileName.lastIndexOf("\\") + 1);
+                            file = new File(filePath+ student.getStudentId()
+                                    + fileName.substring(fileName.lastIndexOf("\\") + 1));
                         }
                         fi.write(file);
-                        Path source = Paths.get(fileRename);
-                        Files.move(source, source.resolveSibling("Main.c"));
+//                        Path source = Paths.get(fileRename);
+//                        Files.move(source, source.resolveSibling("Main.c"));
 
                     } else {
                         if (fi.getFieldName().equals("qId")) {
                             id = fi.getString();
                             System.out.println("id --- > " + id);
-                            finalPath += "Q" + id + "\\" + student.getRegno()+"\\";
+                            finalPath += "Q" + id + "\\" + student.getRegno() + "\\";
+                            questionPath += "Q" + id + "\\";
                             File ff = new File(finalPath);
                             ff.mkdirs();
-                            System.out.println(fileRename);
-                            File source = new File(fileRename);
-                            File dest = new File(finalPath+"Main.c");
-                            try {
-                                FileUtils.copyDirectory(source, dest);
-                            } catch (Exception e) {
-                                e.printStackTrace();
+                            InputStream in = new FileInputStream(new File(fileRename));
+                            String newFileName = "";
+                            OutputStream out= null;
+                            if (fileRename.endsWith(".c"))
+                                out = new FileOutputStream(new File(finalPath+"Main.c"));  
+                            else if (fileRename.endsWith(".cpp"))
+                                out = new FileOutputStream(new File(finalPath+"Main.cpp"));  
+                            else if (fileRename.endsWith(".java"))
+                                out = new FileOutputStream(new File(finalPath+"Main.java"));
+                            File directory = new File(finalPath);
+                            File[] filesToBeDeleted = directory.listFiles();
+                            for (File fff : filesToBeDeleted)
+                                fff.delete();
+                            byte[] buf = new byte[1024];
+                            int len;
+                            while ((len = in.read(buf)) > 0) {
+                                out.write(buf, 0, len);
                             }
+                            in.close();
+                            out.close();
+                            File delete = new File(fileRename);
+                            delete.delete();
                         }
                     }
                 }
@@ -170,8 +186,19 @@ public class UploadFile extends HttpServlet {
         }
 
         Tester2 codeCompileExecuter = new Tester2();
-        System.out.println(codeCompileExecuter.compile("c"));
-        System.out.println(codeCompileExecuter.execute("c", "input", 5000));
+        if (fileRename.endsWith(".c")){
+            System.out.println(codeCompileExecuter.compile("c",finalPath));
+            System.out.println(codeCompileExecuter.execute("c", "input", 5000,finalPath,questionPath));
+        }
+        else if (fileRename.endsWith(".cpp")){
+            System.out.println(codeCompileExecuter.compile("cpp",finalPath));
+            System.out.println(codeCompileExecuter.execute("cpp", "input", 5000,finalPath,questionPath));
+        }
+        else if (fileRename.endsWith(".java")){
+            System.out.println(codeCompileExecuter.compile("java",finalPath));
+            System.out.println(codeCompileExecuter.execute("java", "input", 5000,finalPath,questionPath));
+        }
+        
 
     }
 
