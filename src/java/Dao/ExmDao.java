@@ -221,4 +221,56 @@ public class ExmDao {
         }
         
     }
+    
+    
+    public void updateExam(String password, String title, String startTime, String duration, int score, int examId, Connection conn) {
+        int count = 0;
+        PreparedStatement ps;
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("update exam set password=?,start_time=?,duration=?,score=?,title=? where exam_id=?");
+            stmt.setString(1, password);
+            stmt.setString(2, startTime);
+            stmt.setString(3, duration);
+            stmt.setInt(4, score);
+            stmt.setString(5, title);
+            stmt.setInt(6, examId);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+    }
+    
+    public void deleteByExamId(int examId,Connection conn){
+        
+        PreparedStatement ps;
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("delete from exam_question where exam_id=?");
+            stmt.setInt(1,examId);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("delete from course_exam where exam_id=?");
+            stmt.setInt(1,examId);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("delete from exam where exam_id=?");
+            stmt.setInt(1,examId);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+    }
 }

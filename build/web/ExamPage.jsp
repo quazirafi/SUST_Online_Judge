@@ -145,15 +145,15 @@
                                 <td><c:out value="${exams.getScore()}" /></td>
                                 <c:choose>
                                     <c:when test="${exams.getStatus() eq 'upcoming'}">
-                                        <td><a class="btn btn-info btn-sm removebutton" onclick="" title="Remove"><i
+                                        <td><a href="${pageContext.request.contextPath}/EditExamPage?action=0&examId=${exams.getExamId()}" class="btn btn-info btn-sm removebutton" title="Remove"><i
                                                     class="glyphicon glyphicon-remove "></i></a>
-                                            <a class="btn btn-info btn-sm editbutton" onclick="" title="Edit Exam"><i
+                                            <a href="${pageContext.request.contextPath}/EditExamPage?action=1&examId=${exams.getExamId()}" class="btn btn-info btn-sm editbutton" id="editbtn" title="Edit Exam"><i
                                                     class="glyphicon glyphicon-edit "></i></a>
                                         </td>
                                     </c:when>
                                     <c:when test="${exams.getStatus() eq 'ongoing'}">
                                         <td>
-                                            <a class="btn btn-info btn-sm editbutton" onclick="" title="Edit Exam"><i
+                                            <a href="${pageContext.request.contextPath}/EditExamPage?action=1&examId=${exams.getExamId()}" class="btn btn-info btn-sm editbutton" title="Edit Exam"><i
                                                     class="glyphicon glyphicon-edit "></i></a>
                                         </td>
                                     </c:when>    
@@ -170,253 +170,8 @@
                     </tbody>
                 </table>
             </div>
-            <!-- panel -->
+           
 
-
-            <div class="modal fade" id="modalTaskInfo" tabindex="-1" role="dialog"
-                 aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal"
-                                    aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <h4 class="modal-title" id="myModalLabel">Task details</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <label>ID</label>
-                                </div>
-                                <div class="col-md-1">
-                                    <p id="view_task_id"></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <label>Title</label>
-                                </div>
-                                <div class="col-md-3">
-                                    <p id="view_task_title"></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <label>Type</label>
-                                </div>
-                                <div class="col-md-1">
-                                    <p id="view_task_type"></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-1">
-                                    <label>Description</label>
-                                </div>
-                                <div class="col-md-1">
-                                    <p id="view_task_description"></p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label>Deadline</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <p id="view_task_deadline"></p>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label>Total Group</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <p id="view_task_total_group"></p>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label>Total Submission</label>
-                                </div>
-                                <div class="col-md-2">
-                                    <p id="view_task_total_submission"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal Details -->
-
-            <div class="modal fade" id="modalTaskEdit" tabindex="-1" role="dialog"
-                 aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form id="edit_task" name="edit_task" method="post">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close"">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title" id="modal_label">Edit Task</h4>
-                            </div>
-                            <div class="modal-body">
-                                <input type="hidden" name="taskId" id="edit_task_id"></input>
-                                <div class="row bottom-buffer">
-                                    <div class="col-md-8">
-                                        <label>Session</label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <select name="session" id="session" type="text"
-                                                class="form-control"></select>
-                                    </div>
-                                </div>
-                                <div class="row bottom-buffer">
-                                    <div class="col-md-4">
-                                        <label>Title</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <input name="taskTitle" id="edit_task_title" type="text"
-                                               class="form-control"></input>
-                                    </div>
-                                </div>
-
-                                <div class="row bottom-buffer">
-                                    <div class="col-md-4">
-                                        <label>Description</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <textarea name="taskDesc" id="edit_task_description"
-                                                  type="text" class="form-control"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="row bottom-buffer">
-                                    <div class="col-md-4">
-                                        <label>Final Submission Deadline</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <textarea name="taskDeadline" id="edit_task_deadline"
-                                                  type="text" class="form-control"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="row bottom-buffer">
-                                    <div class="col-md-4">
-                                        <label>Maximum Allowed Groups</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <select name="taskTotalGroupNo" id="edit_task_group_number"
-                                                class="form-control">
-                                            <option selected="selected">1</option>
-                                            <option>2</option>
-                                            <option>3</option>
-                                            <option>4</option>
-                                            <option>5</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="row bottom-buffer">
-                                    <div class="col-md-4">
-                                        <label>Maximum Allowed Submissions</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <textarea name="taskTotalSubmissonNo"
-                                                  id="edit_task_total_submission" type="text"
-                                                  class="form-control"></textarea>
-                                    </div>
-                                </div>
-
-                                <div class="row bottom-buffer">
-                                    <div class="col-md-8 col-md-offset-4">
-                                        <input type="checkbox" name="isOpen" id="edit_task_sopen"
-                                               value="true" checked> Submissions open<br>
-                                    </div>
-                                </div>
-
-                                <div class="row bottom-buffer">
-                                    <div class="col-md-4">
-                                        <label>Type</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <!-- Changed name from 'taskTypeId' to 'taskType' for switching from Entity to Bean -->
-                                        <select name="taskType" id="edit_task_type"
-                                                class="form-control">
-                                            <option>Assignment</option>
-                                            <option selected="selected">Project</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-
-
-
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default"
-                                        data-dismiss="modal">Close</button>
-                                <!-- <button type="submit" class="btn btn-info">Save changes</button> -->
-                                <input type="submit" value="Submit" class="btn btn-info">
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!--Modal Edit -->
-
-            <div class="modal fade" id="modalTaskDelete" tabindex="-1"
-                 role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <form id="delete_task" name="delete_task" method="post">
-
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close" disabled="isMe">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                                <h4 class="modal-title">Delete Task</h4>
-                            </div>
-                            <div class="modal-body">Are you sure you want to delete this
-                                entry?</div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default"
-                                        data-dismiss="modal">Cancel</button>
-                                <input type="submit" value="Delete" class="btn btn-info">
-                            </div>
-
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Exam Password</h4>
-        </div>
-        <div class="modal-body">
-            <form action="QuestionPage" method="post">
-             <input type="hidden" id="hid" name="examId" value=""><br>
-             
-  Password: <input type="password" name="password"><br>
-  <input type="submit" value="Submit">
-</form>
-        </div>
-        
-      </div>
-      
-    </div>
-  </div>
             <!-- Modal delete -->
             <a href="${pageContext.request.contextPath}/courseback">Previous Page</a>
         </div>
@@ -458,6 +213,60 @@
                     <label class="col-sm-2 control-label">Score</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" name="score" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <button type="submit" class="btn btn-default">Add</button>
+                    </div>
+                  </div>
+                </form>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Edit Exam</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" role="form" action="AddNewExam" method="get">
+                  <div class="form-group">
+                    <label  class="col-sm-2 control-label">Exam Title</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="title" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Start Time</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="startTime" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Duration</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="duration" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-2 control-label">Score</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" name="score" />
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <input type="hidden" id="exId"></input>
                     </div>
                   </div>
                   <div class="form-group">

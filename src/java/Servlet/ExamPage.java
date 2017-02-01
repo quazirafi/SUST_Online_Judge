@@ -104,7 +104,7 @@ public class ExamPage extends HttpServlet {
                             e.setStatus("upcoming");
                         else if (currentDate.getTime() > endDate.getTime() && !e.getTitle().equals("no data available"))
                             e.setStatus("finished");
-                        else if (!e.getTitle().equals("no data available"))
+                        else 
                             e.setStatus("ongoing");
                     } catch (Exception e2) {
                         System.out.println("INSIDE THE EXCEPTION");
@@ -163,23 +163,19 @@ public class ExamPage extends HttpServlet {
                             e.setStatus("upcoming");
                         else if (currentDate.getTime() > endDate.getTime() && !e.getTitle().equals("no data available"))
                             e.setStatus("finished");
-                        else if (!e.getTitle().equals("no data available"))
+                        else 
                             e.setStatus("ongoing");
                     } catch (Exception e2) {
                         System.out.println("INSIDE THE EXCEPTION");
                         e2.printStackTrace();
                     }
                 }
-             Course course = courseDao.getCourseById(courseId, conn);
+                Course course = courseDao.getCourseById(courseId, conn);
                 session.setAttribute("exams", exams2);
                 session.setAttribute("courseTitle", course.getTitle());
                 session.setAttribute("course", course);
-                RequestDispatcher rd = request.getRequestDispatcher("ExamPage.jsp");
-                rd.forward(request, response);
-           
-           
-            
-            
+                RequestDispatcher rd = request.getRequestDispatcher("ExamPageStudent.jsp");
+                rd.forward(request, response);  
         }
     }
 

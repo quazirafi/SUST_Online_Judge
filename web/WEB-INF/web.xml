@@ -41,6 +41,10 @@
         <servlet-name>StudentListPage</servlet-name>
         <servlet-class>Servlet.StudentListPage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditExamPage</servlet-name>
+        <servlet-class>Servlet.EditExamPage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -75,6 +79,10 @@
     <servlet-mapping>
         <servlet-name>StudentListPage</servlet-name>
         <url-pattern>/StudentListPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditExamPage</servlet-name>
+        <url-pattern>/EditExamPage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
