@@ -49,6 +49,10 @@
         <servlet-name>AddQuestionPage</servlet-name>
         <servlet-class>Servlet.AddQuestionPage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendQuestionFile</servlet-name>
+        <servlet-class>Servlet.SendQuestionFile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -91,6 +95,10 @@
     <servlet-mapping>
         <servlet-name>AddQuestionPage</servlet-name>
         <url-pattern>/AddQuestionPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendQuestionFile</servlet-name>
+        <url-pattern>/SendQuestionFile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

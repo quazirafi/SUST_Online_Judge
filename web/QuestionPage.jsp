@@ -185,8 +185,9 @@ function loadDoc(path) {
       this.responseText;
     }
   };
-    xhttp.open("POST", path, false);
+    xhttp.open("GET", "SendQuestionFile?"+"path="+path, false);
     xhttp.send();
+    
     //document.getElementById("text1").innerHTML = xhttp.responseText;
 }    
 function goToAddQuestionPage(){

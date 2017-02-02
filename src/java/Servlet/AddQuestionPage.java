@@ -48,7 +48,7 @@ public class AddQuestionPage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-
+            
         }
     }
 
@@ -84,117 +84,120 @@ public class AddQuestionPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         HttpSession session = request.getSession();
         String tracker = (String) session.getAttribute("tracker");
-        File file = null;
-        int maxMemory = 1024 * 100000;
-        int maxFileSize = 1024 * 100000;
-        int qId=0 ;
-        String contentType = request.getContentType();
-        String courseSession = (String) session.getAttribute("courseSession");
-        Teacher teacher = (Teacher) session.getAttribute("teacher");
-        Course course = (Course) session.getAttribute("course");
-        Connection conn = (Connection) session.getAttribute("conn");
-        String courseTitle = course.getTitle();
-        Exam exam = (Exam) session.getAttribute("exam");
-        QuestionDao questionDao = new QuestionDao();
-        String examTitle = exam.getTitle();
-        String fieldName = "";
-        String fileName = "";
-        String id = "";
-        String fileRename = "";
-        String fileNameToBeInserted = "";
-        String filePath = "F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam"+ exam.getExamId() + "\\";
-        File createDirectory = new File(filePath);
-        createDirectory.mkdirs();
-        if (contentType.indexOf("multipart/form-data") >= 0) {
-
-            DiskFileItemFactory factory = new DiskFileItemFactory();
-            factory.setSizeThreshold(maxMemory);
-            factory.setRepository(new File("F:\\"));
-            ServletFileUpload upload = new ServletFileUpload(factory);
-            upload.setSizeMax(maxFileSize);
-
-            try {
-                List fileItems = upload.parseRequest(request);
-                Iterator i = fileItems.iterator();
-                while (i.hasNext()) {
-                    FileItem fi = (FileItem) i.next();
-                    if (!fi.isFormField()) {
-                        System.out.println("inside form field ha");
-                        fieldName = fi.getFieldName();
-                        fileName = fi.getName();
-                        System.out.println(fileName);
-                        boolean isInMemory = fi.isInMemory();
-                        long sizeInBytes = fi.getSize();
-                        if (fileName.lastIndexOf("\\") >= 0) {
-                            fileRename = filePath + teacher.getTeacherCodeName()
-                                    + fileName.substring(fileName.lastIndexOf("\\"));
-                            file = new File(filePath+ teacher.getTeacherCodeName()
-                                    + fileName.substring(fileName.lastIndexOf("\\")));
-                            //fileNameToBeInserted = fileName.substring(fileName.lastIndexOf("\\"));
-                        } else {
-                            fileRename = filePath+ teacher.getTeacherCodeName()
-                                    + fileName.substring(fileName.lastIndexOf("\\") + 1);
-                            file = new File(filePath+ teacher.getTeacherCodeName()
-                                    + fileName.substring(fileName.lastIndexOf("\\") + 1));
-                            //fileNameToBeInserted = fileName.substring(fileName.lastIndexOf("\\"));
-                        }
-                        fi.write(file);
+        if (tracker.equals("teacher")) {
+            File file = null;
+            int maxMemory = 1024 * 100000;
+            int maxFileSize = 1024 * 100000;
+            int qId = 0;
+            String contentType = request.getContentType();
+            String courseSession = (String) session.getAttribute("courseSession");
+            Teacher teacher = (Teacher) session.getAttribute("teacher");
+            Course course = (Course) session.getAttribute("course");
+            Connection conn = (Connection) session.getAttribute("conn");
+            String courseTitle = course.getTitle();
+            Exam exam = (Exam) session.getAttribute("exam");
+            QuestionDao questionDao = new QuestionDao();
+            String examTitle = exam.getTitle();
+            String fieldName = "";
+            String fileName = "";
+            String id = "";
+            String fileRename = "";
+            String fileNameToBeInserted = "";
+            String filePath = "F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+            File createDirectory = new File(filePath);
+            createDirectory.mkdirs();
+            if (contentType.indexOf("multipart/form-data") >= 0) {
+                
+                DiskFileItemFactory factory = new DiskFileItemFactory();
+                factory.setSizeThreshold(maxMemory);
+                factory.setRepository(new File("F:\\"));
+                ServletFileUpload upload = new ServletFileUpload(factory);
+                upload.setSizeMax(maxFileSize);
+                
+                try {
+                    List fileItems = upload.parseRequest(request);
+                    Iterator i = fileItems.iterator();
+                    while (i.hasNext()) {
+                        FileItem fi = (FileItem) i.next();
+                        if (!fi.isFormField()) {
+                            System.out.println("inside form field ha");
+                            fieldName = fi.getFieldName();
+                            fileName = fi.getName();
+                            System.out.println(fileName);
+                            boolean isInMemory = fi.isInMemory();
+                            long sizeInBytes = fi.getSize();
+                            if (fileName.lastIndexOf("\\") >= 0) {
+                                fileRename = filePath + teacher.getTeacherCodeName()
+                                        + fileName.substring(fileName.lastIndexOf("\\"));
+                                file = new File(filePath + teacher.getTeacherCodeName()
+                                        + fileName.substring(fileName.lastIndexOf("\\")));
+                                //fileNameToBeInserted = fileName.substring(fileName.lastIndexOf("\\"));
+                            } else {
+                                fileRename = filePath + teacher.getTeacherCodeName()
+                                        + fileName.substring(fileName.lastIndexOf("\\") + 1);
+                                file = new File(filePath + teacher.getTeacherCodeName()
+                                        + fileName.substring(fileName.lastIndexOf("\\") + 1));
+                                //fileNameToBeInserted = fileName.substring(fileName.lastIndexOf("\\"));
+                            }
+                            fi.write(file);
 //                        Path source = Paths.get(fileRename);
 //                        Files.move(source, source.resolveSibling("Main.c"));
 
-                    } else {
-                        if (fi.getFieldName().equals("score")) {
-                            String score = fi.getString();
-                            System.out.println("score --- > " + score);
-                            qId = questionDao.addQuestion(exam.getExamId(),Integer.parseInt(score),fileName,conn);
-                            System.out.println(qId);
-                            filePath += "Q" + qId + "\\" ;
-                            File ff = new File(filePath);
-                            ff.mkdirs();
-                            InputStream in = new FileInputStream(new File(fileRename));
-                            String newFileName = "";
-                            OutputStream out= null;
-                            out = new FileOutputStream(new File(filePath+fileName));
+                        } else {
+                            if (fi.getFieldName().equals("score")) {
+                                String score = fi.getString();
+                                System.out.println("score --- > " + score);
+                                qId = questionDao.addQuestion(exam.getExamId(), Integer.parseInt(score), fileName, conn);
+                                System.out.println(qId);
+                                filePath += "Q" + qId + "\\";
+                                File ff = new File(filePath);
+                                ff.mkdirs();
+                                InputStream in = new FileInputStream(new File(fileRename));
+                                String newFileName = "";
+                                OutputStream out = null;
+                                out = new FileOutputStream(new File(filePath + fileName));
 //                            File directory = new File(finalPath);
 //                            File[] filesToBeDeleted = directory.listFiles();
 //                            for (File fff : filesToBeDeleted)
 //                                fff.delete();
-                            byte[] buf = new byte[1024];
-                            int len;
-                            while ((len = in.read(buf)) > 0) {
-                                out.write(buf, 0, len);
+                                byte[] buf = new byte[1024];
+                                int len;
+                                while ((len = in.read(buf)) > 0) {
+                                    out.write(buf, 0, len);
+                                }
+                                in.close();
+                                out.close();
+                                File delete = new File(fileRename);
+                                delete.delete();
+                            } else if (fi.getFieldName().equals("title")) {
+                                questionDao.setTitle(fi.getString(), qId, conn);
                             }
-                            in.close();
-                            out.close();
-                            File delete = new File(fileRename);
-                            delete.delete();
-                        }
-                        else if (fi.getFieldName().equals("title")){
-                            questionDao.setTitle(fi.getString(), qId, conn);
                         }
                     }
+                    
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
-
-            } catch (Exception e) {
-                System.out.println(e);
             }
+
+        //from here 
+            List<Question> questions = questionDao.getQuestionByExamId(exam.getExamId(), conn);
+            
+            String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+            for (Question q : questions) {
+                q.setPath(path + "Q" + q.getQuestionId() + "\\" + q.getQuestionFileName());
+                System.out.println("path --> " + q.getPath());
+            }
+            request.setAttribute("questions", questions);
+            RequestDispatcher rd = request.getRequestDispatcher("QuestionPage.jsp");
+            rd.forward(request, response);
+        } else {
+            response.sendRedirect("login.jsp");
         }
         
-        //from here 
-        
-                List<Question> questions = questionDao.getQuestionByExamId(exam.getExamId(), conn);
-                
-                
-                String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
-                for (Question q : questions) {
-                    q.setPath(path + "Q" + q.getQuestionId() + "\\" + q.getQuestionFileName());
-                    System.out.println("path --> " + q.getPath());
-                }
-                request.setAttribute("questions", questions);
-                RequestDispatcher rd = request.getRequestDispatcher("QuestionPage.jsp");
-                rd.forward(request, response);
     }
 
     /**
