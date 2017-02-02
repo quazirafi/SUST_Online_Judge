@@ -90,7 +90,7 @@
                 <c:when test="${course.getIsRunning() eq 1}">
                     <div class="col-xs-2">
                         <c:if test="${tracker=='teacher'}">
-                        <button id="button_add_task" class="btn btn-success col-xs-12" onClick="goToAddTaskPage()">
+                        <button id="button_add_task" class="btn btn-success col-xs-12" onClick="goToAddQuestionPage()">
                             <i class="glyphicon glyphicon-plus-sign"></i> Add New Question
                         </button>
                         </c:if>
@@ -183,6 +183,9 @@ function loadDoc(path) {
     xhttp.send();
     document.getElementById("text1").innerHTML = xhttp.responseText;
 }    
+function goToAddQuestionPage(){
+    window.location.href = "AddQuestionPage"
+}
 </script>
 </html>
 <!-- data-toggle="modal" data-target="#myModal" -->

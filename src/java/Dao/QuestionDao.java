@@ -59,6 +59,22 @@ public class QuestionDao {
         return questions;
     }
     
+    public void addQuestion(int score, String fileName, Connection conn){
+        int count = 0;
+        PreparedStatement ps;
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("insert into question(score,question_filename) values(?,?)");
+            stmt.setInt(1, score);
+            stmt.setString(2, fileName);
+            
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+    }
+    
     
 
 }
