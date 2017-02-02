@@ -85,7 +85,10 @@
                 <label for="score">Score</label>
                 <input type="text" class="form-control" id="score" name="score" placeholder="Enter Score">
             </div>
-
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Enter Title">
+            </div>
 
 
             <input type="submit"></input>

@@ -1,0 +1,19 @@
+shorot  --> 485
+rafi    --> 570
+kollol  --> 0
+shoumik --> 0
+shamim  --> 530
+opu     --> 670
+nirob   --> 654
+
+2909/98.5 = 29.53
+          Meals   Cost   Status
+rafi   --> 20            
+shorot --> 18            
+opu    --> 19            
+kollol -->  6            
+dj     -->  0            
+shomik -->  0             
+Nirob  --> 20            63
+shamim --> 15.5          
+

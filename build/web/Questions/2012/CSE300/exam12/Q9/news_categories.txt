@@ -1,0 +1,28 @@
+fajr & esha
+......prothom-alo....
+bangladesh
+international
+economics
+opinion
+sports
+science & technology????? ?? ? ???? ?? ?? ? ?? ???????? ? ?
+entertainment
+art 
+education
+(sub category available)
+........https://www.teachers.gov.bd/...........
+........mzamin..........
+sports
+international
+entertainment
+bangladesh
+........bdnews24..........
+bangladesh
+international
+economics
+opinion
+sports
+science & technology
+entertainment
+rafaelnadal94
+conda install -c https://conda.anaconda.org/anaconda biopython

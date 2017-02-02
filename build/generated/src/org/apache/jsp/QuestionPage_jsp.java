@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import Entity.*;
 
 public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -11,7 +12,11 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
 
   private static java.util.List<String> _jspx_dependants;
 
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_forEach_var_items;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_choose;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_if_test;
   private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_url_value_nobody;
+  private org.apache.jasper.runtime.TagHandlerPool _jspx_tagPool_c_when_test;
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
 
@@ -20,11 +25,19 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
   }
 
   public void _jspInit() {
+    _jspx_tagPool_c_forEach_var_items = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_c_choose = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_c_if_test = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
     _jspx_tagPool_c_url_value_nobody = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
+    _jspx_tagPool_c_when_test = org.apache.jasper.runtime.TagHandlerPool.getTagHandlerPool(getServletConfig());
   }
 
   public void _jspDestroy() {
+    _jspx_tagPool_c_forEach_var_items.release();
+    _jspx_tagPool_c_choose.release();
+    _jspx_tagPool_c_if_test.release();
     _jspx_tagPool_c_url_value_nobody.release();
+    _jspx_tagPool_c_when_test.release();
   }
 
   public void _jspService(HttpServletRequest request, HttpServletResponse response)
@@ -143,11 +156,18 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\t\tclass=\"\r\n");
       out.write("                 col-sm-5 col-sm-offset-1\r\n");
       out.write("                 col-xs-12\">\r\n");
-      out.write("\t\t\t<ul class=\"nav navbar-nav navbar-right\">\\\r\n");
-      out.write("                                <li><a href=\"#\">Questions</a></li>\r\n");
-      out.write("\t\t\t\t<li><a href=\"#\">Student Performance</a></li>\r\n");
-      out.write("\t\t\t\t<li><a href=\"sign-in.html\">Log out</a></li>\r\n");
-      out.write("\t\t\t</ul>\r\n");
+      out.write("\t\t\t<ul class=\"nav navbar-nav navbar-right\">\r\n");
+      out.write("                             ");
+      if (_jspx_meth_c_choose_0(_jspx_page_context))
+        return;
+      out.write("\r\n");
+      out.write("                                ");
+      if (_jspx_meth_c_if_0(_jspx_page_context))
+        return;
+      out.write("\r\n");
+      out.write("                                <li><a href=\"sign-in.html\">Log out</a></li>\r\n");
+      out.write("\t\t\t       \r\n");
+      out.write("                            </ul>\r\n");
       out.write("\t\t</div>\r\n");
       out.write("\t</div>\r\n");
       out.write("\t</nav>\r\n");
@@ -156,19 +176,16 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\t<div class=\"row searchbar\">\r\n");
       out.write("\t\t\t<div class=\"col-xs-8\">\r\n");
       out.write("                            <p class=\"table-headertext\">\r\n");
-      out.write("\t\t\t\tSummary: <span id=\"course_code\">54 Students attended,101 submissions</span>\r\n");
-      out.write("                            </p>\r\n");
+      out.write("                                ");
+      if (_jspx_meth_c_if_1(_jspx_page_context))
+        return;
+      out.write("\r\n");
+      out.write("                              </p>\r\n");
       out.write("\t\t\t</div>\r\n");
-      out.write("\t\t\t<div class=\"col-xs-2\">\r\n");
-      out.write("                            <button id=\"button_add_task\" class=\"btn btn-success col-xs-12\" onClick=\"goToAddTaskPage()\">\r\n");
-      out.write("\t\t\t\t<i class=\"glyphicon glyphicon-plus-sign\"></i> Add Question\r\n");
-      out.write("                            </button>\t\t\r\n");
-      out.write("                        </div>\r\n");
-      out.write("                        <div class=\"col-xs-2\">\r\n");
-      out.write("                            <button id=\"button_add_task\" class=\"btn btn-success col-xs-12\" onClick=\"goToAddTaskPage()\">\r\n");
-      out.write("\t\t\t\t<i class=\"glyphicon glyphicon-plus-sign\"></i> Start Exam\r\n");
-      out.write("                            </button>\t\t\r\n");
-      out.write("                        </div>\r\n");
+      out.write("\t\t\t");
+      if (_jspx_meth_c_choose_1(_jspx_page_context))
+        return;
+      out.write("\r\n");
       out.write("                </div>       \r\n");
       out.write("                 \r\n");
       out.write("\t<!--\t<div class=\"clearfix\"></div> -->\r\n");
@@ -185,297 +202,18 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t\t\t\t\t\t<th class=\"col-md-2 col-sm-2 col-xs-2\">Actions</th>\r\n");
       out.write("\t\t\t\t\t</tr>\r\n");
       out.write("\t\t\t\t</thead>\r\n");
-      out.write("\t\t\t\t<tbody>\t\t\t\t\r\n");
-      out.write("                                \t<tr>\r\n");
-      out.write("\t\t\t\t\t\t<td>1</td>\r\n");
-      out.write("                                                <td><a data-toggle=\"modal\" data-target=\"#myModal\" >Question 1</a></td>\t\t\t\t\t\r\n");
-      out.write("\t\t\t\t\t\t<td>100</td>\r\n");
-      out.write("\t\t\t\t\t\t<td><a class=\"btn btn-info btn-sm removebutton\" onclick=\"\" title=\"Remove\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-remove \"></i></a>\r\n");
-      out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Test Case File\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
-      out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Question File\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
-      out.write("\t\t\t\t\t\t</td>\r\n");
-      out.write("\t\t\t\t\t</tr>\r\n");
-      out.write("                                        <tr>\r\n");
-      out.write("\t\t\t\t\t\t<td>1</td>\r\n");
-      out.write("\t\t\t\t\t\t<td><a>Question 1</a></td>\t\t\t\t\t\r\n");
-      out.write("\t\t\t\t\t\t<td>100</td>\r\n");
-      out.write("\t\t\t\t\t\t<td><a class=\"btn btn-info btn-sm removebutton\" onclick=\"\" title=\"Remove\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-remove \"></i></a>\r\n");
-      out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Test Case File\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
-      out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Question File\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
-      out.write("\t\t\t\t\t\t</td>\r\n");
-      out.write("\t\t\t\t\t</tr>\r\n");
-      out.write("                                        <tr>\r\n");
-      out.write("\t\t\t\t\t\t<td>1</td>\r\n");
-      out.write("\t\t\t\t\t\t<td><a>Question 1</a></td>\t\t\t\t\t\r\n");
-      out.write("\t\t\t\t\t\t<td>100</td>\r\n");
-      out.write("\t\t\t\t\t\t<td><a class=\"btn btn-info btn-sm removebutton\" onclick=\"\" title=\"Remove\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-remove \"></i></a>\r\n");
-      out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Test Case File\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
-      out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Question File\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
-      out.write("\t\t\t\t\t\t</td>\r\n");
-      out.write("\t\t\t\t\t</tr>\r\n");
-      out.write("                                        <tr>\r\n");
-      out.write("\t\t\t\t\t\t<td>1</td>\r\n");
-      out.write("\t\t\t\t\t\t<td><a>Question 1</a></td>\t\t\t\t\t\r\n");
-      out.write("\t\t\t\t\t\t<td>100</td>\r\n");
-      out.write("\t\t\t\t\t\t<td><a class=\"btn btn-info btn-sm removebutton\" onclick=\"\" title=\"Remove\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-remove \"></i></a>\r\n");
-      out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Test Case File\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
-      out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Question File\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
-      out.write("\t\t\t\t\t\t</td>\r\n");
-      out.write("\t\t\t\t\t</tr>\r\n");
-      out.write("                                        <tr>\r\n");
-      out.write("\t\t\t\t\t\t<td>1</td>\r\n");
-      out.write("\t\t\t\t\t\t<td><a>Question 1</a></td>\t\t\t\t\t\r\n");
-      out.write("\t\t\t\t\t\t<td>100</td>\r\n");
-      out.write("\t\t\t\t\t\t<td><a class=\"btn btn-info btn-sm removebutton\" onclick=\"\" title=\"Remove\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-remove \"></i></a>\r\n");
-      out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Test Case File\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
-      out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Question File\"><i\r\n");
-      out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
-      out.write("\t\t\t\t\t\t</td>\r\n");
-      out.write("\t\t\t\t\t</tr>\r\n");
+      out.write("\t\t\t\t<tbody>\t\t\t\r\n");
+      out.write("                                    ");
+      if (_jspx_meth_c_forEach_0(_jspx_page_context))
+        return;
+      out.write("   \r\n");
       out.write("\t\t\t\t</tbody>\r\n");
       out.write("\t\t\t</table>\r\n");
       out.write("\t\t</div>\r\n");
       out.write("\t\t<!-- panel -->\r\n");
       out.write("\r\n");
       out.write("\r\n");
-      out.write("\t\t<div class=\"modal fade\" id=\"modalTaskInfo\" tabindex=\"-1\" role=\"dialog\"\r\n");
-      out.write("\t\t\taria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n");
-      out.write("\t\t\t<div class=\"modal-dialog\">\r\n");
-      out.write("\t\t\t\t<div class=\"modal-content\">\r\n");
-      out.write("\t\t\t\t\t<div class=\"modal-header\">\r\n");
-      out.write("\t\t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\"\r\n");
-      out.write("\t\t\t\t\t\t\taria-label=\"Close\">\r\n");
-      out.write("\t\t\t\t\t\t\t<span aria-hidden=\"true\">&times;</span>\r\n");
-      out.write("\t\t\t\t\t\t</button>\r\n");
-      out.write("\t\t\t\t\t\t<h4 class=\"modal-title\" id=\"myModalLabel\">Task details</h4>\r\n");
-      out.write("\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t<div class=\"modal-body\">\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"row\">\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-1\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<label>ID</label>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-1\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<p id=\"view_task_id\"></p>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"row\">\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-3\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<label>Title</label>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-3\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<p id=\"view_task_title\"></p>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"row\">\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-1\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<label>Type</label>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-1\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<p id=\"view_task_type\"></p>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"row\">\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-1\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<label>Description</label>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-1\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<p id=\"view_task_description\"></p>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"row\">\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-2\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<label>Deadline</label>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-2\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<p id=\"view_task_deadline\"></p>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"row\">\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-2\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<label>Total Group</label>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-2\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<p id=\"view_task_total_group\"></p>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"row\">\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-2\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<label>Total Submission</label>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"col-md-2\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<p id=\"view_task_total_submission\"></p>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t<div class=\"modal-footer\">\r\n");
-      out.write("\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\r\n");
-      out.write("\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t</div>\r\n");
-      out.write("\t\t\t</div>\r\n");
-      out.write("\t\t</div>\r\n");
-      out.write("\t\t<!-- Modal Details -->\r\n");
-      out.write("\r\n");
-      out.write("\t\t<div class=\"modal fade\" id=\"modalTaskEdit\" tabindex=\"-1\" role=\"dialog\"\r\n");
-      out.write("\t\t\taria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n");
-      out.write("\t\t\t<div class=\"modal-dialog\">\r\n");
-      out.write("\t\t\t\t<div class=\"modal-content\">\r\n");
-      out.write("\t\t\t\t\t<form id=\"edit_task\" name=\"edit_task\" method=\"post\">\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"modal-header\">\r\n");
-      out.write("\t\t\t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\"\r\n");
-      out.write("\t\t\t\t\t\t\t\taria-label=\"Close\"\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<span aria-hidden=\"true\">&times;</span>\r\n");
-      out.write("\t\t\t\t\t\t\t</button>\r\n");
-      out.write("\t\t\t\t\t\t\t<h4 class=\"modal-title\" id=\"modal_label\">Edit Task</h4>\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"modal-body\">\r\n");
-      out.write("\t\t\t\t\t\t\t<input type=\"hidden\" name=\"taskId\" id=\"edit_task_id\"></input>\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"row bottom-buffer\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-8\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<label>Session</label>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-4\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<select name=\"session\" id=\"session\" type=\"text\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\tclass=\"form-control\"></select>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"row bottom-buffer\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-4\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<label>Title</label>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-8\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<input name=\"taskTitle\" id=\"edit_task_title\" type=\"text\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\tclass=\"form-control\"></input>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"row bottom-buffer\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-4\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<label>Description</label>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-8\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<textarea name=\"taskDesc\" id=\"edit_task_description\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\ttype=\"text\" class=\"form-control\"></textarea>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"row bottom-buffer\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-4\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<label>Final Submission Deadline</label>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-8\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<textarea name=\"taskDeadline\" id=\"edit_task_deadline\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\ttype=\"text\" class=\"form-control\"></textarea>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"row bottom-buffer\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-4\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<label>Maximum Allowed Groups</label>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-8\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<select name=\"taskTotalGroupNo\" id=\"edit_task_group_number\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\tclass=\"form-control\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<option selected=\"selected\">1</option>\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<option>2</option>\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<option>3</option>\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<option>4</option>\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<option>5</option>\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t</select>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"row bottom-buffer\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-4\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<label>Maximum Allowed Submissions</label>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-8\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<textarea name=\"taskTotalSubmissonNo\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\tid=\"edit_task_total_submission\" type=\"text\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\tclass=\"form-control\"></textarea>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"row bottom-buffer\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-8 col-md-offset-4\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<input type=\"checkbox\" name=\"isOpen\" id=\"edit_task_sopen\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\tvalue=\"true\" checked> Submissions open<br>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t\t<div class=\"row bottom-buffer\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-4\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<label>Type</label>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t\t<div class=\"col-md-8\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<!-- Changed name from 'taskTypeId' to 'taskType' for switching from Entity to Bean -->\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t<select name=\"taskType\" id=\"edit_task_type\"\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\tclass=\"form-control\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<option>Assignment</option>\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t\t<option selected=\"selected\">Project</option>\r\n");
-      out.write("\t\t\t\t\t\t\t\t\t</select>\r\n");
-      out.write("\t\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t\t</div>\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"modal-footer\">\r\n");
-      out.write("\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-default\"\r\n");
-      out.write("\t\t\t\t\t\t\t\tdata-dismiss=\"modal\">Close</button>\r\n");
-      out.write("\t\t\t\t\t\t\t<!-- <button type=\"submit\" class=\"btn btn-info\">Save changes</button> -->\r\n");
-      out.write("\t\t\t\t\t\t\t<input type=\"submit\" value=\"Submit\" class=\"btn btn-info\">\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t</form>\r\n");
-      out.write("\t\t\t\t</div>\r\n");
-      out.write("\t\t\t</div>\r\n");
-      out.write("\t\t</div>\r\n");
-      out.write("\t\t<!--Modal Edit -->\r\n");
-      out.write("\r\n");
-      out.write("\t\t<div class=\"modal fade\" id=\"modalTaskDelete\" tabindex=\"-1\"\r\n");
-      out.write("\t\t\trole=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n");
-      out.write("\t\t\t<div class=\"modal-dialog\">\r\n");
-      out.write("\t\t\t\t<div class=\"modal-content\">\r\n");
-      out.write("\t\t\t\t\t<form id=\"delete_task\" name=\"delete_task\" method=\"post\">\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"modal-header\">\r\n");
-      out.write("\t\t\t\t\t\t\t<button type=\"button\" class=\"close\" data-dismiss=\"modal\"\r\n");
-      out.write("\t\t\t\t\t\t\t\taria-label=\"Close\" disabled=\"isMe\">\r\n");
-      out.write("\t\t\t\t\t\t\t\t<span aria-hidden=\"true\">&times;</span>\r\n");
-      out.write("\t\t\t\t\t\t\t</button>\r\n");
-      out.write("\t\t\t\t\t\t\t<h4 class=\"modal-title\">Delete Task</h4>\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"modal-body\">Are you sure you want to delete this\r\n");
-      out.write("\t\t\t\t\t\t\tentry?</div>\r\n");
-      out.write("\t\t\t\t\t\t<div class=\"modal-footer\">\r\n");
-      out.write("\t\t\t\t\t\t\t<button type=\"button\" class=\"btn btn-default\"\r\n");
-      out.write("\t\t\t\t\t\t\t\tdata-dismiss=\"modal\">Cancel</button>\r\n");
-      out.write("\t\t\t\t\t\t\t<input type=\"submit\" value=\"Delete\" class=\"btn btn-info\">\r\n");
-      out.write("\t\t\t\t\t\t</div>\r\n");
-      out.write("\r\n");
-      out.write("\t\t\t\t\t</form>\r\n");
-      out.write("\t\t\t\t</div>\r\n");
-      out.write("\t\t\t</div>\r\n");
-      out.write("\t\t</div>\r\n");
-      out.write("\t\t<!-- Modal delete -->\r\n");
-      out.write("                \r\n");
-      out.write("                <!-- Button trigger modal -->\r\n");
+      out.write("\t\t\r\n");
       out.write("\r\n");
       out.write("<!-- Modal -->\r\n");
       out.write("<div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\r\n");
@@ -483,13 +221,12 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("    <div class=\"modal-content\">\r\n");
       out.write("      <div class=\"modal-header\">\r\n");
       out.write("        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n");
-      out.write("        <h4 class=\"modal-title\" id=\"myModalLabel\">Modal title</h4>\r\n");
+      out.write("        <h4 class=\"modal-title\" id=\"myModalLabel\">Question</h4>\r\n");
       out.write("      </div>\r\n");
       out.write("      <div class=\"modal-body\">\r\n");
       out.write("           <textarea id=\"text1\" cols=\"80\" rows=\"20\" ></textarea>\r\n");
       out.write("      </div>\r\n");
       out.write("      <div class=\"modal-footer\">\r\n");
-      out.write("        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\r\n");
       out.write("        \r\n");
       out.write("      </div>\r\n");
       out.write("    </div>\r\n");
@@ -502,34 +239,24 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("\t<!-- body container -->\r\n");
       out.write("</body>\r\n");
       out.write("\r\n");
-      out.write("<script>\r\n");
-      out.write("$(document).ready(function(){\r\n");
-      out.write("    $('#taskTable').DataTable();\r\n");
-      out.write("    \r\n");
+      out.write("<script>   \r\n");
+      out.write("    $(document).ready(function () {\r\n");
+      out.write("            $('#taskTable').DataTable();\r\n");
       out.write("            \r\n");
-      out.write("                $.ajax({\r\n");
-      out.write("                    url: \"Questions\\2012\\CSE300\\exam1\\Q1\\q1.txt\",\r\n");
-      out.write("                    dataType: \"text\",\r\n");
-      out.write("                    success: function (data) {\r\n");
-      out.write("                        $(\"#text1\").html(data);\r\n");
-      out.write("                    }\r\n");
-      out.write("                });\r\n");
-      out.write("            \r\n");
-      out.write("        \r\n");
-      out.write("});\r\n");
-      out.write("function goToUpdateTaskPage(taskId){\r\n");
-      out.write("\talert(\"whoops!!!!\");\r\n");
-      out.write("\twindow.location.href = \"goToUpdateTaskPage?taskId=\"+taskId;\r\n");
-      out.write("}\r\n");
-      out.write("function goToAddTaskPage(){\r\n");
-      out.write("\talert(\"whoops!!!!\");\r\n");
-      out.write("\twindow.location.href = \"goToAddTaskPage\";\r\n");
-      out.write("}\r\n");
-      out.write("function fun1(){\r\n");
-      out.write("    $('#myText2').load(\"myText.txt\");\r\n");
+      out.write("        });\r\n");
+      out.write("function loadDoc(path) {\r\n");
+      out.write("    alert(path);\r\n");
+      out.write("    var xhttp = new XMLHttpRequest();\r\n");
+      out.write("    xhttp.open(\"GET\", path, false);\r\n");
+      out.write("    xhttp.send();\r\n");
+      out.write("    document.getElementById(\"text1\").innerHTML = xhttp.responseText;\r\n");
+      out.write("}    \r\n");
+      out.write("function goToAddQuestionPage(){\r\n");
+      out.write("    window.location.href = \"AddQuestionPage\"\r\n");
       out.write("}\r\n");
       out.write("</script>\r\n");
-      out.write("</html>");
+      out.write("</html>\r\n");
+      out.write("<!-- data-toggle=\"modal\" data-target=\"#myModal\" -->");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
@@ -720,6 +447,384 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
       return true;
     }
     _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_9);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_choose_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:choose
+    org.apache.taglibs.standard.tag.common.core.ChooseTag _jspx_th_c_choose_0 = (org.apache.taglibs.standard.tag.common.core.ChooseTag) _jspx_tagPool_c_choose.get(org.apache.taglibs.standard.tag.common.core.ChooseTag.class);
+    _jspx_th_c_choose_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_choose_0.setParent(null);
+    int _jspx_eval_c_choose_0 = _jspx_th_c_choose_0.doStartTag();
+    if (_jspx_eval_c_choose_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("                        ");
+        if (_jspx_meth_c_when_0((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_choose_0, _jspx_page_context))
+          return true;
+        out.write("\r\n");
+        out.write("                                ");
+        if (_jspx_meth_c_when_1((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_choose_0, _jspx_page_context))
+          return true;
+        out.write("\r\n");
+        out.write("                            ");
+        int evalDoAfterBody = _jspx_th_c_choose_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_choose_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_choose.reuse(_jspx_th_c_choose_0);
+      return true;
+    }
+    _jspx_tagPool_c_choose.reuse(_jspx_th_c_choose_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_when_0(javax.servlet.jsp.tagext.JspTag _jspx_th_c_choose_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:when
+    org.apache.taglibs.standard.tag.rt.core.WhenTag _jspx_th_c_when_0 = (org.apache.taglibs.standard.tag.rt.core.WhenTag) _jspx_tagPool_c_when_test.get(org.apache.taglibs.standard.tag.rt.core.WhenTag.class);
+    _jspx_th_c_when_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_when_0.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_choose_0);
+    _jspx_th_c_when_0.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${tracker == 'teacher'}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_when_0 = _jspx_th_c_when_0.doStartTag();
+    if (_jspx_eval_c_when_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("                            <li><a>");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${teacher.getFullName()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+        out.write("</a></li>\r\n");
+        out.write("                                ");
+        int evalDoAfterBody = _jspx_th_c_when_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_when_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_when_test.reuse(_jspx_th_c_when_0);
+      return true;
+    }
+    _jspx_tagPool_c_when_test.reuse(_jspx_th_c_when_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_when_1(javax.servlet.jsp.tagext.JspTag _jspx_th_c_choose_0, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:when
+    org.apache.taglibs.standard.tag.rt.core.WhenTag _jspx_th_c_when_1 = (org.apache.taglibs.standard.tag.rt.core.WhenTag) _jspx_tagPool_c_when_test.get(org.apache.taglibs.standard.tag.rt.core.WhenTag.class);
+    _jspx_th_c_when_1.setPageContext(_jspx_page_context);
+    _jspx_th_c_when_1.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_choose_0);
+    _jspx_th_c_when_1.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${tracker == 'student'}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_when_1 = _jspx_th_c_when_1.doStartTag();
+    if (_jspx_eval_c_when_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("                            <li><a>");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${student.getRegno()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+        out.write("</a></li>\r\n");
+        out.write("                                ");
+        int evalDoAfterBody = _jspx_th_c_when_1.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_when_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_when_test.reuse(_jspx_th_c_when_1);
+      return true;
+    }
+    _jspx_tagPool_c_when_test.reuse(_jspx_th_c_when_1);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_if_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_0 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_if_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_if_0.setParent(null);
+    _jspx_th_c_if_0.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${tracker=='teacher'}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_if_0 = _jspx_th_c_if_0.doStartTag();
+    if (_jspx_eval_c_if_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("                                <li><a href=\"QuestionPage?examId=");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${exam.getExamId()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+        out.write("\">Questions</a></li>\r\n");
+        out.write("                                <li><a href=\"StudentListPage?examId=");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${exam.getExamId()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+        out.write("\">Student's List</a></li>\r\n");
+        out.write("\t\t\t\t<li><a href=\"#\">Student Performance</a></li>\r\n");
+        out.write("\t\t\t\t");
+        int evalDoAfterBody = _jspx_th_c_if_0.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_if_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_0);
+      return true;
+    }
+    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_0);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_if_1(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_1 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_if_1.setPageContext(_jspx_page_context);
+    _jspx_th_c_if_1.setParent(null);
+    _jspx_th_c_if_1.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${tracker=='test'}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_if_1 = _jspx_th_c_if_1.doStartTag();
+    if (_jspx_eval_c_if_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("\t\t\t\tSummary: <span id=\"course_code\">54 Students attended,101 submissions</span>\r\n");
+        out.write("                            ");
+        int evalDoAfterBody = _jspx_th_c_if_1.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_if_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_1);
+      return true;
+    }
+    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_1);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_choose_1(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:choose
+    org.apache.taglibs.standard.tag.common.core.ChooseTag _jspx_th_c_choose_1 = (org.apache.taglibs.standard.tag.common.core.ChooseTag) _jspx_tagPool_c_choose.get(org.apache.taglibs.standard.tag.common.core.ChooseTag.class);
+    _jspx_th_c_choose_1.setPageContext(_jspx_page_context);
+    _jspx_th_c_choose_1.setParent(null);
+    int _jspx_eval_c_choose_1 = _jspx_th_c_choose_1.doStartTag();
+    if (_jspx_eval_c_choose_1 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("                ");
+        if (_jspx_meth_c_when_2((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_choose_1, _jspx_page_context))
+          return true;
+        out.write("\r\n");
+        out.write("            ");
+        int evalDoAfterBody = _jspx_th_c_choose_1.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_choose_1.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_choose.reuse(_jspx_th_c_choose_1);
+      return true;
+    }
+    _jspx_tagPool_c_choose.reuse(_jspx_th_c_choose_1);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_when_2(javax.servlet.jsp.tagext.JspTag _jspx_th_c_choose_1, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:when
+    org.apache.taglibs.standard.tag.rt.core.WhenTag _jspx_th_c_when_2 = (org.apache.taglibs.standard.tag.rt.core.WhenTag) _jspx_tagPool_c_when_test.get(org.apache.taglibs.standard.tag.rt.core.WhenTag.class);
+    _jspx_th_c_when_2.setPageContext(_jspx_page_context);
+    _jspx_th_c_when_2.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_choose_1);
+    _jspx_th_c_when_2.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${course.getIsRunning() eq 1}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_when_2 = _jspx_th_c_when_2.doStartTag();
+    if (_jspx_eval_c_when_2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("                    <div class=\"col-xs-2\">\r\n");
+        out.write("                        ");
+        if (_jspx_meth_c_if_2((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_when_2, _jspx_page_context))
+          return true;
+        out.write("\r\n");
+        out.write("                    </div>\r\n");
+        out.write("                    \r\n");
+        out.write("                ");
+        int evalDoAfterBody = _jspx_th_c_when_2.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_when_2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_when_test.reuse(_jspx_th_c_when_2);
+      return true;
+    }
+    _jspx_tagPool_c_when_test.reuse(_jspx_th_c_when_2);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_if_2(javax.servlet.jsp.tagext.JspTag _jspx_th_c_when_2, PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_2 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_if_2.setPageContext(_jspx_page_context);
+    _jspx_th_c_if_2.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_when_2);
+    _jspx_th_c_if_2.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${tracker=='teacher'}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_if_2 = _jspx_th_c_if_2.doStartTag();
+    if (_jspx_eval_c_if_2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("                        <button id=\"button_add_task\" class=\"btn btn-success col-xs-12\" onClick=\"goToAddQuestionPage()\">\r\n");
+        out.write("                            <i class=\"glyphicon glyphicon-plus-sign\"></i> Add New Question\r\n");
+        out.write("                        </button>\r\n");
+        out.write("                        ");
+        int evalDoAfterBody = _jspx_th_c_if_2.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_if_2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_2);
+      return true;
+    }
+    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_2);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_forEach_0(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:forEach
+    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_0 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+    _jspx_th_c_forEach_0.setPageContext(_jspx_page_context);
+    _jspx_th_c_forEach_0.setParent(null);
+    _jspx_th_c_forEach_0.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${questions}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_0.setVar("questions");
+    int[] _jspx_push_body_count_c_forEach_0 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_forEach_0 = _jspx_th_c_forEach_0.doStartTag();
+      if (_jspx_eval_c_forEach_0 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+        do {
+          out.write("\r\n");
+          out.write("                                \t<tr>\r\n");
+          out.write("\t\t\t\t\t\t<td>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${questions.getCounter()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</td>\r\n");
+          out.write("                                                <td><button style=\"border: none;cursor: pointer\" data-toggle=\"modal\" data-target=\"#myModal\" value=\"");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${questions.getPath()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("\" onclick=\"loadDoc(this.value)\">");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${questions.getTitle()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</button>\t\t\t\t\r\n");
+          out.write("\t\t\t\t\t\t<td>");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${questions.getScore()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</td>\r\n");
+          out.write("                                               \r\n");
+          out.write("\t\t\t\t\t\t<td>\r\n");
+          out.write("                                                     ");
+          if (_jspx_meth_c_if_3((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_0, _jspx_page_context, _jspx_push_body_count_c_forEach_0))
+            return true;
+          out.write("\r\n");
+          out.write("                                                     ");
+          if (_jspx_meth_c_if_4((javax.servlet.jsp.tagext.JspTag) _jspx_th_c_forEach_0, _jspx_page_context, _jspx_push_body_count_c_forEach_0))
+            return true;
+          out.write("\r\n");
+          out.write("                                                     </td>\r\n");
+          out.write("                                                \r\n");
+          out.write("\t\t\t\t\t</tr>\r\n");
+          out.write("                                     ");
+          int evalDoAfterBody = _jspx_th_c_forEach_0.doAfterBody();
+          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+            break;
+        } while (true);
+      }
+      if (_jspx_th_c_forEach_0.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_forEach_0[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_forEach_0.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_forEach_0.doFinally();
+      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_0);
+    }
+    return false;
+  }
+
+  private boolean _jspx_meth_c_if_3(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_0, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_0)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_3 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_if_3.setPageContext(_jspx_page_context);
+    _jspx_th_c_if_3.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_0);
+    _jspx_th_c_if_3.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${tracker=='teacher'}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_if_3 = _jspx_th_c_if_3.doStartTag();
+    if (_jspx_eval_c_if_3 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("                                                    <a class=\"btn btn-info btn-sm removebutton\" onclick=\"\" title=\"Remove\"><i\r\n");
+        out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-remove \"></i></a>\r\n");
+        out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Test Case File\"><i\r\n");
+        out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
+        out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Question File\"><i\r\n");
+        out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
+        out.write("\t\t\t\t\t\t");
+        int evalDoAfterBody = _jspx_th_c_if_3.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_if_3.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_3);
+      return true;
+    }
+    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_3);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_if_4(javax.servlet.jsp.tagext.JspTag _jspx_th_c_forEach_0, PageContext _jspx_page_context, int[] _jspx_push_body_count_c_forEach_0)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:if
+    org.apache.taglibs.standard.tag.rt.core.IfTag _jspx_th_c_if_4 = (org.apache.taglibs.standard.tag.rt.core.IfTag) _jspx_tagPool_c_if_test.get(org.apache.taglibs.standard.tag.rt.core.IfTag.class);
+    _jspx_th_c_if_4.setPageContext(_jspx_page_context);
+    _jspx_th_c_if_4.setParent((javax.servlet.jsp.tagext.Tag) _jspx_th_c_forEach_0);
+    _jspx_th_c_if_4.setTest(((java.lang.Boolean) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${tracker=='student'}", java.lang.Boolean.class, (PageContext)_jspx_page_context, null)).booleanValue());
+    int _jspx_eval_c_if_4 = _jspx_th_c_if_4.doStartTag();
+    if (_jspx_eval_c_if_4 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+      do {
+        out.write("\r\n");
+        out.write("                                                       <form action=\"UploadFile\" method=\"post\" enctype=\"multipart/form-data\">\r\n");
+        out.write("              <input type=\"file\" name=\"file\" size=\"50\" />\r\n");
+        out.write("              <input type=\"hidden\" name=\"qId\" value=\"");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${questions.getQuestionId()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+        out.write("\" />\r\n");
+        out.write("<input type=\"submit\" value=\"Submit\" />\r\n");
+        out.write("          </form> \r\n");
+        out.write("                                                     ");
+        int evalDoAfterBody = _jspx_th_c_if_4.doAfterBody();
+        if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+          break;
+      } while (true);
+    }
+    if (_jspx_th_c_if_4.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_4);
+      return true;
+    }
+    _jspx_tagPool_c_if_test.reuse(_jspx_th_c_if_4);
     return false;
   }
 }

@@ -59,22 +59,60 @@ public class QuestionDao {
         return questions;
     }
     
-    public void addQuestion(int score, String fileName, Connection conn){
-        int count = 0;
+    public int addQuestion(int examId, int score, String fileName, Connection conn){
+        int qId = 0;
         PreparedStatement ps;
+        ResultSet rs = null;
         try {
 
             PreparedStatement stmt = conn.prepareStatement("insert into question(score,question_filename) values(?,?)");
             stmt.setInt(1, score);
             stmt.setString(2, fileName);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("select max(question_id) from question");
+            
+            
+            rs = stmt.executeQuery();
+            while (rs.next()){
+                qId = rs.getInt("max(question_id)");
+            }
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("insert into exam_question(exam_id,question_id) values(?,?)");
+            stmt.setInt(1, examId);
+            stmt.setInt(2, qId);
             
             stmt.execute();
             stmt.close();
         } catch (Exception se) {
             se.printStackTrace();
         }
+        return qId;
     }
     
+    public void setTitle(String title, int qId, Connection conn){
+        PreparedStatement ps;
+        ResultSet rs = null;
+        try {
+            PreparedStatement stmt = conn.prepareStatement("update question set title=? where question_id=?");
+            stmt.setString(1, title);
+            stmt.setInt(2, qId);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+    }
     
 
 }

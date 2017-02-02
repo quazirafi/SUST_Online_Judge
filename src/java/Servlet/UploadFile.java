@@ -106,8 +106,8 @@ public class UploadFile extends HttpServlet {
         Exam exam = (Exam) session.getAttribute("exam");
         String examTitle = exam.getTitle();
         Student student = (Student) session.getAttribute("student");
-        String finalPath = "F:\\UploadFIles\\Submissions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";
-        String questionPath = "F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";;
+        String finalPath = "F:\\UploadFIles\\Submissions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+        String questionPath = "F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
         String fileRename = "";
 
         if (contentType.indexOf("multipart/form-data") >= 0) {

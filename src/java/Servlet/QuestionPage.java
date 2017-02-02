@@ -96,7 +96,7 @@ public class QuestionPage extends HttpServlet {
                 String courseTitle = course.getTitle();
                 Exam exam = (Exam) session.getAttribute("exam");
                 String examTitle = exam.getTitle();
-                String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";
+                String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
                 for (Question q : questions) {
                     q.setPath(path + "Q" + q.getQuestionId() + "\\" + q.getQuestionFileName());
                     System.out.println("path --> " + q.getPath());
@@ -148,9 +148,9 @@ public class QuestionPage extends HttpServlet {
                 String courseTitle = course.getTitle();
                 Exam exam = (Exam) session.getAttribute("exam");
                 String examTitle = exam.getTitle();
-                String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";
+                String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
                 for (Question q : questions) {
-                    q.setPath(path + "Q" + q.getCounter() + "\\" + q.getQuestionFileName());
+                    q.setPath(path + "Q" + q.getQuestionId()+ "\\" + q.getQuestionFileName());
                     System.out.println("path --> " + q.getPath());
                 }
                 request.setAttribute("questions", questions);
@@ -172,9 +172,9 @@ public class QuestionPage extends HttpServlet {
             String courseTitle = course.getTitle();
             Exam exam = (Exam) session.getAttribute("exam");
             String examTitle = exam.getTitle();
-            String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + examTitle + "\\";
+            String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
             for (Question q : questions) {
-                q.setPath(path + "Q" + q.getCounter() + "\\" + q.getQuestionFileName());
+                q.setPath(path + "Q" + q.getQuestionId()+ "\\" + q.getQuestionFileName());
                 System.out.println("path --> " + q.getPath());
             }
             request.setAttribute("questions", questions);

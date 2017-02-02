@@ -177,11 +177,17 @@
             
         });
 function loadDoc(path) {
-    alert(path);
+    //alert(path);
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", path, false);
+    xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById("text1").innerHTML =
+      this.responseText;
+    }
+  };
+    xhttp.open("POST", path, false);
     xhttp.send();
-    document.getElementById("text1").innerHTML = xhttp.responseText;
+    //document.getElementById("text1").innerHTML = xhttp.responseText;
 }    
 function goToAddQuestionPage(){
     window.location.href = "AddQuestionPage"

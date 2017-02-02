@@ -1,0 +1,15 @@
+git add .
+git commit -m "Write a short message about the change"
+git push origin master
+
+accident
+art 
+crime
+economics
+education
+environment 
+international
+opinion
+politics
+science & tech
+sports
