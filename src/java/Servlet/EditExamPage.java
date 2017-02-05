@@ -11,7 +11,11 @@ import Entity.Exam;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -72,6 +76,37 @@ public class EditExamPage extends HttpServlet {
                 Course course = (Course) session.getAttribute("course");
                 ArrayList<Exam> exams;
                 exams = (ArrayList<Exam>) exmDao.getExamsByCourseId(course.getCourseId(), conn);
+                 for (Exam e : exams) {
+                    System.out.println("INSIDE EXAM LOOP");
+                    String startDateString = e.getStartTime();
+                    //String endDateString = e.getEndTime();
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                   
+                    Date startDate,endDate;
+                    Date currentDate = new Date();
+                    System.out.print(df.format(currentDate)+" --> ");
+                    String newDateString="",newDateString2="";
+                    try {
+                        startDate = df.parse(startDateString);
+                        //endDate = df.parse(endDateString);
+                        newDateString = df.format(startDate);
+                        //newDateString2 = df.format(endDate);
+                        
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(startDate);
+                        calendar.add(Calendar.MINUTE,200);
+                        endDate = calendar.getTime();
+                        if (currentDate.before(startDate) && !e.getTitle().equals("no data available"))
+                            e.setStatus("upcoming");
+                        else if (currentDate.getTime() > endDate.getTime() && !e.getTitle().equals("no data available"))
+                            e.setStatus("finished");
+                        else 
+                            e.setStatus("ongoing");
+                    } catch (Exception e2) {
+                        System.out.println("INSIDE THE EXCEPTION");
+                        e2.printStackTrace();
+                    }
+                }
                 request.setAttribute("exams", exams);
                 request.setAttribute("courseTitle", course.getTitle());
                 RequestDispatcher rd = request.getRequestDispatcher("ExamPage.jsp");
@@ -110,6 +145,37 @@ public class EditExamPage extends HttpServlet {
             Course course = (Course) session.getAttribute("course");
             ArrayList<Exam> exams;
             exams = (ArrayList<Exam>) exmDao.getExamsByCourseId(course.getCourseId(), conn);
+             for (Exam e : exams) {
+                    System.out.println("INSIDE EXAM LOOP");
+                    String startDateString = e.getStartTime();
+                    //String endDateString = e.getEndTime();
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                   
+                    Date startDate,endDate;
+                    Date currentDate = new Date();
+                    System.out.print(df.format(currentDate)+" --> ");
+                    String newDateString="",newDateString2="";
+                    try {
+                        startDate = df.parse(startDateString);
+                        //endDate = df.parse(endDateString);
+                        newDateString = df.format(startDate);
+                        //newDateString2 = df.format(endDate);
+                        
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(startDate);
+                        calendar.add(Calendar.MINUTE,200);
+                        endDate = calendar.getTime();
+                        if (currentDate.before(startDate) && !e.getTitle().equals("no data available"))
+                            e.setStatus("upcoming");
+                        else if (currentDate.getTime() > endDate.getTime() && !e.getTitle().equals("no data available"))
+                            e.setStatus("finished");
+                        else 
+                            e.setStatus("ongoing");
+                    } catch (Exception e2) {
+                        System.out.println("INSIDE THE EXCEPTION");
+                        e2.printStackTrace();
+                    }
+                }
             request.setAttribute("exams", exams);
             request.setAttribute("courseTitle", course.getTitle());
             RequestDispatcher rd = request.getRequestDispatcher("ExamPage.jsp");
