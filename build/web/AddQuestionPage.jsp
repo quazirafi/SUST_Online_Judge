@@ -78,7 +78,7 @@
         <form action="AddQuestionPage" method="post" enctype="multipart/form-data">
 
             <div class="form-group">
-                <label for="qFile">Select The File(text file in .txt format)</label>
+                <label for="qFile">Select The Question File(text file in .txt format)</label>
                 <input type="file" name="qFile" size="50" id="qFile"/>
             </div>
             <div class="form-group">

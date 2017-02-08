@@ -24,7 +24,8 @@
 	rel="stylesheet" type="text/css" />
 <link href="<c:url value="/resources/css/thesis-list.css"/>"
 	rel="stylesheet" type="text/css" />
-
+<link href="<c:url value="/resources/css/buttonstyles.css"/>"
+	rel="stylesheet" type="text/css" />
 <script
 	src="<c:url value="/resources/javascript/jquery-1.11.3.min.js" />"
 	type="text/javascript"></script>
@@ -123,12 +124,9 @@
                                                
 						<td>
                                                      <c:if test="${tracker=='teacher'}">
-                                                    <a class="btn btn-info btn-sm removebutton" onclick="" title="Remove"><i
-									class="glyphicon glyphicon-remove "></i></a>
-                                                            <a class="btn btn-info btn-sm editbutton" onclick="" title="Edit Test Case File"><i
-									class="glyphicon glyphicon-edit "></i></a>
-                                                            <a class="btn btn-info btn-sm editbutton" onclick="" title="Edit Question File"><i
-									class="glyphicon glyphicon-edit "></i></a>
+                                                         <button data-toggle="modal" data-id="${questions.getQuestionId()}" class="addition" id="test">Add Test Case</button><br>
+                                                         <button data-toggle="modal" data-id="${questions.getQuestionId()}" class="addition" id="output">Add Output File</button>
+                                                         <button class="deletion" id="delete">Delete</button>
 						</c:if>
                                                      <c:if test="${tracker=='student'}">
                                                        <form action="UploadFile" method="post" enctype="multipart/form-data">
@@ -166,6 +164,48 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Upload Test Case FIle(.txt format)</h4>
+      </div>
+      <div class="modal-body">
+          <form action="AddTestCase" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" size="50" />
+                <input type="hidden" name="qId" id="qId" />
+<!--                <input type="hidden" name="type" value="test"/>-->
+<input type="submit" value="Submit" />
+          </form>
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Upload Output FIle(.txt format)</h4>
+      </div>
+      <div class="modal-body">
+          <form action="AddOutputFile" method="post" enctype="multipart/form-data">
+                <input type="file" name="file" size="50" />
+                <input type="hidden" name="qId2" id="qId2" />
+<!--                <input type="hidden" name="type" value="output"/>-->
+<input type="submit" value="Submit" />
+          </form>
+      </div>
+      <div class="modal-footer">
+        
+      </div>
+    </div>
+  </div>
+</div>
 	<a href="${pageContext.request.contextPath}/courseback">Previous Page</a>
 	</div>
 	<!-- body container -->
@@ -193,6 +233,21 @@ function loadDoc(path) {
 function goToAddQuestionPage(){
     window.location.href = "AddQuestionPage"
 }
+
+ $(document).ready(function () {
+            $('#taskTable').DataTable();
+            $("#test").click(function(){
+                var id=$(this).data('id');
+                document.getElementById('qId').value=id;
+               $('#myModal2').modal('show'); 
+            });
+            $("#output").click(function(){
+                var id=$(this).data('id');
+                alert(id);
+                document.getElementById('qId2').value=id;
+               $('#myModal3').modal('show'); 
+            });
+        });
 </script>
 </html>
 <!-- data-toggle="modal" data-target="#myModal" -->

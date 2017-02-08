@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import Dao.*;
 import Entity.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -48,7 +51,7 @@ public class AddQuestionPage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
+
         }
     }
 
@@ -84,7 +87,7 @@ public class AddQuestionPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         HttpSession session = request.getSession();
         String tracker = (String) session.getAttribute("tracker");
         if (tracker.equals("teacher")) {
@@ -110,13 +113,13 @@ public class AddQuestionPage extends HttpServlet {
             File createDirectory = new File(filePath);
             createDirectory.mkdirs();
             if (contentType.indexOf("multipart/form-data") >= 0) {
-                
+
                 DiskFileItemFactory factory = new DiskFileItemFactory();
                 factory.setSizeThreshold(maxMemory);
                 factory.setRepository(new File("F:\\"));
                 ServletFileUpload upload = new ServletFileUpload(factory);
                 upload.setSizeMax(maxFileSize);
-                
+
                 try {
                     List fileItems = upload.parseRequest(request);
                     Iterator i = fileItems.iterator();
@@ -125,6 +128,7 @@ public class AddQuestionPage extends HttpServlet {
                         if (!fi.isFormField()) {
                             System.out.println("inside form field ha");
                             fieldName = fi.getFieldName();
+                            System.out.println("FIELDNAME " + fieldName);
                             fileName = fi.getName();
                             System.out.println(fileName);
                             boolean isInMemory = fi.isInMemory();
@@ -143,8 +147,6 @@ public class AddQuestionPage extends HttpServlet {
                                 //fileNameToBeInserted = fileName.substring(fileName.lastIndexOf("\\"));
                             }
                             fi.write(file);
-//                        Path source = Paths.get(fileRename);
-//                        Files.move(source, source.resolveSibling("Main.c"));
 
                         } else {
                             if (fi.getFieldName().equals("score")) {
@@ -177,15 +179,15 @@ public class AddQuestionPage extends HttpServlet {
                             }
                         }
                     }
-                    
+
                 } catch (Exception e) {
                     System.out.println(e);
                 }
             }
 
-        //from here 
+            //from here 
             List<Question> questions = questionDao.getQuestionByExamId(exam.getExamId(), conn);
-            
+
             String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
             for (Question q : questions) {
                 q.setPath(path + "Q" + q.getQuestionId() + "\\" + q.getQuestionFileName());
@@ -197,7 +199,7 @@ public class AddQuestionPage extends HttpServlet {
         } else {
             response.sendRedirect("login.jsp");
         }
-        
+
     }
 
     /**

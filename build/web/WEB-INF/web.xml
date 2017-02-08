@@ -53,6 +53,14 @@
         <servlet-name>SendQuestionFile</servlet-name>
         <servlet-class>Servlet.SendQuestionFile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddTestCase</servlet-name>
+        <servlet-class>Servlet.AddTestCase</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddOutputFile</servlet-name>
+        <servlet-class>Servlet.AddOutputFile</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -99,6 +107,14 @@
     <servlet-mapping>
         <servlet-name>SendQuestionFile</servlet-name>
         <url-pattern>/SendQuestionFile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddTestCase</servlet-name>
+        <url-pattern>/AddTestCase</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddOutputFile</servlet-name>
+        <url-pattern>/AddOutputFile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
