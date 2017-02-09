@@ -110,20 +110,18 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
         return;
       out.write("\"\r\n");
       out.write("\trel=\"stylesheet\" type=\"text/css\" />\r\n");
-      out.write("\r\n");
-      out.write("<script\r\n");
-      out.write("\tsrc=\"");
+      out.write("<link href=\"");
       if (_jspx_meth_c_url_6(_jspx_page_context))
         return;
       out.write("\"\r\n");
-      out.write("\ttype=\"text/javascript\"></script>\r\n");
-      out.write("<script src=\"");
+      out.write("\trel=\"stylesheet\" type=\"text/css\" />\r\n");
+      out.write("<script\r\n");
+      out.write("\tsrc=\"");
       if (_jspx_meth_c_url_7(_jspx_page_context))
         return;
       out.write("\"\r\n");
       out.write("\ttype=\"text/javascript\"></script>\r\n");
-      out.write("<script\r\n");
-      out.write("\tsrc=\"");
+      out.write("<script src=\"");
       if (_jspx_meth_c_url_8(_jspx_page_context))
         return;
       out.write("\"\r\n");
@@ -131,6 +129,12 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("<script\r\n");
       out.write("\tsrc=\"");
       if (_jspx_meth_c_url_9(_jspx_page_context))
+        return;
+      out.write("\"\r\n");
+      out.write("\ttype=\"text/javascript\"></script>\r\n");
+      out.write("<script\r\n");
+      out.write("\tsrc=\"");
+      if (_jspx_meth_c_url_10(_jspx_page_context))
         return;
       out.write("\"\r\n");
       out.write("\ttype=\"text/javascript\"></script>\r\n");
@@ -232,6 +236,48 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("    </div>\r\n");
       out.write("  </div>\r\n");
       out.write("</div>\r\n");
+      out.write("<div class=\"modal fade\" id=\"myModal2\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\r\n");
+      out.write("  <div class=\"modal-dialog\" role=\"document\">\r\n");
+      out.write("    <div class=\"modal-content\">\r\n");
+      out.write("      <div class=\"modal-header\">\r\n");
+      out.write("        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n");
+      out.write("        <h4 class=\"modal-title\" id=\"myModalLabel\">Upload Test Case FIle(.txt format)</h4>\r\n");
+      out.write("      </div>\r\n");
+      out.write("      <div class=\"modal-body\">\r\n");
+      out.write("          <form action=\"AddTestCase\" method=\"post\" enctype=\"multipart/form-data\">\r\n");
+      out.write("                <input type=\"file\" name=\"file\" size=\"50\" />\r\n");
+      out.write("                <input type=\"hidden\" name=\"qId\" id=\"qId\" />\r\n");
+      out.write("<!--                <input type=\"hidden\" name=\"type\" value=\"test\"/>-->\r\n");
+      out.write("<input type=\"submit\" value=\"Submit\" />\r\n");
+      out.write("          </form>\r\n");
+      out.write("      </div>\r\n");
+      out.write("      <div class=\"modal-footer\">\r\n");
+      out.write("        \r\n");
+      out.write("      </div>\r\n");
+      out.write("    </div>\r\n");
+      out.write("  </div>\r\n");
+      out.write("</div>\r\n");
+      out.write("<div class=\"modal fade\" id=\"myModal3\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\r\n");
+      out.write("  <div class=\"modal-dialog\" role=\"document\">\r\n");
+      out.write("    <div class=\"modal-content\">\r\n");
+      out.write("      <div class=\"modal-header\">\r\n");
+      out.write("        <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\"><span aria-hidden=\"true\">&times;</span></button>\r\n");
+      out.write("        <h4 class=\"modal-title\" id=\"myModalLabel\">Upload Output FIle(.txt format)</h4>\r\n");
+      out.write("      </div>\r\n");
+      out.write("      <div class=\"modal-body\">\r\n");
+      out.write("          <form action=\"AddOutputFile\" method=\"post\" enctype=\"multipart/form-data\">\r\n");
+      out.write("                <input type=\"file\" name=\"file\" size=\"50\" />\r\n");
+      out.write("                <input type=\"hidden\" name=\"qId2\" id=\"qId2\" />\r\n");
+      out.write("<!--                <input type=\"hidden\" name=\"type\" value=\"output\"/>-->\r\n");
+      out.write("<input type=\"submit\" value=\"Submit\" />\r\n");
+      out.write("          </form>\r\n");
+      out.write("      </div>\r\n");
+      out.write("      <div class=\"modal-footer\">\r\n");
+      out.write("        \r\n");
+      out.write("      </div>\r\n");
+      out.write("    </div>\r\n");
+      out.write("  </div>\r\n");
+      out.write("</div>\r\n");
       out.write("\t<a href=\"");
       out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${pageContext.request.contextPath}", java.lang.String.class, (PageContext)_jspx_page_context, null));
       out.write("/courseback\">Previous Page</a>\r\n");
@@ -245,15 +291,37 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
       out.write("            \r\n");
       out.write("        });\r\n");
       out.write("function loadDoc(path) {\r\n");
-      out.write("    alert(path);\r\n");
+      out.write("    //alert(path);\r\n");
       out.write("    var xhttp = new XMLHttpRequest();\r\n");
-      out.write("    xhttp.open(\"GET\", path, false);\r\n");
+      out.write("    xhttp.onreadystatechange = function() {\r\n");
+      out.write("    if (this.readyState == 4 && this.status == 200) {\r\n");
+      out.write("      document.getElementById(\"text1\").innerHTML =\r\n");
+      out.write("      this.responseText;\r\n");
+      out.write("    }\r\n");
+      out.write("  };\r\n");
+      out.write("    xhttp.open(\"GET\", \"SendQuestionFile?\"+\"path=\"+path, false);\r\n");
       out.write("    xhttp.send();\r\n");
-      out.write("    document.getElementById(\"text1\").innerHTML = xhttp.responseText;\r\n");
+      out.write("    \r\n");
+      out.write("    //document.getElementById(\"text1\").innerHTML = xhttp.responseText;\r\n");
       out.write("}    \r\n");
       out.write("function goToAddQuestionPage(){\r\n");
       out.write("    window.location.href = \"AddQuestionPage\"\r\n");
       out.write("}\r\n");
+      out.write("\r\n");
+      out.write(" $(document).ready(function () {\r\n");
+      out.write("            $('#taskTable').DataTable();\r\n");
+      out.write("            $(\".addition\").click(function(){\r\n");
+      out.write("                var id=$(this).data('id');\r\n");
+      out.write("                document.getElementById('qId').value=id;\r\n");
+      out.write("               $('#myModal2').modal('show'); \r\n");
+      out.write("            });\r\n");
+      out.write("            $(\".addition2\").click(function(){\r\n");
+      out.write("                var id=$(this).data('id');\r\n");
+      out.write("                alert(id);\r\n");
+      out.write("                document.getElementById('qId2').value=id;\r\n");
+      out.write("               $('#myModal3').modal('show'); \r\n");
+      out.write("            });\r\n");
+      out.write("        });\r\n");
       out.write("</script>\r\n");
       out.write("</html>\r\n");
       out.write("<!-- data-toggle=\"modal\" data-target=\"#myModal\" -->");
@@ -386,7 +454,7 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.taglibs.standard.tag.rt.core.UrlTag _jspx_th_c_url_6 = (org.apache.taglibs.standard.tag.rt.core.UrlTag) _jspx_tagPool_c_url_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.UrlTag.class);
     _jspx_th_c_url_6.setPageContext(_jspx_page_context);
     _jspx_th_c_url_6.setParent(null);
-    _jspx_th_c_url_6.setValue("/resources/javascript/jquery-1.11.3.min.js");
+    _jspx_th_c_url_6.setValue("/resources/css/buttonstyles.css");
     int _jspx_eval_c_url_6 = _jspx_th_c_url_6.doStartTag();
     if (_jspx_th_c_url_6.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_6);
@@ -404,7 +472,7 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.taglibs.standard.tag.rt.core.UrlTag _jspx_th_c_url_7 = (org.apache.taglibs.standard.tag.rt.core.UrlTag) _jspx_tagPool_c_url_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.UrlTag.class);
     _jspx_th_c_url_7.setPageContext(_jspx_page_context);
     _jspx_th_c_url_7.setParent(null);
-    _jspx_th_c_url_7.setValue("/resources/javascript/bootstrap.min.js");
+    _jspx_th_c_url_7.setValue("/resources/javascript/jquery-1.11.3.min.js");
     int _jspx_eval_c_url_7 = _jspx_th_c_url_7.doStartTag();
     if (_jspx_th_c_url_7.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_7);
@@ -422,7 +490,7 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.taglibs.standard.tag.rt.core.UrlTag _jspx_th_c_url_8 = (org.apache.taglibs.standard.tag.rt.core.UrlTag) _jspx_tagPool_c_url_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.UrlTag.class);
     _jspx_th_c_url_8.setPageContext(_jspx_page_context);
     _jspx_th_c_url_8.setParent(null);
-    _jspx_th_c_url_8.setValue("/resources/javascript/jquery.dataTables.min.js");
+    _jspx_th_c_url_8.setValue("/resources/javascript/bootstrap.min.js");
     int _jspx_eval_c_url_8 = _jspx_th_c_url_8.doStartTag();
     if (_jspx_th_c_url_8.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_8);
@@ -440,13 +508,31 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
     org.apache.taglibs.standard.tag.rt.core.UrlTag _jspx_th_c_url_9 = (org.apache.taglibs.standard.tag.rt.core.UrlTag) _jspx_tagPool_c_url_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.UrlTag.class);
     _jspx_th_c_url_9.setPageContext(_jspx_page_context);
     _jspx_th_c_url_9.setParent(null);
-    _jspx_th_c_url_9.setValue("/resources/javascript/dataTables.bootstrap.js");
+    _jspx_th_c_url_9.setValue("/resources/javascript/jquery.dataTables.min.js");
     int _jspx_eval_c_url_9 = _jspx_th_c_url_9.doStartTag();
     if (_jspx_th_c_url_9.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_9);
       return true;
     }
     _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_9);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_url_10(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:url
+    org.apache.taglibs.standard.tag.rt.core.UrlTag _jspx_th_c_url_10 = (org.apache.taglibs.standard.tag.rt.core.UrlTag) _jspx_tagPool_c_url_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.UrlTag.class);
+    _jspx_th_c_url_10.setPageContext(_jspx_page_context);
+    _jspx_th_c_url_10.setParent(null);
+    _jspx_th_c_url_10.setValue("/resources/javascript/dataTables.bootstrap.js");
+    int _jspx_eval_c_url_10 = _jspx_th_c_url_10.doStartTag();
+    if (_jspx_th_c_url_10.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_10);
+      return true;
+    }
+    _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_10);
     return false;
   }
 
@@ -774,12 +860,13 @@ public final class QuestionPage_jsp extends org.apache.jasper.runtime.HttpJspBas
     if (_jspx_eval_c_if_3 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
       do {
         out.write("\r\n");
-        out.write("                                                    <a class=\"btn btn-info btn-sm removebutton\" onclick=\"\" title=\"Remove\"><i\r\n");
-        out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-remove \"></i></a>\r\n");
-        out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Test Case File\"><i\r\n");
-        out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
-        out.write("                                                            <a class=\"btn btn-info btn-sm editbutton\" onclick=\"\" title=\"Edit Question File\"><i\r\n");
-        out.write("\t\t\t\t\t\t\t\t\tclass=\"glyphicon glyphicon-edit \"></i></a>\r\n");
+        out.write("                                                         <button data-toggle=\"modal\" data-id=\"");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${questions.getQuestionId()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+        out.write("\" class=\"addition\" id=\"test\">Add Test Case</button><br>\r\n");
+        out.write("                                                         <button data-toggle=\"modal\" data-id=\"");
+        out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${questions.getQuestionId()}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+        out.write("\" class=\"addition2\" id=\"output\">Add Output File</button>\r\n");
+        out.write("                                                         <button class=\"deletion\" id=\"delete\">Delete</button>\r\n");
         out.write("\t\t\t\t\t\t");
         int evalDoAfterBody = _jspx_th_c_if_3.doAfterBody();
         if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)

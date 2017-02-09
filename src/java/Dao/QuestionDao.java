@@ -114,5 +114,30 @@ public class QuestionDao {
         }
     }
     
+    public Question getQuestionByQuestionId(int questionId,Connection conn){
+        Question question = new Question();
+        try {
+
+                Statement stmt = conn.createStatement();
+                String sql;
+                sql = "SELECT * from question where question_id=" + questionId;
+                ResultSet rs = stmt.executeQuery(sql);
+
+                while (rs.next()) {
+                    question.setOutputFileName(rs.getString("output_filename"));
+                    question.setQuestionFileName(rs.getString("question_filename"));
+                    question.setQuestionId(rs.getInt("question_id"));
+                    question.setScore(rs.getInt("score"));
+                    question.setTestCaseFileName(rs.getString("testcase_filename"));
+                    question.setTitle(rs.getString("title"));
+                }
+
+                rs.close();
+                stmt.close();
+            } catch (Exception se) {
+                se.printStackTrace();
+            }
+        return question;
+    }
 
 }

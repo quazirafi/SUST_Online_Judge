@@ -125,7 +125,7 @@
 						<td>
                                                      <c:if test="${tracker=='teacher'}">
                                                          <button data-toggle="modal" data-id="${questions.getQuestionId()}" class="addition" id="test">Add Test Case</button><br>
-                                                         <button data-toggle="modal" data-id="${questions.getQuestionId()}" class="addition" id="output">Add Output File</button>
+                                                         <button data-toggle="modal" data-id="${questions.getQuestionId()}" class="addition2" id="output">Add Output File</button>
                                                          <button class="deletion" id="delete">Delete</button>
 						</c:if>
                                                      <c:if test="${tracker=='student'}">
@@ -236,12 +236,12 @@ function goToAddQuestionPage(){
 
  $(document).ready(function () {
             $('#taskTable').DataTable();
-            $("#test").click(function(){
+            $(".addition").click(function(){
                 var id=$(this).data('id');
                 document.getElementById('qId').value=id;
                $('#myModal2').modal('show'); 
             });
-            $("#output").click(function(){
+            $(".addition2").click(function(){
                 var id=$(this).data('id');
                 alert(id);
                 document.getElementById('qId2').value=id;
