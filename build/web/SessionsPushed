@@ -7,4 +7,6 @@ session.setAttribute("tracker", "student");
 session.setAttribute("course", course);2nd
 session.setAttribute("exam",exmDao.getExamById(examId,conn));3rd
 session.setAttribute("exams", exam2);
+session.setAttribute("submissions", submissions);
+session.setAttribute("questions", questions);
 session.setAttribute("courseTitle", courseTitle);

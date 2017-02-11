@@ -126,7 +126,7 @@
                                 <td>
                                     <c:if test="${tracker=='student'}">
                                         <c:set var="idNo"  value="${exams.getExamId()}"/>
-                                        <button style="border: none;cursor: pointer" data-toggle="modal" id="exambtn" data-id=${exams.getExamId()}>
+                                        <button style="border: none;cursor: pointer" data-toggle="modal" class="exambtn" data-id=${exams.getExamId()}>
                                             <c:out value="${exams.getTitle()}" />
                                                 
                                             
@@ -448,7 +448,7 @@
         var id="";
         $(document).ready(function () {
             $('#taskTable').DataTable();
-            $("#exambtn").click(function(){
+            $(".exambtn").click(function(){
                 var id=$(this).data('id');
                 document.getElementById('hid').value=id;
                $('#myModal').modal('show'); 

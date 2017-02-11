@@ -64,13 +64,12 @@
                                 </c:when>
                                 <c:when test="${tracker == 'student'}">
                             <li><a>${student.getRegno()}</a></li>
-                            <li><a href="${pageContext.request.contextPath}/ToSubmissionPage">My Submissions</a></li>
                                 </c:when>
                             </c:choose>
                                 <c:if test="${tracker=='teacher'}">
                                 <li><a href="QuestionPage?examId=${exam.getExamId()}">Questions</a></li>
                                 <li><a href="StudentListPage?examId=${exam.getExamId()}">Student's List</a></li>
-				<li><a href="${pageContext.request.contextPath}/ToDashboard">Student Performance</a></li>
+				<li><a href="#">Student Performance</a></li>
 				</c:if>
                                 <li><a href="sign-in.html">Log out</a></li>
 			       
@@ -107,41 +106,34 @@
 		<div class="panel">
 
 			<table id="taskTable"
-				class="table table-striped table-bordered table-hover">
-				<thead>
-					<tr>						
-						<th class="col-md-3 col-sm-3 col-xs-3">Ques. Id</th>						
-						<th class="col-md-3 col-sm-3 col-xs-3">Title</th>
-						<th class="col-md-3 col-sm-3 col-xs-3">Score</th>						
-						<th class="col-md-2 col-sm-2 col-xs-2">Actions</th>
-					</tr>
-				</thead>
-				<tbody>			
-                                    <c:forEach items="${questions}" var="questions">
-                                	<tr>
-						<td>${questions.getCounter()}</td>
-                                                <td><button style="border: none;cursor: pointer" data-toggle="modal" data-target="#myModal" value="${questions.getPath()}" onclick="loadDoc(this.value)">${questions.getTitle()}</button>				
-						<td>${questions.getScore()}</td>
-                                               
-						<td>
-                                                     <c:if test="${tracker=='teacher'}">
-                                                         <button data-toggle="modal" data-id="${questions.getQuestionId()}" class="addition" id="test">Add Test Case</button><br>
-                                                         <button data-toggle="modal" data-id="${questions.getQuestionId()}" class="addition2" id="output">Add Output File</button>
-                                                         <button class="deletion" id="delete">Delete</button>
-						</c:if>
-                                                     <c:if test="${tracker=='student'}">
-                                                       <form action="UploadFile" method="post" enctype="multipart/form-data">
-              <input type="file" name="file" size="50" />
-              <input type="hidden" name="qId" value="${questions.getQuestionId()}" />
-<input type="submit" value="Submit" />
-          </form> 
-                                                     </c:if>
-                                                     </td>
-                                                
-					</tr>
-                                     </c:forEach>   
-				</tbody>
-			</table>
+                           class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th class="col-md-1 col-sm-1 col-xs-1">ID</th>
+                                <th class="col-md-2 col-sm-2 col-xs-2">Question Title</th>
+                                <th class="col-md-2 col-sm-2 col-xs-2">Submission</th>
+                                <th class="col-md-2 col-sm-2 col-xs-2">Verdict</th>
+                                <th class="col-md-2 col-sm-2 col-xs-2">Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${submissions}" var="submissions">
+                                <tr>
+                                    <td><c:out value="${submissions.getSubmissionCount()}" /></td>
+                                    <td><button style="border: none;cursor: pointer" data-toggle="modal" 
+                                                    data-target="#myModal" value="${submissions.getQuestionPath()}" 
+                                                    onclick="loadDoc(this.value)">${submissions.getQuestionTitle()}</button>
+                                    </td>
+                                    <td><button style="border: none;cursor: pointer" data-toggle="modal" 
+                                                    data-target="#myModal" value="${submissions.getSubmissionFileName()}" 
+                                                    onclick="loadDoc(this.value)">Source Code</button>
+                                    </td>
+                                    <td><c:out value="${submissions.getVerdict()}" /></td>
+                                    <td><c:out value="${submissions.getMarks()}" /></td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
 		</div>
 		<!-- panel -->
 
@@ -226,7 +218,7 @@ function loadDoc(path) {
       this.responseText;
     }
   };
-    xhttp.open("GET", "SendQuestionFile?"+"path="+path, false);
+    xhttp.open("GET", "SendFile?"+"path="+path, false);
     xhttp.send();
     
     //document.getElementById("text1").innerHTML = xhttp.responseText;
@@ -251,4 +243,4 @@ function goToAddQuestionPage(){
         });
 </script>
 </html>
-<!-- data-toggle="modal" data-target="#myModal" -->
+ 

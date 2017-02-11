@@ -101,7 +101,7 @@ public class QuestionPage extends HttpServlet {
                     q.setPath(path + "Q" + q.getQuestionId() + "\\" + q.getQuestionFileName());
                     System.out.println("path --> " + q.getPath());
                 }
-                request.setAttribute("questions", questions);
+                session.setAttribute("questions", questions);
                 RequestDispatcher rd = request.getRequestDispatcher("QuestionPage.jsp");
                 rd.forward(request, response);
             }

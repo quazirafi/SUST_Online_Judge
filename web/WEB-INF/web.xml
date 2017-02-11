@@ -61,6 +61,22 @@
         <servlet-name>AddOutputFile</servlet-name>
         <servlet-class>Servlet.AddOutputFile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendFile</servlet-name>
+        <servlet-class>Servlet.SendFile</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ToSubmissionPage</servlet-name>
+        <servlet-class>Servlet.ToSubmissionPage</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ToDashboard</servlet-name>
+        <servlet-class>Servlet.ToDashboard</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ToIndividualSubmissionPage</servlet-name>
+        <servlet-class>Servlet.ToIndividualSubmissionPage</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -115,6 +131,22 @@
     <servlet-mapping>
         <servlet-name>AddOutputFile</servlet-name>
         <url-pattern>/AddOutputFile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendFile</servlet-name>
+        <url-pattern>/SendFile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ToSubmissionPage</servlet-name>
+        <url-pattern>/ToSubmissionPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ToDashboard</servlet-name>
+        <url-pattern>/ToDashboard</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ToIndividualSubmissionPage</servlet-name>
+        <url-pattern>/ToIndividualSubmissionPage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

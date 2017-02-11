@@ -197,7 +197,10 @@ public class UploadFile extends HttpServlet {
             File[] filesNumber = directory.listFiles();
             Path source = Paths.get(finalPath + "Main.c");
             Files.move(source, source.resolveSibling("Main" + filesNumber.length + ".c"));
-            submissionDao.addSubmission(Integer.parseInt(id),student.getStudentId(),verdict,finalPath+"Main" + filesNumber.length + ".c",score,conn);
+            submissionDao.addSubmission(Integer.parseInt(id),student.getStudentId(),verdict,finalPath+"Main" + filesNumber.length + ".c",score,conn,exam.getExamId());
+            session.setAttribute("submissions", submissionDao.getStudentSubmissions(student.getStudentId(), exam.getExamId(), questionPath, conn));
+            RequestDispatcher rd = request.getRequestDispatcher("SubmissionPage.jsp");
+            rd.forward(request, response);
         } else if (fileRename.endsWith(".cpp")) {
             System.out.println(codeCompileExecuter.compile("cpp", finalPath));
             System.out.println(codeCompileExecuter.execute("cpp", "input", 5000, finalPath, questionPath));
@@ -211,7 +214,10 @@ public class UploadFile extends HttpServlet {
             File[] filesNumber = directory.listFiles();
             Path source = Paths.get(finalPath + "Main.cpp");
             Files.move(source, source.resolveSibling("Main" + filesNumber.length + ".cpp"));
-            submissionDao.addSubmission(Integer.parseInt(id),student.getStudentId(),verdict,finalPath+"Main" + filesNumber.length + ".cpp",score,conn);
+            submissionDao.addSubmission(Integer.parseInt(id),student.getStudentId(),verdict,finalPath+"Main" + filesNumber.length + ".cpp",score,conn,exam.getExamId());
+            session.setAttribute("submissions", submissionDao.getStudentSubmissions(student.getStudentId(), exam.getExamId(), questionPath, conn));
+            RequestDispatcher rd = request.getRequestDispatcher("SubmissionPage.jsp");
+            rd.forward(request, response);
         } else if (fileRename.endsWith(".java")) {
             System.out.println(codeCompileExecuter.compile("java", finalPath));
             System.out.println(codeCompileExecuter.execute("java", "input", 5000, finalPath, questionPath));
@@ -225,7 +231,10 @@ public class UploadFile extends HttpServlet {
             File[] filesNumber = directory.listFiles();
             Path source = Paths.get(finalPath + "Main.java");
             Files.move(source, source.resolveSibling("Main" + filesNumber.length + ".java"));
-            submissionDao.addSubmission(Integer.parseInt(id),student.getStudentId(),verdict,finalPath+"Main" + filesNumber.length + ".java",score,conn);
+            submissionDao.addSubmission(Integer.parseInt(id),student.getStudentId(),verdict,finalPath+"Main" + filesNumber.length + ".java",score,conn,exam.getExamId());
+            session.setAttribute("submissions", submissionDao.getStudentSubmissions(student.getStudentId(), exam.getExamId(), questionPath, conn));
+            RequestDispatcher rd = request.getRequestDispatcher("SubmissionPage.jsp");
+            rd.forward(request, response);
         }
 
     }

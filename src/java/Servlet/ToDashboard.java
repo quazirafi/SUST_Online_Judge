@@ -11,31 +11,36 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import Entity.*;
-import Dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import Dao.*;
+import Entity.*;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-
+import java.util.Iterator;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.*;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 /**
  *
  * @author DANA
  */
-public class StudentListPage extends HttpServlet {
+public class ToDashboard extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,19 +53,7 @@ public class StudentListPage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet StudentListPage</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet StudentListPage at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -75,15 +68,40 @@ public class StudentListPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int examId = Integer.parseInt(request.getParameter("examId"));
         HttpSession session = request.getSession();
-        String tracker = (String)session.getAttribute("tracker");
+        String tracker = (String) session.getAttribute("tracker");
         Connection conn = (Connection) session.getAttribute("conn");
-        StudentExamDao studentExamDao = new StudentExamDao();
-        ArrayList<Student> students = (ArrayList<Student>) studentExamDao.findEnteredStudents(conn, examId);
+        Exam exam = (Exam) session.getAttribute("exam");
         if (tracker.equals("teacher")){
-            request.setAttribute("studentsEntered", students);
-            RequestDispatcher rd = request.getRequestDispatcher("StudentListPage.jsp");
+            ArrayList<StudentPerformance> studentPerformances = new ArrayList<StudentPerformance>();
+            StudentPerformance studentPerformance=null;
+            StudentExamDao studentExamDao = new StudentExamDao();
+            List<Integer> studentIds = studentExamDao.getStudentByExamId(exam.getExamId(), conn);
+            int counter = 0;
+            for (Integer i : studentIds){
+                studentPerformance = new StudentPerformance();
+                StudentDao studentDao = new StudentDao();
+                SubmissionDao submissionDao = new SubmissionDao();
+                if (studentExamDao.getExamStudentIsAllowed(conn, i.intValue(), exam.getExamId())==1){
+                    ++counter;
+                    studentPerformance.setCounter(counter);
+                    studentPerformance.setStudentId(i.intValue());
+                    studentPerformance.setStudentRegNo(studentDao.getStudentByStudentId(i.intValue(), conn).getRegno());
+                    studentPerformance.setNumOfAccepted(submissionDao.getNumberOfAccepted(i.intValue(), conn));
+                    ArrayList<Integer> qIds = (ArrayList<Integer>)submissionDao.getQuestionIds(i.intValue(), conn);
+                    int totalSum = 0;
+                    for (Integer j : qIds){
+                        QuestionDao questionDao = new QuestionDao();
+                        totalSum += questionDao.getQuestionByQuestionId(j.intValue(), conn).getScore();
+                    }
+                    studentPerformance.setSumOfScores(totalSum);
+                }
+            }
+            studentPerformances.add(studentPerformance);
+            for (StudentPerformance sp : studentPerformances)
+                System.out.println(sp.getStudentRegNo()+" "+sp.getSumOfScores());
+            request.setAttribute("studentPerformances", studentPerformances);
+            RequestDispatcher rd = request.getRequestDispatcher("StudentPerformancePage.jsp");
             rd.forward(request, response);
         }
         else{
@@ -102,18 +120,6 @@ public class StudentListPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String[] studentIdsString = request.getParameterValues("studentsIds");
-        String batch = request.getParameter("batch");
-        System.out.println("HERE!!!");
-        HttpSession session = request.getSession();
-        Connection conn = (Connection) session.getAttribute("conn");
-        Student student = (Student) session.getAttribute("student");
-        Exam exam = (Exam) session.getAttribute("exam");
-        StudentExamDao studentExamDao = new StudentExamDao();
-        for (int i=0;i<studentIdsString.length;++i){
-            System.out.println(studentIdsString[i]);
-            studentExamDao.setAllowedResetEntered(conn, Integer.parseInt(studentIdsString[i]), exam.getExamId(),batch);
-        }
         
     }
 

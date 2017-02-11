@@ -4,10 +4,42 @@ package Entity;
 public class Submission {
     private int submissionCount = 0;
     private int studentId;
-    private int questionid;
+    private int questionId;
+    private String questionTitle;
+    private String questionPath; 
     private String verdict;
     private String submissionFileName;
     private int marks;
+    private int examId;
+
+    public String getQuestionPath() {
+        return questionPath;
+    }
+
+    public void setQuestionPath(String questionPath) {
+        this.questionPath = questionPath;
+    }
+    
+    
+
+    public String getQuestionTitle() {
+        return questionTitle;
+    }
+
+    public void setQuestionTitle(String questionTitle) {
+        this.questionTitle = questionTitle;
+    }
+
+    
+    public int getExamId() {
+        return examId;
+    }
+
+    public void setExamId(int examId) {
+        this.examId = examId;
+    }
+    
+    
 
     public int getSubmissionCount() {
         return submissionCount;
@@ -25,12 +57,12 @@ public class Submission {
         this.studentId = studentId;
     }
 
-    public int getQuestionid() {
-        return questionid;
+    public int getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestionid(int questionid) {
-        this.questionid = questionid;
+    public void setQuestionId(int questionid) {
+        this.questionId = questionId;
     }
 
     public String getVerdict() {

@@ -88,19 +88,37 @@ public class StudentExamDao {
         return students;
     }
     
-    public void setAllowedResetEntered(Connection conn, int sId, int eId){
+    public void setAllowedResetEntered(Connection conn, int sId, int eId,String batch){
         try {
 
-            PreparedStatement stmt = conn.prepareStatement("update student_exam set entered = ?,allowed = ? where "
+            PreparedStatement stmt = conn.prepareStatement("update student_exam set entered = ?,allowed = ?,batch = ? where "
                     + "student_id = ? and exam_id = ?");
             stmt.setInt(1, 0);
             stmt.setInt(2, 1);
-            stmt.setInt(3, sId);
-            stmt.setInt(4, eId);
+            stmt.setString(3,batch);
+            stmt.setInt(4, sId);
+            stmt.setInt(5, eId);
             stmt.execute();
             stmt.close();
         } catch (Exception se) {
             se.printStackTrace();
         }
+    }
+    
+    public List<Integer> getStudentByExamId(int examId,Connection conn){
+        ArrayList<Integer> studentIds = new ArrayList<Integer>();
+        try {
+                
+                PreparedStatement stmt = conn.prepareStatement("select * from student_exam where exam_id = ?");
+                stmt.setInt(1, examId);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    studentIds.add(rs.getInt("student_id"));
+                }
+                stmt.close();
+            } catch (Exception se) {
+                se.printStackTrace();
+            }
+        return studentIds;
     }
 }

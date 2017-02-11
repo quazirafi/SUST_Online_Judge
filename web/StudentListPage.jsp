@@ -93,6 +93,7 @@
 		<!-- TABLE -->
 		<div class="panel">
                     <form action="StudentListPage" method="post" >
+                        <input type="text" name="batch" /> 
 			<table id="studentTable"
 				class="table table-striped table-bordered table-hover">
 				<thead>
