@@ -36,11 +36,12 @@ import javax.servlet.http.*;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
 /**
  *
  * @author DANA
  */
-public class ToDashboard extends HttpServlet {
+public class StudentPerformanceBatchwise extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,7 +54,11 @@ public class ToDashboard extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+          
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,6 +73,7 @@ public class ToDashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String batch = request.getParameter("batch");
         HttpSession session = request.getSession();
         String tracker = (String) session.getAttribute("tracker");
         Connection conn = (Connection) session.getAttribute("conn");
@@ -76,10 +82,9 @@ public class ToDashboard extends HttpServlet {
             ArrayList<StudentPerformance> studentPerformances = new ArrayList<StudentPerformance>();
             StudentPerformance studentPerformance=null;
             StudentExamDao studentExamDao = new StudentExamDao();
-            List<Integer> studentIds = studentExamDao.getStudentByExamId(exam.getExamId(), conn);
+            List<Integer> studentIds = studentExamDao.getStudentByExamIdAndBatch(exam.getExamId(), batch, conn);
             int counter = 0;
             for (Integer i : studentIds){
-                System.out.println("id --> "+i.intValue());
                 studentPerformance = new StudentPerformance();
                 StudentDao studentDao = new StudentDao();
                 SubmissionDao submissionDao = new SubmissionDao();
@@ -96,9 +101,9 @@ public class ToDashboard extends HttpServlet {
                         totalSum += questionDao.getQuestionByQuestionId(j.intValue(), conn).getScore();
                     }
                     studentPerformance.setSumOfScores(totalSum);
-                    studentPerformances.add(studentPerformance);
                 //}
             }
+            studentPerformances.add(studentPerformance);
             for (StudentPerformance sp : studentPerformances)
                 System.out.println(sp.getStudentRegNo()+" "+sp.getSumOfScores());
             session.setAttribute("batches", studentExamDao.getBatch(exam.getExamId(), conn));
@@ -122,7 +127,7 @@ public class ToDashboard extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**

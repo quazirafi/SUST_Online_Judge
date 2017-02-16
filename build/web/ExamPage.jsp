@@ -89,13 +89,13 @@
                         </button>
                                  </c:if>
                     </div>
-                    <div class="col-xs-2">
-                        <c:if test="${tracker == 'teacher'}">
+<!--                    <div class="col-xs-2">
+                        <%--<c:if test="${tracker == 'teacher'}">--%>
                             <button id="button_add_task" class="btn btn-success col-xs-12" onClick="goToAddTaskPage()">
                             <i class="glyphicon glyphicon-plus-sign"></i> Add From Previous
                         </button>
-                            </c:if>
-                    </div>
+                            <%--</c:if>--%>
+                    </div>-->
                 </c:when>
             </c:choose>
             </div>       

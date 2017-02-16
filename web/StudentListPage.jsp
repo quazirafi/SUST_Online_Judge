@@ -68,7 +68,7 @@
                                 <c:if test="${tracker=='teacher'}">
                                 <li><a href="QuestionPage?examId=${exam.getExamId()}">Questions</a></li>
                                 <li><a href="StudentListPage?examId=${exam.getExamId()}">Student's List</a></li>
-				<li><a href="#">Student Performance</a></li>
+				<li><a href="${pageContext.request.contextPath}/ToDashboard">Student Performance</a></li>
 				</c:if>
                                 <li><a href="sign-in.html">Log out</a></li>
 			       
@@ -91,9 +91,13 @@
                  
 	<!--	<div class="clearfix"></div> -->
 		<!-- TABLE -->
+                <form action="StudentListPage" method="post" >
+                     Batch Name <input type="text" name="batch" /> 
+                     <br>
+                     <br>
 		<div class="panel">
-                    <form action="StudentListPage" method="post" >
-                        <input type="text" name="batch" /> 
+                    
+                       
 			<table id="studentTable"
 				class="table table-striped table-bordered table-hover">
 				<thead>
@@ -114,9 +118,10 @@
 				</tbody>
 			</table>
                         <input type="submit" value="Submit" />
-                    </form> 
+                    
                     
 		</div>
+                </form> 
 		<!-- panel -->
 
 

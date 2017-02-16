@@ -83,6 +83,25 @@
                  
 	<!--	<div class="clearfix"></div> -->
 		<!-- TABLE -->
+                <div class="row searchbar">
+                    <div class="col-xs-8">
+                    </div>
+                    <div class="col-xs-2">
+                        <c:if test="${tracker == 'teacher'}">
+                        <select id="filter_session" class="form-control">
+                            <option selected disabled>Choose a Batch</option>
+                            <c:forEach items="${batches}" var="batches">
+                                <option value="${batches}">${batches}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="col-xs-2">
+                        <button onclick="go()" id="button_add_task" class="btn btn-success col-xs-12">
+                            <i class="glyphicon glyphicon-plus-sign"></i> Go
+                        </button>
+                    </div>
+                        </c:if>
+                </div>
 		<div class="panel">
 
 			<table id="taskTable"
@@ -200,7 +219,10 @@ function loadDoc(path) {
 function goToAddQuestionPage(){
     window.location.href = "AddQuestionPage"
 }
-
+function go(){
+   var batch = document.getElementById("filter_session").value;
+   window.location.href = "StudentPerformanceBatchwise?batch="+batch;
+}
  $(document).ready(function () {
             $('#taskTable').DataTable();
             $(".addition").click(function(){

@@ -121,4 +121,47 @@ public class StudentExamDao {
             }
         return studentIds;
     }
+    
+    public List<Integer> getStudentByExamIdAndBatch(int examId,String batch,Connection conn){
+        ArrayList<Integer> studentIds = new ArrayList<Integer>();
+        try {
+                
+                PreparedStatement stmt = conn.prepareStatement("select * from student_exam where exam_id = ? and batch=?");
+                stmt.setInt(1, examId);
+                stmt.setString(2, batch);
+                ResultSet rs = stmt.executeQuery();
+                while (rs.next()) {
+                    studentIds.add(rs.getInt("student_id"));
+                }
+                stmt.close();
+            } catch (Exception se) {
+                se.printStackTrace();
+            }
+        return studentIds;
+    }
+    
+    public ArrayList<String> getBatch(int eId,Connection conn){
+      int allowed = 0;
+      ArrayList<String> batches = new ArrayList<String>();
+        try {
+            
+            Statement stmt = conn.createStatement();
+            String sql;
+            sql = "SELECT batch from student_exam where exam_id=" + eId ;
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+               String batch = rs.getString("batch");
+               batches.add(batch);
+            }
+
+            rs.close();
+            stmt.close();
+
+        } catch (Exception se) {
+
+            se.printStackTrace();
+        }
+        return batches;   
+    }
 }

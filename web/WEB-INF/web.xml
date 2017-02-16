@@ -77,6 +77,10 @@
         <servlet-name>ToIndividualSubmissionPage</servlet-name>
         <servlet-class>Servlet.ToIndividualSubmissionPage</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>StudentPerformanceBatchwise</servlet-name>
+        <servlet-class>Servlet.StudentPerformanceBatchwise</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -147,6 +151,10 @@
     <servlet-mapping>
         <servlet-name>ToIndividualSubmissionPage</servlet-name>
         <url-pattern>/ToIndividualSubmissionPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentPerformanceBatchwise</servlet-name>
+        <url-pattern>/StudentPerformanceBatchwise</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

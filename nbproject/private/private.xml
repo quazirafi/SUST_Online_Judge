@@ -5,7 +5,11 @@
         <group>
             <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/web/login.jsp</file>
             <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/src/java/DatabaseConnector/DatabaseConnector.java</file>
+            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/web/AddQuestionPage.jsp</file>
+            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/src/java/Servlet/AddQuestionPage.java</file>
             <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/web/ExamPageStudent.jsp</file>
+            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/src/java/Servlet/UploadFile.java</file>
+            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/web/ExamPage.jsp</file>
         </group>
     </open-files>
 </project-private>
