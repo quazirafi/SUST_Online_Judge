@@ -81,6 +81,22 @@
         <servlet-name>StudentPerformanceBatchwise</servlet-name>
         <servlet-class>Servlet.StudentPerformanceBatchwise</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditSubmission</servlet-name>
+        <servlet-class>Servlet.EditSubmission</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ToCourse</servlet-name>
+        <servlet-class>Servlet.ToCourse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>Servlet.Logout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteQuestion</servlet-name>
+        <servlet-class>Servlet.DeleteQuestion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -155,6 +171,22 @@
     <servlet-mapping>
         <servlet-name>StudentPerformanceBatchwise</servlet-name>
         <url-pattern>/StudentPerformanceBatchwise</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSubmission</servlet-name>
+        <url-pattern>/EditSubmission</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ToCourse</servlet-name>
+        <url-pattern>/ToCourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteQuestion</servlet-name>
+        <url-pattern>/DeleteQuestion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

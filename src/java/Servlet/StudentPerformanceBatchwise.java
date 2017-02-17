@@ -93,12 +93,16 @@ public class StudentPerformanceBatchwise extends HttpServlet {
                     studentPerformance.setCounter(counter);
                     studentPerformance.setStudentId(i.intValue());
                     studentPerformance.setStudentRegNo(studentDao.getStudentByStudentId(i.intValue(), conn).getRegno());
-                    studentPerformance.setNumOfAccepted(submissionDao.getNumberOfAccepted(i.intValue(), conn));
-                    ArrayList<Integer> qIds = (ArrayList<Integer>)submissionDao.getQuestionIds(i.intValue(), conn);
+                    studentPerformance.setNumOfAccepted(submissionDao.getNumberOfAccepted(i.intValue(), exam.getExamId(), conn));
+                    ArrayList<Integer> qIds = (ArrayList<Integer>)submissionDao.getQuestionIds(i.intValue(), exam.getExamId(), conn);
                     int totalSum = 0;
                     for (Integer j : qIds){
                         QuestionDao questionDao = new QuestionDao();
                         totalSum += questionDao.getQuestionByQuestionId(j.intValue(), conn).getScore();
+                    }
+                    ArrayList<Integer> qIdsOfWrong = (ArrayList<Integer>)submissionDao.getQuestionIdsOfWrong(i.intValue(),exam.getExamId(),conn);
+                    for (Integer j : qIdsOfWrong){
+                        totalSum += submissionDao.getMaxNumAmongWrong(i.intValue(), j.intValue(), exam.getExamId(), conn);
                     }
                     studentPerformance.setSumOfScores(totalSum);
                 //}

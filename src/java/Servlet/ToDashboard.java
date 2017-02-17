@@ -72,7 +72,8 @@ public class ToDashboard extends HttpServlet {
         String tracker = (String) session.getAttribute("tracker");
         Connection conn = (Connection) session.getAttribute("conn");
         Exam exam = (Exam) session.getAttribute("exam");
-        if (tracker.equals("teacher")){
+        try{
+            if (tracker.equals("teacher")){
             ArrayList<StudentPerformance> studentPerformances = new ArrayList<StudentPerformance>();
             StudentPerformance studentPerformance=null;
             StudentExamDao studentExamDao = new StudentExamDao();
@@ -88,12 +89,16 @@ public class ToDashboard extends HttpServlet {
                     studentPerformance.setCounter(counter);
                     studentPerformance.setStudentId(i.intValue());
                     studentPerformance.setStudentRegNo(studentDao.getStudentByStudentId(i.intValue(), conn).getRegno());
-                    studentPerformance.setNumOfAccepted(submissionDao.getNumberOfAccepted(i.intValue(), conn));
-                    ArrayList<Integer> qIds = (ArrayList<Integer>)submissionDao.getQuestionIds(i.intValue(), conn);
+                    studentPerformance.setNumOfAccepted(submissionDao.getNumberOfAccepted(i.intValue(), exam.getExamId(), conn));
+                    ArrayList<Integer> qIds = (ArrayList<Integer>)submissionDao.getQuestionIds(i.intValue(), exam.getExamId(), conn);
                     int totalSum = 0;
                     for (Integer j : qIds){
                         QuestionDao questionDao = new QuestionDao();
                         totalSum += questionDao.getQuestionByQuestionId(j.intValue(), conn).getScore();
+                    }
+                    ArrayList<Integer> qIdsOfWrong = (ArrayList<Integer>)submissionDao.getQuestionIdsOfWrong(i.intValue(),exam.getExamId(),conn);
+                    for (Integer j : qIdsOfWrong){
+                        totalSum += submissionDao.getMaxNumAmongWrong(i.intValue(), j.intValue(), exam.getExamId(), conn);
                     }
                     studentPerformance.setSumOfScores(totalSum);
                     studentPerformances.add(studentPerformance);
@@ -109,6 +114,11 @@ public class ToDashboard extends HttpServlet {
         else{
             response.sendRedirect("login.jsp");
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        };
+        
     }
 
     /**

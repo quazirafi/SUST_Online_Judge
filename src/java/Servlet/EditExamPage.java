@@ -94,7 +94,7 @@ public class EditExamPage extends HttpServlet {
                         
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(startDate);
-                        calendar.add(Calendar.MINUTE,200);
+                        calendar.add(Calendar.MINUTE,e.getDuration());
                         endDate = calendar.getTime();
                         if (currentDate.before(startDate) && !e.getTitle().equals("no data available"))
                             e.setStatus("upcoming");
@@ -163,7 +163,7 @@ public class EditExamPage extends HttpServlet {
                         
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(startDate);
-                        calendar.add(Calendar.MINUTE,200);
+                        calendar.add(Calendar.MINUTE,e.getDuration());
                         endDate = calendar.getTime();
                         if (currentDate.before(startDate) && !e.getTitle().equals("no data available"))
                             e.setStatus("upcoming");
@@ -176,7 +176,7 @@ public class EditExamPage extends HttpServlet {
                         e2.printStackTrace();
                     }
                 }
-            request.setAttribute("exams", exams);
+            session.setAttribute("exams", exams);
             request.setAttribute("courseTitle", course.getTitle());
             RequestDispatcher rd = request.getRequestDispatcher("ExamPage.jsp");
             rd.forward(request, response);

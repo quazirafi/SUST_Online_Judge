@@ -4,12 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/web/login.jsp</file>
-            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/src/java/DatabaseConnector/DatabaseConnector.java</file>
-            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/web/AddQuestionPage.jsp</file>
-            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/src/java/Servlet/AddQuestionPage.java</file>
-            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/web/ExamPageStudent.jsp</file>
-            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/src/java/Servlet/UploadFile.java</file>
-            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/web/ExamPage.jsp</file>
+            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/src/java/Entity/Submission.java</file>
+            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/src/java/Dao/SubmissionDao.java</file>
+            <file>file:/F:/Rafi/My_Projects/SUST_OnlineJudge/src/java/Servlet/ToDashboard.java</file>
         </group>
     </open-files>
 </project-private>

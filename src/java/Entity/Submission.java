@@ -11,7 +11,16 @@ public class Submission {
     private String submissionFileName;
     private int marks;
     private int examId;
+    private int submissionId;
 
+    public int getSubmissionId() {
+        return submissionId;
+    }
+    
+    public void setSubmissionId(int submissionId) {
+        this.submissionId = submissionId;
+    }
+    
     public String getQuestionPath() {
         return questionPath;
     }

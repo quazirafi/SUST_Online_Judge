@@ -36,7 +36,7 @@
     background-color: white; /* Green */
     color: #4CAF50;
 }
-.deletion {
+.ddeletion {
     background-color: #f44336; 
     border: none;
     color: white;
@@ -54,4 +54,23 @@
 .deletion:hover {
     background-color: white; /* Green */
     color: #f44336;
+}
+.fstbutton {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 6px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.fstbutton:hover{
+    background-color: white; /* Green */
+    color: #4CAF50;
 }

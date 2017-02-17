@@ -60,13 +60,15 @@
                     <c:choose>
                         <c:when test="${tracker == 'teacher'}">
                             <li><a>${teacher.getFullName()}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ToCourse">Courses</a></li>
                                 </c:when>
                                 <c:when test="${tracker == 'student'}">
                             <li><a>${student.getRegno()}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ToCourse">Courses</a></li>
                                 </c:when>
                             </c:choose>
 
-                    <li><a href="sign-in.html">Log out</a></li>
+                    <li><a href="Logout">Log out</a></li>
                 </ul>
             </div>
         </div>
@@ -143,26 +145,12 @@
                                 <td><c:out value="${exams.getStartTime()}" /></td>
                                 <td><c:out value="${exams.getDuration()}" /></td>
                                 <td><c:out value="${exams.getScore()}" /></td>
-                                <c:choose>
-                                    <c:when test="${exams.getStatus() eq 'upcoming'}">
-                                        <td><a href="${pageContext.request.contextPath}/EditExamPage?action=0&examId=${exams.getExamId()}" class="btn btn-info btn-sm removebutton" title="Remove"><i
+                                <td><a href="${pageContext.request.contextPath}/EditExamPage?action=0&examId=${exams.getExamId()}" class="btn btn-info btn-sm removebutton" title="Remove"><i
                                                     class="glyphicon glyphicon-remove "></i></a>
                                             <a href="${pageContext.request.contextPath}/EditExamPage?action=1&examId=${exams.getExamId()}" class="btn btn-info btn-sm editbutton" id="editbtn" title="Edit Exam"><i
                                                     class="glyphicon glyphicon-edit "></i></a>
                                         </td>
-                                    </c:when>
-                                    <c:when test="${exams.getStatus() eq 'ongoing'}">
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/EditExamPage?action=1&examId=${exams.getExamId()}" class="btn btn-info btn-sm editbutton" title="Edit Exam"><i
-                                                    class="glyphicon glyphicon-edit "></i></a>
-                                        </td>
-                                    </c:when>    
-                                    <c:otherwise>
-                                        <td>
-                                            Not Allowed
-                                        </td>
-                                    </c:otherwise>
-                                </c:choose>
+                                
 
                                 <td><c:out value="${exams.getStatus()}" /></td>
                             </tr>

@@ -57,9 +57,11 @@
                     <c:choose>
                     <c:when test="${tracker == 'teacher'}">
                        <li><a>${teacher.getFullName()}</a></li>
+                       <li><a href="Logout">Log out</a></li>
                     </c:when>
                     <c:when test="${tracker == 'student'}">
                        <li><a>${student.getRegno()}</a></li>
+                       <li><a href="Logout">Log out</a></li>
                     </c:when>
                     </c:choose>
                             <%-- 			<li><a href="#">${UserRole.getUserName()}</a></li> --%>

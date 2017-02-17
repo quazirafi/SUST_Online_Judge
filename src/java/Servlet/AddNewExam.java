@@ -95,7 +95,7 @@ public class AddNewExam extends HttpServlet {
                         
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(startDate);
-                        calendar.add(Calendar.MINUTE,200);
+                        calendar.add(Calendar.MINUTE,e.getDuration());
                         endDate = calendar.getTime();
                         if (currentDate.before(startDate) && !e.getTitle().equals("no data available"))
                             e.setStatus("upcoming");

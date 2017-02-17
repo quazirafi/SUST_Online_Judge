@@ -66,7 +66,37 @@ public class QuestionPage extends HttpServlet {
         Connection conn = (Connection) session.getAttribute("conn");
         Teacher teacher = (Teacher) session.getAttribute("teacher");
         String tracker = (String) session.getAttribute("tracker");
-        session.setAttribute("exam", exmDao.getExamById(examId, conn));
+        Exam e = exmDao.getExamById(examId, conn);
+        String startDateString = e.getStartTime();
+                    //String endDateString = e.getEndTime();
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                   
+                    Date startDate,endDate;
+                    Date currentDate = new Date();
+                    System.out.print(df.format(currentDate)+" --> ");
+                    String newDateString="",newDateString2="";
+                    try {
+                        startDate = df.parse(startDateString);
+                        //endDate = df.parse(endDateString);
+                        newDateString = df.format(startDate);
+                        //newDateString2 = df.format(endDate);
+                        
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(startDate);
+                        calendar.add(Calendar.MINUTE,e.getDuration());
+                        endDate = calendar.getTime();
+                        if (currentDate.before(startDate) && !e.getTitle().equals("no data available"))
+                            e.setStatus("upcoming");
+                        else if (currentDate.getTime() > endDate.getTime() && !e.getTitle().equals("no data available"))
+                            e.setStatus("finished");
+                        else 
+                            e.setStatus("ongoing");
+                    } catch (Exception e2) {
+                        System.out.println("INSIDE THE EXCEPTION");
+                        e2.printStackTrace();
+                    }
+        //
+        session.setAttribute("exam", e);
         System.out.println("Exam Info -> " + exmDao.getExamById(examId, conn).getTitle());
         CourseExamDao courseExamDao = new CourseExamDao();
         CourseDao courseDao = new CourseDao();
@@ -146,13 +176,45 @@ public class QuestionPage extends HttpServlet {
                 String courseSession = (String) session.getAttribute("courseSession");
                 Course course = (Course) session.getAttribute("course");
                 String courseTitle = course.getTitle();
-                Exam exam = (Exam) session.getAttribute("exam");
+                //Exam exam = (Exam) session.getAttribute("exam");
+                Exam exam = examDao.getExamById(examId, conn);
                 String examTitle = exam.getTitle();
                 String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
                 for (Question q : questions) {
                     q.setPath(path + "Q" + q.getQuestionId()+ "\\" + q.getQuestionFileName());
                     System.out.println("path --> " + q.getPath());
                 }
+                //
+                 String startDateString = exam.getStartTime();
+                    //String endDateString = e.getEndTime();
+                    DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                   
+                    Date startDate,endDate;
+                    Date currentDate = new Date();
+                    System.out.print(df.format(currentDate)+" --> ");
+                    String newDateString="",newDateString2="";
+                    try {
+                        startDate = df.parse(startDateString);
+                        //endDate = df.parse(endDateString);
+                        newDateString = df.format(startDate);
+                        //newDateString2 = df.format(endDate);
+                        
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTime(startDate);
+                        calendar.add(Calendar.MINUTE,exam.getDuration());
+                        endDate = calendar.getTime();
+                        if (currentDate.before(startDate) && !exam.getTitle().equals("no data available"))
+                            exam.setStatus("upcoming");
+                        else if (currentDate.getTime() > endDate.getTime() && !exam.getTitle().equals("no data available"))
+                            exam.setStatus("finished");
+                        else 
+                            exam.setStatus("ongoing");
+                    } catch (Exception e2) {
+                        System.out.println("INSIDE THE EXCEPTION");
+                        e2.printStackTrace();
+                    }
+                //
+                session.setAttribute("exam", exam);
                 request.setAttribute("questions", questions);
                 RequestDispatcher rd = request.getRequestDispatcher("QuestionPage.jsp");
                 rd.forward(request, response);

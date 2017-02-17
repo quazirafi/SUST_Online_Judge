@@ -52,6 +52,7 @@
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
 			<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Judge<sup>alpha</sup></a>
+                        
 		</div>
 		<div
 			class="
@@ -60,19 +61,25 @@
 			<ul class="nav navbar-nav navbar-right">
                              <c:choose>
                         <c:when test="${tracker == 'teacher'}">
-                            <li><a>${teacher.getFullName()}</a></li>
+                           
                                 </c:when>
                                 <c:when test="${tracker == 'student'}">
                             <li><a>${student.getRegno()}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ToCourse">Courses</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ExamPage?courseId=${course.getCourseId()}">Exams</a></li>
                             <li><a href="${pageContext.request.contextPath}/ToSubmissionPage">My Submissions</a></li>
+                            <li><a href="${pageContext.request.contextPath}/Logout">Logout</a></li>
                                 </c:when>
                             </c:choose>
                                 <c:if test="${tracker=='teacher'}">
+                                <li><a href="${pageContext.request.contextPath}/ExamPage?courseId=${course.getCourseId()}">Exams</a></li>
                                 <li><a href="QuestionPage?examId=${exam.getExamId()}">Questions</a></li>
-                                <li><a href="StudentListPage?examId=${exam.getExamId()}">Student's List</a></li>
-				<li><a href="${pageContext.request.contextPath}/ToDashboard">Student Performance</a></li>
+                                <li><a href="StudentListPage?examId=${exam.getExamId()}">Students</a></li>
+				<li><a href="${pageContext.request.contextPath}/ToDashboard">Performance</a></li>
+                                <li><a href="${pageContext.request.contextPath}/ToCourse">Courses</a></li>
+                                <li><a href="${pageContext.request.contextPath}/Logout">Logout</a></li>
 				</c:if>
-                                <li><a href="sign-in.html">Log out</a></li>
+                                
 			       
                             </ul>
 		</div>
@@ -83,9 +90,7 @@
 		<div class="row searchbar">
 			<div class="col-xs-8">
                             <p class="table-headertext">
-                                <c:if test="${tracker=='test'}">
-				Summary: <span id="course_code">54 Students attended,101 submissions</span>
-                            </c:if>
+                                
                               </p>
 			</div>
 			<c:choose>
@@ -127,13 +132,13 @@
                                                      <c:if test="${tracker=='teacher'}">
                                                          <button data-toggle="modal" data-id="${questions.getQuestionId()}" class="addition" id="test">Add Test Case</button><br>
                                                          <button data-toggle="modal" data-id="${questions.getQuestionId()}" class="addition2" id="output">Add Output File</button>
-                                                         <button class="deletion" id="delete">Delete</button>
+                                                         <button class="deletion" id="delete" onclick="goDelete('${questions.getQuestionId()}')">Delete</button>
 						</c:if>
                                                      <c:if test="${tracker=='student'}">
                                                        <form action="UploadFile" method="post" enctype="multipart/form-data">
               <input type="file" name="file" size="50" />
               <input type="hidden" name="qId" value="${questions.getQuestionId()}" />
-<input type="submit" value="Submit" />
+<input  class="fstbutton" type="submit" value="Submit" />
           </form> 
                                                      </c:if>
                                                      </td>
@@ -233,6 +238,13 @@ function loadDoc(path) {
 }    
 function goToAddQuestionPage(){
     window.location.href = "AddQuestionPage"
+}
+
+function goDelete(qId){
+    var result = confirm("Want to delete?");
+    if (result) {
+        window.location.href = "DeleteQuestion?qId="+qId;
+    }
 }
 
  $(document).ready(function () {

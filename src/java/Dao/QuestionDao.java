@@ -139,5 +139,36 @@ public class QuestionDao {
             }
         return question;
     }
+    
+    public void deleteByQId(int qId,Connection conn){
+        PreparedStatement ps;
+        try {
 
+            PreparedStatement stmt = conn.prepareStatement("delete from exam_question where question_id=?");
+            stmt.setInt(1,qId);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+        
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("delete from submission where question_id=?");
+            stmt.setInt(1,qId);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("delete from question where question_id=?");
+            stmt.setInt(1,qId);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+    }
 }

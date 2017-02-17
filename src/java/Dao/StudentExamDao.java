@@ -32,18 +32,50 @@ public class StudentExamDao {
 
     public void setEntered(Connection conn, int sId, int eId) {
         PreparedStatement ps;
+        int flag = 0;
         try {
 
-            PreparedStatement stmt = conn.prepareStatement("update student_exam set entered=? where student_id=?"
-                    + " and exam_id=?");
-            stmt.setInt(1, 1);
-            stmt.setInt(2, sId);
-            stmt.setInt(3, eId);
-            stmt.execute();
+            PreparedStatement stmt = conn.prepareStatement("select * from student_exam where student_id=? and exam_id=?");
+            stmt.setInt(1, sId);
+            stmt.setInt(2, eId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                flag = 1;
+            }
             stmt.close();
         } catch (Exception se) {
             se.printStackTrace();
         }
+        if (flag == 1) {
+            try {
+
+                PreparedStatement stmt = conn.prepareStatement("update student_exam set entered=? where student_id=?"
+                        + " and exam_id=?");
+                stmt.setInt(1, 1);
+                stmt.setInt(2, sId);
+                stmt.setInt(3, eId);
+                stmt.execute();
+                stmt.close();
+            } catch (Exception se) {
+                se.printStackTrace();
+            }
+        }
+        else{
+            try {
+
+                PreparedStatement stmt = conn.prepareStatement("insert into student_exam(student_id,exam_id,allowed,entered,batch) values (?,?,?,?,?)");
+                stmt.setInt(1, sId);
+                stmt.setInt(2, eId);
+                stmt.setInt(3, 0);
+                stmt.setInt(4, 1);
+                stmt.setString(5, "b");
+                stmt.execute();
+                stmt.close();
+            } catch (Exception se) {
+                se.printStackTrace();
+            }
+        }
+
     }
 
     public List<Student> findEnteredStudents(Connection conn, int eId) {
@@ -87,15 +119,15 @@ public class StudentExamDao {
         }
         return students;
     }
-    
-    public void setAllowedResetEntered(Connection conn, int sId, int eId,String batch){
+
+    public void setAllowedResetEntered(Connection conn, int sId, int eId, String batch) {
         try {
 
             PreparedStatement stmt = conn.prepareStatement("update student_exam set entered = ?,allowed = ?,batch = ? where "
                     + "student_id = ? and exam_id = ?");
             stmt.setInt(1, 0);
             stmt.setInt(2, 1);
-            stmt.setString(3,batch);
+            stmt.setString(3, batch);
             stmt.setInt(4, sId);
             stmt.setInt(5, eId);
             stmt.execute();
@@ -104,55 +136,55 @@ public class StudentExamDao {
             se.printStackTrace();
         }
     }
-    
-    public List<Integer> getStudentByExamId(int examId,Connection conn){
+
+    public List<Integer> getStudentByExamId(int examId, Connection conn) {
         ArrayList<Integer> studentIds = new ArrayList<Integer>();
         try {
-                
-                PreparedStatement stmt = conn.prepareStatement("select * from student_exam where exam_id = ?");
-                stmt.setInt(1, examId);
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                    studentIds.add(rs.getInt("student_id"));
-                }
-                stmt.close();
-            } catch (Exception se) {
-                se.printStackTrace();
+
+            PreparedStatement stmt = conn.prepareStatement("select * from student_exam where exam_id = ?");
+            stmt.setInt(1, examId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                studentIds.add(rs.getInt("student_id"));
             }
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
         return studentIds;
     }
-    
-    public List<Integer> getStudentByExamIdAndBatch(int examId,String batch,Connection conn){
+
+    public List<Integer> getStudentByExamIdAndBatch(int examId, String batch, Connection conn) {
         ArrayList<Integer> studentIds = new ArrayList<Integer>();
         try {
-                
-                PreparedStatement stmt = conn.prepareStatement("select * from student_exam where exam_id = ? and batch=?");
-                stmt.setInt(1, examId);
-                stmt.setString(2, batch);
-                ResultSet rs = stmt.executeQuery();
-                while (rs.next()) {
-                    studentIds.add(rs.getInt("student_id"));
-                }
-                stmt.close();
-            } catch (Exception se) {
-                se.printStackTrace();
+
+            PreparedStatement stmt = conn.prepareStatement("select * from student_exam where exam_id = ? and batch=?");
+            stmt.setInt(1, examId);
+            stmt.setString(2, batch);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                studentIds.add(rs.getInt("student_id"));
             }
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
         return studentIds;
     }
-    
-    public ArrayList<String> getBatch(int eId,Connection conn){
-      int allowed = 0;
-      ArrayList<String> batches = new ArrayList<String>();
+
+    public ArrayList<String> getBatch(int eId, Connection conn) {
+        int allowed = 0;
+        ArrayList<String> batches = new ArrayList<String>();
         try {
-            
+
             Statement stmt = conn.createStatement();
             String sql;
-            sql = "SELECT batch from student_exam where exam_id=" + eId ;
+            sql = "SELECT batch from student_exam where exam_id=" + eId;
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {
-               String batch = rs.getString("batch");
-               batches.add(batch);
+                String batch = rs.getString("batch");
+                batches.add(batch);
             }
 
             rs.close();
@@ -162,6 +194,6 @@ public class StudentExamDao {
 
             se.printStackTrace();
         }
-        return batches;   
+        return batches;
     }
 }

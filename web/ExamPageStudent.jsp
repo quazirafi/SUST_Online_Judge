@@ -63,10 +63,12 @@
                                 </c:when>
                                 <c:when test="${tracker == 'student'}">
                             <li><a>${student.getRegno()}</a></li>
+                            <li><a href="${pageContext.request.contextPath}/ToCourse">Courses</a></li>
+                            <li><a href="${pageContext.request.contextPath}/Logout">Logout</a></li>
                                 </c:when>
                             </c:choose>
 
-                    <li><a href="sign-in.html">Log out</a></li>
+                    <li><a href="Logout">Log out</a></li>
                 </ul>
             </div>
         </div>
@@ -113,7 +115,7 @@
                             <th class="col-md-2 col-sm-2 col-xs-2">Start Time</th>						
                             <th class="col-md-2 col-sm-2 col-xs-2">Duration(Minutes)</th>
                             <th class="col-md-2 col-sm-2 col-xs-2">Score</th>
-                            <th class="col-md-2 col-sm-2 col-xs-2">Actions</th>
+                            
                             <th class="col-md-2 col-sm-2 col-xs-2">Status</th>
                         </tr>
                     </thead>
@@ -143,24 +145,7 @@
                                 <td><c:out value="${exams.getStartTime()}" /></td>
                                 <td><c:out value="${exams.getDuration()}" /></td>
                                 <td><c:out value="${exams.getScore()}" /></td>
-                                <c:choose>
-                                    <c:when test="${exams.getStatus() eq 'upcoming'}">
-                                        <td><a class="btn btn-info btn-sm removebutton" onclick="" title="Remove"><i
-                                                    class="glyphicon glyphicon-remove "></i></a>
-                                            <a class="btn btn-info btn-sm editbutton" href="${pageContext.request.contextPath}/EditExamPage?examId=${exams.getExamId()}" title="Edit Exam">Edit</a>
-                                        </td>
-                                    </c:when>
-                                    <c:when test="${exams.getStatus() eq 'ongoing'}">
-                                        <td>
-                                            <a href="${pageContext.request.contextPath}/EditExamPage?examId=${exams.getExamId()}" title="Edit Exam">Edit</a>
-                                        </td>
-                                    </c:when>    
-                                    <c:otherwise>
-                                        <td>
-                                            Not Allowed
-                                        </td>
-                                    </c:otherwise>
-                                </c:choose>
+                                
 
                                 <td><c:out value="${exams.getStatus()}" /></td>
                             </tr>

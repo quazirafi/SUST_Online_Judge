@@ -103,138 +103,145 @@ public class UploadFile extends HttpServlet {
         String finalPath = "F:\\UploadFIles\\Submissions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
         String questionPath = "F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
         String fileRename = "";
+        if (exam.getStatus().equals("ongoing")) {
+            if (contentType.indexOf("multipart/form-data") >= 0) {
 
-        if (contentType.indexOf("multipart/form-data") >= 0) {
+                DiskFileItemFactory factory = new DiskFileItemFactory();
+                factory.setSizeThreshold(maxMemory);
+                factory.setRepository(new File("F:\\"));
+                ServletFileUpload upload = new ServletFileUpload(factory);
+                upload.setSizeMax(maxFileSize);
 
-            DiskFileItemFactory factory = new DiskFileItemFactory();
-            factory.setSizeThreshold(maxMemory);
-            factory.setRepository(new File("F:\\"));
-            ServletFileUpload upload = new ServletFileUpload(factory);
-            upload.setSizeMax(maxFileSize);
+                try {
+                    List fileItems = upload.parseRequest(request);
+                    Iterator i = fileItems.iterator();
+                    while (i.hasNext()) {
+                        FileItem fi = (FileItem) i.next();
+                        if (!fi.isFormField()) {
 
-            try {
-                List fileItems = upload.parseRequest(request);
-                Iterator i = fileItems.iterator();
-                while (i.hasNext()) {
-                    FileItem fi = (FileItem) i.next();
-                    if (!fi.isFormField()) {
-
-                        fieldName = fi.getFieldName();
-                        fileName = fi.getName();
-                        System.out.println(fileName);
-                        boolean isInMemory = fi.isInMemory();
-                        long sizeInBytes = fi.getSize();
-                        if (fileName.lastIndexOf("\\") >= 0) {
-                            fileRename = filePath + student.getStudentId()
-                                    + fileName.substring(fileName.lastIndexOf("\\"));
-                            file = new File(filePath + student.getStudentId()
-                                    + fileName.substring(fileName.lastIndexOf("\\")));
-                        } else {
-                            fileRename = filePath + student.getStudentId()
-                                    + fileName.substring(fileName.lastIndexOf("\\") + 1);
-                            file = new File(filePath + student.getStudentId()
-                                    + fileName.substring(fileName.lastIndexOf("\\") + 1));
-                        }
-                        fi.write(file);
+                            fieldName = fi.getFieldName();
+                            fileName = fi.getName();
+                            System.out.println(fileName);
+                            boolean isInMemory = fi.isInMemory();
+                            long sizeInBytes = fi.getSize();
+                            if (fileName.lastIndexOf("\\") >= 0) {
+                                fileRename = filePath + student.getStudentId()
+                                        + fileName.substring(fileName.lastIndexOf("\\"));
+                                file = new File(filePath + student.getStudentId()
+                                        + fileName.substring(fileName.lastIndexOf("\\")));
+                            } else {
+                                fileRename = filePath + student.getStudentId()
+                                        + fileName.substring(fileName.lastIndexOf("\\") + 1);
+                                file = new File(filePath + student.getStudentId()
+                                        + fileName.substring(fileName.lastIndexOf("\\") + 1));
+                            }
+                            fi.write(file);
 //                        Path source = Paths.get(fileRename);
 //                        Files.move(source, source.resolveSibling("Main.c"));
 
-                    } else {
-                        if (fi.getFieldName().equals("qId")) {
-                            id = fi.getString();
-                            System.out.println("id --- > " + id);
-                            finalPath += "Q" + id + "\\" + student.getRegno() + "\\";
-                            questionPath += "Q" + id + "\\";
-                            File ff = new File(finalPath);
-                            ff.mkdirs();
-                            InputStream in = new FileInputStream(new File(fileRename));
-                            String newFileName = "";
-                            OutputStream out = null;
-                            if (fileRename.endsWith(".c")) {
-                                out = new FileOutputStream(new File(finalPath + "Main.c"));
-                            } else if (fileRename.endsWith(".cpp")) {
-                                out = new FileOutputStream(new File(finalPath + "Main.cpp"));
-                            } else if (fileRename.endsWith(".java")) {
-                                out = new FileOutputStream(new File(finalPath + "Main.java"));
-                            }
+                        } else {
+                            if (fi.getFieldName().equals("qId")) {
+                                id = fi.getString();
+                                System.out.println("id --- > " + id);
+                                finalPath += "Q" + id + "\\" + student.getRegno() + "\\";
+                                questionPath += "Q" + id + "\\";
+                                File ff = new File(finalPath);
+                                ff.mkdirs();
+                                InputStream in = new FileInputStream(new File(fileRename));
+                                String newFileName = "";
+                                OutputStream out = null;
+                                if (fileRename.endsWith(".c")) {
+                                    out = new FileOutputStream(new File(finalPath + "Main.c"));
+                                } else if (fileRename.endsWith(".cpp")) {
+                                    out = new FileOutputStream(new File(finalPath + "Main.cpp"));
+                                } else if (fileRename.endsWith(".java")) {
+                                    out = new FileOutputStream(new File(finalPath + "Main.java"));
+                                }
 //                            File directory = new File(finalPath);
 //                            File[] filesToBeDeleted = directory.listFiles();
 //                            for (File fff : filesToBeDeleted)
 //                                fff.delete();
-                            byte[] buf = new byte[1024];
-                            int len;
-                            while ((len = in.read(buf)) > 0) {
-                                out.write(buf, 0, len);
+                                byte[] buf = new byte[1024];
+                                int len;
+                                while ((len = in.read(buf)) > 0) {
+                                    out.write(buf, 0, len);
+                                }
+                                in.close();
+                                out.close();
+                                File delete = new File(fileRename);
+                                delete.delete();
                             }
-                            in.close();
-                            out.close();
-                            File delete = new File(fileRename);
-                            delete.delete();
                         }
                     }
+
+                } catch (Exception e) {
+                    System.out.println(e);
                 }
 
-            } catch (Exception e) {
-                System.out.println(e);
             }
 
-        }
-
-        Tester2 codeCompileExecuter = new Tester2();
-        QuestionDao questionDao = new QuestionDao();
-        SubmissionDao submissionDao = new SubmissionDao();
-        int score;
-        if (fileRename.endsWith(".c")) {
-            System.out.println(codeCompileExecuter.compile("c", finalPath));
-            System.out.println(codeCompileExecuter.execute("c", "input", 5000, finalPath, questionPath));
-            System.out.println(codeCompileExecuter.match(finalPath, questionPath));
-            String verdict = codeCompileExecuter.match(finalPath, questionPath);
-            if (verdict.equals("Accepted"))
-                score = questionDao.getQuestionByQuestionId(Integer.parseInt(id), conn).getScore();
-            else
-                score = 0;
-            File directory = new File(finalPath);
-            File[] filesNumber = directory.listFiles();
-            Path source = Paths.get(finalPath + "Main.c");
-            Files.move(source, source.resolveSibling("Main" + filesNumber.length + ".c"));
-            submissionDao.addSubmission(Integer.parseInt(id),student.getStudentId(),verdict,finalPath+"Main" + filesNumber.length + ".c",score,conn,exam.getExamId());
-            session.setAttribute("submissions", submissionDao.getStudentSubmissions(student.getStudentId(), exam.getExamId(), questionPath, conn));
-            RequestDispatcher rd = request.getRequestDispatcher("SubmissionPage.jsp");
-            rd.forward(request, response);
-        } else if (fileRename.endsWith(".cpp")) {
-            System.out.println(codeCompileExecuter.compile("cpp", finalPath));
-            System.out.println(codeCompileExecuter.execute("cpp", "input", 5000, finalPath, questionPath));
-            System.out.println(codeCompileExecuter.match(finalPath, questionPath));
-            String verdict = codeCompileExecuter.match(finalPath, questionPath);
-            if (verdict.equals("Accepted"))
-                score = questionDao.getQuestionByQuestionId(Integer.parseInt(id), conn).getScore();
-            else
-                score = 0;
-            File directory = new File(finalPath);
-            File[] filesNumber = directory.listFiles();
-            Path source = Paths.get(finalPath + "Main.cpp");
-            Files.move(source, source.resolveSibling("Main" + filesNumber.length + ".cpp"));
-            submissionDao.addSubmission(Integer.parseInt(id),student.getStudentId(),verdict,finalPath+"Main" + filesNumber.length + ".cpp",score,conn,exam.getExamId());
-            session.setAttribute("submissions", submissionDao.getStudentSubmissions(student.getStudentId(), exam.getExamId(), questionPath, conn));
-            RequestDispatcher rd = request.getRequestDispatcher("SubmissionPage.jsp");
-            rd.forward(request, response);
-        } else if (fileRename.endsWith(".java")) {
-            System.out.println(codeCompileExecuter.compile("java", finalPath));
-            System.out.println(codeCompileExecuter.execute("java", "input", 5000, finalPath, questionPath));
-            System.out.println(codeCompileExecuter.match(finalPath, questionPath));
-            String verdict = codeCompileExecuter.match(finalPath, questionPath);
-            if (verdict.equals("Accepted"))
-                score = questionDao.getQuestionByQuestionId(Integer.parseInt(id), conn).getScore();
-            else
-                score = 0;
-            File directory = new File(finalPath);
-            File[] filesNumber = directory.listFiles();
-            Path source = Paths.get(finalPath + "Main.java");
-            Files.move(source, source.resolveSibling("Main" + filesNumber.length + ".java"));
-            submissionDao.addSubmission(Integer.parseInt(id),student.getStudentId(),verdict,finalPath+"Main" + filesNumber.length + ".java",score,conn,exam.getExamId());
-            session.setAttribute("submissions", submissionDao.getStudentSubmissions(student.getStudentId(), exam.getExamId(), questionPath, conn));
-            RequestDispatcher rd = request.getRequestDispatcher("SubmissionPage.jsp");
-            rd.forward(request, response);
+            Tester2 codeCompileExecuter = new Tester2();
+            QuestionDao questionDao = new QuestionDao();
+            SubmissionDao submissionDao = new SubmissionDao();
+            int score;
+            if (fileRename.endsWith(".c")) {
+                System.out.println(codeCompileExecuter.compile("c", finalPath));
+                System.out.println(codeCompileExecuter.execute("c", "input", 5000, finalPath, questionPath));
+                System.out.println(codeCompileExecuter.match(finalPath, questionPath));
+                String verdict = codeCompileExecuter.match(finalPath, questionPath);
+                if (verdict.equals("Accepted")) {
+                    score = questionDao.getQuestionByQuestionId(Integer.parseInt(id), conn).getScore();
+                } else {
+                    score = 0;
+                }
+                File directory = new File(finalPath);
+                File[] filesNumber = directory.listFiles();
+                Path source = Paths.get(finalPath + "Main.c");
+                Files.move(source, source.resolveSibling("Main" + filesNumber.length + ".c"));
+                submissionDao.addSubmission(Integer.parseInt(id), student.getStudentId(), verdict, finalPath + "Main" + filesNumber.length + ".c", score, conn, exam.getExamId());
+                session.setAttribute("submissions", submissionDao.getStudentSubmissions(student.getStudentId(), exam.getExamId(), questionPath, conn));
+                RequestDispatcher rd = request.getRequestDispatcher("SubmissionPage.jsp");
+                rd.forward(request, response);
+            } else if (fileRename.endsWith(".cpp")) {
+                System.out.println(codeCompileExecuter.compile("cpp", finalPath));
+                System.out.println(codeCompileExecuter.execute("cpp", "input", 5000, finalPath, questionPath));
+                System.out.println(codeCompileExecuter.match(finalPath, questionPath));
+                String verdict = codeCompileExecuter.match(finalPath, questionPath);
+                if (verdict.equals("Accepted")) {
+                    score = questionDao.getQuestionByQuestionId(Integer.parseInt(id), conn).getScore();
+                } else {
+                    score = 0;
+                }
+                File directory = new File(finalPath);
+                File[] filesNumber = directory.listFiles();
+                Path source = Paths.get(finalPath + "Main.cpp");
+                Files.move(source, source.resolveSibling("Main" + filesNumber.length + ".cpp"));
+                submissionDao.addSubmission(Integer.parseInt(id), student.getStudentId(), verdict, finalPath + "Main" + filesNumber.length + ".cpp", score, conn, exam.getExamId());
+                session.setAttribute("submissions", submissionDao.getStudentSubmissions(student.getStudentId(), exam.getExamId(), questionPath, conn));
+                RequestDispatcher rd = request.getRequestDispatcher("SubmissionPage.jsp");
+                rd.forward(request, response);
+            } else if (fileRename.endsWith(".java")) {
+                System.out.println(codeCompileExecuter.compile("java", finalPath));
+                System.out.println(codeCompileExecuter.execute("java", "input", 5000, finalPath, questionPath));
+                System.out.println(codeCompileExecuter.match(finalPath, questionPath));
+                String verdict = codeCompileExecuter.match(finalPath, questionPath);
+                if (verdict.equals("Accepted")) {
+                    score = questionDao.getQuestionByQuestionId(Integer.parseInt(id), conn).getScore();
+                } else {
+                    score = 0;
+                }
+                File directory = new File(finalPath);
+                File[] filesNumber = directory.listFiles();
+                Path source = Paths.get(finalPath + "Main.java");
+                Files.move(source, source.resolveSibling("Main" + filesNumber.length + ".java"));
+                submissionDao.addSubmission(Integer.parseInt(id), student.getStudentId(), verdict, finalPath + "Main" + filesNumber.length + ".java", score, conn, exam.getExamId());
+                session.setAttribute("submissions", submissionDao.getStudentSubmissions(student.getStudentId(), exam.getExamId(), questionPath, conn));
+                RequestDispatcher rd = request.getRequestDispatcher("SubmissionPage.jsp");
+                rd.forward(request, response);
+            }
+        } else {
+            System.out.println("exam status "+exam.getStatus());
+            response.sendRedirect("SubmissionFailed.jsp");
         }
 
     }

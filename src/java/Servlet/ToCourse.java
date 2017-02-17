@@ -5,12 +5,6 @@
  */
 package Servlet;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import Entity.*;
 import Dao.*;
 import java.io.IOException;
@@ -35,7 +29,7 @@ import java.util.Calendar;
  *
  * @author DANA
  */
-public class StudentListPage extends HttpServlet {
+public class ToCourse extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -54,10 +48,10 @@ public class StudentListPage extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet StudentListPage</title>");
+            out.println("<title>Servlet ToCourse</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet StudentListPage at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ToCourse at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,23 +69,28 @@ public class StudentListPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int examId = Integer.parseInt(request.getParameter("examId"));
         HttpSession session = request.getSession();
-        String tracker = (String)session.getAttribute("tracker");
+        Teacher teacher = (Teacher) session.getAttribute("teacher");
+        Student student = (Student) session.getAttribute("student");
+        String tracker = (String) session.getAttribute("tracker");
         Connection conn = (Connection) session.getAttribute("conn");
-        StudentExamDao studentExamDao = new StudentExamDao();
-        ArrayList<Student> students = (ArrayList<Student>) studentExamDao.findEnteredStudents(conn, examId);
-        try{
-            if (tracker.equals("teacher")){
-            request.setAttribute("studentsEntered", students);
-            RequestDispatcher rd = request.getRequestDispatcher("StudentListPage.jsp");
+        List<Course> courses = null;
+        CourseDao courseDao = new CourseDao();
+        if (tracker.equals("teacher")) {
+            System.out.println(tracker);
+            courses = courseDao.getCourseByTeacherId(teacher.getTeacherId(), conn, 2012);
+            request.setAttribute("courses", courses);
+            RequestDispatcher rd = request.getRequestDispatcher("course.jsp");
             rd.forward(request, response);
         }
-        else{
-            response.sendRedirect("login.jsp");
+        else if (tracker.equals("student")){
+            System.out.println(tracker);
+            courses = courseDao.getCourseByStudentId(student.getStudentId(), conn, 2012);
+            request.setAttribute("courses", courses);
+            RequestDispatcher rd = request.getRequestDispatcher("course.jsp");
+            rd.forward(request, response);
         }
-        }
-        catch(Exception e){
+                else {
             response.sendRedirect("login.jsp");
         }
     }
@@ -107,19 +106,7 @@ public class StudentListPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String[] studentIdsString = request.getParameterValues("studentsIds");
-        String batch = request.getParameter("batch");
-        System.out.println("HERE!!!");
-        HttpSession session = request.getSession();
-        Connection conn = (Connection) session.getAttribute("conn");
-        Student student = (Student) session.getAttribute("student");
-        Exam exam = (Exam) session.getAttribute("exam");
-        StudentExamDao studentExamDao = new StudentExamDao();
-        for (int i=0;i<studentIdsString.length;++i){
-            System.out.println(studentIdsString[i]);
-            studentExamDao.setAllowedResetEntered(conn, Integer.parseInt(studentIdsString[i]), exam.getExamId(),batch);
-        }
-        
+        processRequest(request, response);
     }
 
     /**

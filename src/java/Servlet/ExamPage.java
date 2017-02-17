@@ -98,7 +98,7 @@ public class ExamPage extends HttpServlet {
                         
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(startDate);
-                        calendar.add(Calendar.MINUTE,200);
+                        calendar.add(Calendar.MINUTE,e.getDuration());
                         endDate = calendar.getTime();
                         if (currentDate.before(startDate) && !e.getTitle().equals("no data available"))
                             e.setStatus("upcoming");
@@ -130,16 +130,16 @@ public class ExamPage extends HttpServlet {
            exams=(ArrayList<Exam>) examDao.getExamsByCourseId(courseId, conn);
           
           
-             for(Exam e : exams){
-             boolean feedback=examDao.verifyExambystudentId(student_id,e.getExamId(),conn);
-               if(feedback==true)
-               {
-                   exams2.add(e);
-               }
-               
-           }
+//             for(Exam e : exams){
+//             boolean feedback=examDao.verifyExambystudentId(student_id,e.getExamId(),conn);
+//               if(feedback==true)
+//               {
+//                   exams2.add(e);
+//               }
+//               
+//           }
            System.out.println("Size...."+exams2.size());
-            for (Exam e : exams2) {
+            for (Exam e : exams) {
                     System.out.println("INSIDE EXAM LOOP");
                     String startDateString = e.getStartTime();
                     //String endDateString = e.getEndTime();
@@ -157,7 +157,7 @@ public class ExamPage extends HttpServlet {
                         
                         Calendar calendar = Calendar.getInstance();
                         calendar.setTime(startDate);
-                        calendar.add(Calendar.MINUTE,200);
+                        calendar.add(Calendar.MINUTE,e.getDuration());
                         endDate = calendar.getTime();
                         if (currentDate.before(startDate) && !e.getTitle().equals("no data available"))
                             e.setStatus("upcoming");
@@ -171,11 +171,14 @@ public class ExamPage extends HttpServlet {
                     }
                 }
                 Course course = courseDao.getCourseById(courseId, conn);
-                session.setAttribute("exams", exams2);
+                session.setAttribute("exams", exams);
                 session.setAttribute("courseTitle", course.getTitle());
                 session.setAttribute("course", course);
                 RequestDispatcher rd = request.getRequestDispatcher("ExamPageStudent.jsp");
                 rd.forward(request, response);  
+        }
+        else {
+            response.sendRedirect("login.jsp");
         }
     }
 
