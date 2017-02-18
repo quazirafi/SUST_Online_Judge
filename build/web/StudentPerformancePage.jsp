@@ -60,7 +60,7 @@
 			<ul class="nav navbar-nav navbar-right">
                              <c:choose>
                         <c:when test="${tracker == 'teacher'}">
-                            <li><a>${teacher.getFullName()}</a></li>
+                           
                                 </c:when>
                                 <c:when test="${tracker == 'student'}">
                             <li><a>${student.getRegno()}</a></li>

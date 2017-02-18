@@ -97,6 +97,10 @@
         <servlet-name>DeleteQuestion</servlet-name>
         <servlet-class>Servlet.DeleteQuestion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteStudents</servlet-name>
+        <servlet-class>Servlet.DeleteStudents</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -187,6 +191,10 @@
     <servlet-mapping>
         <servlet-name>DeleteQuestion</servlet-name>
         <url-pattern>/DeleteQuestion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteStudents</servlet-name>
+        <url-pattern>/DeleteStudents</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

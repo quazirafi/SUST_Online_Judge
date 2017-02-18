@@ -80,7 +80,7 @@ public class SubmissionDao {
         }
         return submissions;
     }
-    
+
     public List<Submission> getStudentSubmissions(int sId, int eId, Connection conn) {
         ArrayList<Submission> submissions = new ArrayList<Submission>();
         try {
@@ -151,8 +151,8 @@ public class SubmissionDao {
         }
         return numOfAccepted;
     }
-    
-    public List<Integer> getQuestionIds(int studentId, int examId, Connection conn){
+
+    public List<Integer> getQuestionIds(int studentId, int examId, Connection conn) {
         ArrayList<Integer> qIds = new ArrayList<Integer>();
         PreparedStatement ps;
         try {
@@ -172,8 +172,8 @@ public class SubmissionDao {
         }
         return qIds;
     }
-    
-    public List<Integer> getQuestionIdsOfWrong(int studentId, int examId, Connection conn){
+
+    public List<Integer> getQuestionIdsOfWrong(int studentId, int examId, Connection conn) {
         ArrayList<Integer> qIds = new ArrayList<Integer>();
         PreparedStatement ps;
         try {
@@ -185,7 +185,19 @@ public class SubmissionDao {
             stmt.setInt(3, examId);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                qIds.add(rs.getInt("question_id"));
+                int flag = 0;
+                PreparedStatement stmt2 = conn.prepareStatement("SELECT * "
+                        + "FROM submission"
+                        + " where verdict=? and student_id=? and exam_id=? and question_id=?");
+                stmt2.setString(1, "Accepted");
+                stmt2.setInt(2, studentId);
+                stmt2.setInt(3, examId);
+                stmt2.setInt(4, rs.getInt("question_id"));
+                ResultSet rs2 = stmt2.executeQuery();
+                if (rs2.next())
+                    flag = 1;
+                if (flag == 0)
+                    qIds.add(rs.getInt("question_id"));
             }
             stmt.close();
         } catch (Exception se) {
@@ -193,21 +205,21 @@ public class SubmissionDao {
         }
         return qIds;
     }
-    
-    public int getMaxNumAmongWrong(int studentId, int qId,int examId, Connection conn){
+
+    public int getMaxNumAmongWrong(int studentId, int qId, int examId, Connection conn) {
         int marks = 0;
         PreparedStatement ps;
         try {
-            PreparedStatement stmt = conn.prepareStatement("SELECT MAX(marks) "
+            PreparedStatement stmt = conn.prepareStatement("SELECT marks "
                     + "FROM submission"
-                    + " where verdict=? and student_id=? and question_id=? and exam_id=?");
+                    + " where verdict=? and student_id=? and question_id=? and exam_id=? order by marks DESC");
             stmt.setString(1, "Wrong");
             stmt.setInt(2, studentId);
             stmt.setInt(3, qId);
             stmt.setInt(4, examId);
             ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                marks = rs.getInt("max(marks)");
+            if (rs.next()) {
+                marks = rs.getInt("marks");
             }
             stmt.close();
         } catch (Exception se) {
@@ -215,8 +227,8 @@ public class SubmissionDao {
         }
         return marks;
     }
-    
-    public void editSubmission(int submissionId,int marks,Connection conn){
+
+    public void editSubmission(int submissionId, int marks, Connection conn) {
         int count = 0;
         PreparedStatement ps;
         try {

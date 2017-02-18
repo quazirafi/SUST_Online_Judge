@@ -5,12 +5,25 @@
  */
 package Servlet;
 
+import Entity.*;
+import Dao.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -29,8 +42,7 @@ public class ToSubmissionPage extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -45,7 +57,23 @@ public class ToSubmissionPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("SubmissionPage.jsp");
+
+        HttpSession session = request.getSession();
+        String courseSession = (String) session.getAttribute("courseSession");
+        Course course = (Course) session.getAttribute("course");
+        String courseTitle = course.getTitle();
+        Exam exam = (Exam) session.getAttribute("exam");
+        Connection conn = (Connection) session.getAttribute("conn");
+        String examTitle = exam.getTitle();
+        Student student = (Student) session.getAttribute("student");
+        String finalPath = "F:\\UploadFIles\\Submissions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+        String questionPath = "F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+
+        SubmissionDao submissionDao = new SubmissionDao();
+
+        session.setAttribute("submissions", submissionDao.getStudentSubmissions(student.getStudentId(), exam.getExamId(), questionPath, conn));
+        RequestDispatcher rd = request.getRequestDispatcher("SubmissionPage.jsp");
+        rd.forward(request, response);
     }
 
     /**

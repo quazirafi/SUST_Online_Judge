@@ -36,7 +36,27 @@
     background-color: white; /* Green */
     color: #4CAF50;
 }
-.ddeletion {
+.addition3 {
+    background-color: #4CAF50; 
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.addition3:hover {
+    background-color: white; /* Green */
+    color: #4CAF50;
+}
+
+.deletion {
     background-color: #f44336; 
     border: none;
     color: white;
@@ -52,6 +72,26 @@
 }
 
 .deletion:hover {
+    background-color: white; /* Green */
+    color: #f44336;
+}
+
+.deletion3 {
+    background-color: #f44336; 
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.deletion3:hover {
     background-color: white; /* Green */
     color: #f44336;
 }

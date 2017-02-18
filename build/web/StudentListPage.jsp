@@ -13,7 +13,8 @@
 <title>SUST Judge</title>
 <link href="<c:url value="/resources/css/topbar.css" />"
 	rel="stylesheet" type="text/css" />
-
+<link href="<c:url value="/resources/css/buttonstyles.css"/>"
+	rel="stylesheet" type="text/css" />
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
 	rel="stylesheet" type="text/css" />
 <link href="<c:url value="/resources/css/bootstrap-theme.min.css" />"
@@ -50,7 +51,7 @@
 			class="
                  col-sm-4 col-sm-offset-1
                  col-xs-12">
-			<a class="navbar-brand" href="${pageContext.request.contextPath}/sign-in.html">SUST Judge<sup>alpha</sup></a>
+			<a class="navbar-brand" href="${pageContext.request.contextPath}/login.jsp">SUST Judge<sup>alpha</sup></a>
 		</div>
 		<div
 			class="
@@ -59,7 +60,7 @@
 			<ul class="nav navbar-nav navbar-right">
                              <c:choose>
                         <c:when test="${tracker == 'teacher'}">
-                            <li><a>${teacher.getFullName()}</a></li>
+                            
                                 </c:when>
                                 <c:when test="${tracker == 'student'}">
                             <li><a>${student.getRegno()}</a></li>
@@ -80,18 +81,25 @@
 	</nav>
 
 	<div class="container">
+            <form action="StudentListPage" method="post" >
 		<div class="row searchbar">
 			<div class="col-xs-8">
                             <p class="table-headertext">
                                
-                              </p>
+                            </p>
+			</div>
+                     <div class="col-xs-2">
+                         <button class="deletion3" onclick="removeAll()" type="button">Remove Students</button>
+			</div>
+                        <div class="col-xs-2">
+                            <input class="addition3" type="submit" value="Add Students" />
 			</div>
 			
                 </div>       
                  
 	<!--	<div class="clearfix"></div> -->
 		<!-- TABLE -->
-                <form action="StudentListPage" method="post" >
+                
                      Batch Name <input type="text" name="batch" /> 
                      <br>
                      <br>
@@ -117,7 +125,7 @@
                                      </c:forEach>   
 				</tbody>
 			</table>
-                        <input type="submit" value="Submit" />
+                        
                     
                     
 		</div>
@@ -131,7 +139,7 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+        <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Question</h4>
       </div>
@@ -144,7 +152,7 @@
     </div>
   </div>
 </div>
-	<a href="${pageContext.request.contextPath}/courseback">Previous Page</a>
+	
 	</div>
 	<!-- body container -->
 </body>
@@ -154,6 +162,12 @@
             $('#studentTable').DataTable();
             
         });
+function removeAll(){
+    var result = confirm('Are you sure ?');
+    if (result){
+        window.location.href = "DeleteStudents";
+    }
+}
 function loadDoc(path) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", path, false);

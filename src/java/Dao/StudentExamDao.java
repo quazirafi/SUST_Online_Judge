@@ -191,9 +191,23 @@ public class StudentExamDao {
             stmt.close();
 
         } catch (Exception se) {
-
+            
             se.printStackTrace();
         }
         return batches;
+    }
+    
+    public void deleteAllStudents(int examId,Connection conn){
+         try {
+
+            PreparedStatement stmt = conn.prepareStatement("update student_exam set entered = ?,allowed = ? where exam_id = ?");
+            stmt.setInt(1, 0);
+            stmt.setInt(2, 0);
+            stmt.setInt(3, examId);
+            stmt.execute();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
     }
 }
