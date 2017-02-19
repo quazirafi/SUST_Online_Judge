@@ -67,7 +67,9 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          int flag=0;// flag is for detecting weather the input is student's regNo or Teacher's codename 
+        
+        try{
+              int flag=0;// flag is for detecting weather the input is student's regNo or Teacher's codename 
 
         String userId = (request.getParameter("user_name")).toString();
         String password = request.getParameter("password");
@@ -156,6 +158,11 @@ public class Login extends HttpServlet {
                 rd.forward(request, response);
             }   
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        };
+        
 //        else
 //            studentDao.getStudentByUserIdPassword(userId,password,conn);
     }

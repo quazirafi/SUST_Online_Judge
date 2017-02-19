@@ -61,7 +61,8 @@ public class DeleteStudents extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       HttpSession session = request.getSession();
+        try{
+            HttpSession session = request.getSession();
        Connection conn = (Connection) session.getAttribute("conn");
        Exam exam = (Exam) session.getAttribute("exam");
        System.out.println("exam ID "+exam.getExamId());
@@ -69,6 +70,11 @@ public class DeleteStudents extends HttpServlet {
        studentExamDao.deleteAllStudents(exam.getExamId(),conn);
        Course course = (Course) session.getAttribute("course");
        response.sendRedirect("ExamPage?courseId="+course.getCourseId());
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        };
+       
     }
 
     /**

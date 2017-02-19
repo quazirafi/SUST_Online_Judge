@@ -80,7 +80,7 @@ public class UploadFile extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        try{
         File file = null;
         int maxMemory = 1024 * 100000;
         int maxFileSize = 1024 * 100000;
@@ -243,6 +243,11 @@ public class UploadFile extends HttpServlet {
             System.out.println("exam status "+exam.getStatus());
             response.sendRedirect("SubmissionFailed.jsp");
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        };
+        
 
     }
 

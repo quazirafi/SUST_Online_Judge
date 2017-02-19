@@ -69,6 +69,7 @@ public class ToCourse extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try{
         HttpSession session = request.getSession();
         Teacher teacher = (Teacher) session.getAttribute("teacher");
         Student student = (Student) session.getAttribute("student");
@@ -93,6 +94,11 @@ public class ToCourse extends HttpServlet {
                 else {
             response.sendRedirect("login.jsp");
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        }
+        
     }
 
     /**

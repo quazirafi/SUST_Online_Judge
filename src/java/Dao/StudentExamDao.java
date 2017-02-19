@@ -179,7 +179,7 @@ public class StudentExamDao {
 
             Statement stmt = conn.createStatement();
             String sql;
-            sql = "SELECT batch from student_exam where exam_id=" + eId;
+            sql = "SELECT distinct batch from student_exam where exam_id=" + eId;
             ResultSet rs = stmt.executeQuery(sql);
 
             while (rs.next()) {

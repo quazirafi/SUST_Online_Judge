@@ -57,7 +57,7 @@ public class ToSubmissionPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        try{
         HttpSession session = request.getSession();
         String courseSession = (String) session.getAttribute("courseSession");
         Course course = (Course) session.getAttribute("course");
@@ -74,6 +74,11 @@ public class ToSubmissionPage extends HttpServlet {
         session.setAttribute("submissions", submissionDao.getStudentSubmissions(student.getStudentId(), exam.getExamId(), questionPath, conn));
         RequestDispatcher rd = request.getRequestDispatcher("SubmissionPage.jsp");
         rd.forward(request, response);
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        }
+        
     }
 
     /**

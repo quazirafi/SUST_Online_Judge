@@ -63,6 +63,7 @@ public class ToIndividualSubmissionPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try{
         int studentId = Integer.parseInt(request.getParameter("sId"));
         HttpSession session = request.getSession();
         Exam exam = (Exam) session.getAttribute("exam");
@@ -72,6 +73,11 @@ public class ToIndividualSubmissionPage extends HttpServlet {
         request.setAttribute("submissions", submissions);
         RequestDispatcher rd = request.getRequestDispatcher("IndividualSubmissionPage.jsp");
         rd.forward(request, response);
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        };
+        
     }
 
     /**

@@ -68,7 +68,8 @@ public class ToDashboard extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        try{
+            HttpSession session = request.getSession();
         String tracker = (String) session.getAttribute("tracker");
         Connection conn = (Connection) session.getAttribute("conn");
         Exam exam = (Exam) session.getAttribute("exam");
@@ -118,6 +119,11 @@ public class ToDashboard extends HttpServlet {
         catch(Exception e){
             response.sendRedirect("login.jsp");
         };
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        }
+        
         
     }
 

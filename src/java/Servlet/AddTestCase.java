@@ -79,7 +79,9 @@ public class AddTestCase extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        File file = null;
+        
+        try{
+            File file = null;
         int maxMemory = 1024 * 100000;
         int maxFileSize = 1024 * 100000;
         ServletContext context = request.getSession().getServletContext();
@@ -180,6 +182,11 @@ public class AddTestCase extends HttpServlet {
         else {
             response.sendRedirect("login.jsp");
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        };
+        
     }
 
     /**

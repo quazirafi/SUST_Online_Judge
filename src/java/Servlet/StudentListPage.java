@@ -75,25 +75,29 @@ public class StudentListPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int examId = Integer.parseInt(request.getParameter("examId"));
-        HttpSession session = request.getSession();
-        String tracker = (String)session.getAttribute("tracker");
-        Connection conn = (Connection) session.getAttribute("conn");
-        StudentExamDao studentExamDao = new StudentExamDao();
-        ArrayList<Student> students = (ArrayList<Student>) studentExamDao.findEnteredStudents(conn, examId);
-        try{
-            if (tracker.equals("teacher")){
-            request.setAttribute("studentsEntered", students);
-            RequestDispatcher rd = request.getRequestDispatcher("StudentListPage.jsp");
-            rd.forward(request, response);
-        }
-        else{
+
+        try {
+            int examId = Integer.parseInt(request.getParameter("examId"));
+            HttpSession session = request.getSession();
+            String tracker = (String) session.getAttribute("tracker");
+            Connection conn = (Connection) session.getAttribute("conn");
+            StudentExamDao studentExamDao = new StudentExamDao();
+            ArrayList<Student> students = (ArrayList<Student>) studentExamDao.findEnteredStudents(conn, examId);
+            try {
+                if (tracker.equals("teacher")) {
+                    request.setAttribute("studentsEntered", students);
+                    RequestDispatcher rd = request.getRequestDispatcher("StudentListPage.jsp");
+                    rd.forward(request, response);
+                } else {
+                    response.sendRedirect("login.jsp");
+                }
+            } catch (Exception e) {
+                response.sendRedirect("login.jsp");
+            }
+        } catch (Exception e) {
             response.sendRedirect("login.jsp");
         }
-        }
-        catch(Exception e){
-            response.sendRedirect("login.jsp");
-        }
+
     }
 
     /**
@@ -107,19 +111,24 @@ public class StudentListPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String[] studentIdsString = request.getParameterValues("studentsIds");
-        String batch = request.getParameter("batch");
-        System.out.println("HERE!!!");
-        HttpSession session = request.getSession();
-        Connection conn = (Connection) session.getAttribute("conn");
-        Student student = (Student) session.getAttribute("student");
-        Exam exam = (Exam) session.getAttribute("exam");
-        StudentExamDao studentExamDao = new StudentExamDao();
-        for (int i=0;i<studentIdsString.length;++i){
-            System.out.println(studentIdsString[i]);
-            studentExamDao.setAllowedResetEntered(conn, Integer.parseInt(studentIdsString[i]), exam.getExamId(),batch);
+        try {
+            String[] studentIdsString = request.getParameterValues("studentsIds");
+            String batch = request.getParameter("batch");
+            System.out.println("HERE!!!");
+            HttpSession session = request.getSession();
+            Connection conn = (Connection) session.getAttribute("conn");
+            Student student = (Student) session.getAttribute("student");
+            Exam exam = (Exam) session.getAttribute("exam");
+            StudentExamDao studentExamDao = new StudentExamDao();
+            for (int i = 0; i < studentIdsString.length; ++i) {
+                System.out.println(studentIdsString[i]);
+                studentExamDao.setAllowedResetEntered(conn, Integer.parseInt(studentIdsString[i]), exam.getExamId(), batch);
+            }
+            response.sendRedirect("QuestionPage?examId=" + exam.getExamId());
+        } catch (Exception e) {
+            response.sendRedirect("login.jsp");
         }
-        response.sendRedirect("QuestionPage?examId="+exam.getExamId());
+
     }
 
     /**

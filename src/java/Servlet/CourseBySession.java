@@ -54,7 +54,9 @@ public class CourseBySession extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("INSIDE Course BY session");
+        
+        try{
+            System.out.println("INSIDE Course BY session");
         int courseSession = Integer.parseInt(request.getParameter("session"));
         HttpSession session = request.getSession();
         String tracker = (String) session.getAttribute("tracker");
@@ -88,6 +90,11 @@ public class CourseBySession extends HttpServlet {
                 rd.forward(request, response);
             }
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        };
+        
     }
 
     /**

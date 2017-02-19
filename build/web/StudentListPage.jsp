@@ -89,7 +89,7 @@
                             </p>
 			</div>
                      <div class="col-xs-2">
-                         <button class="deletion3" onclick="removeAll()" type="button">Remove Students</button>
+                         <button class="deletion3" onclick="removeAll()" type="button">Remove All</button>
 			</div>
                         <div class="col-xs-2">
                             <input class="addition3" type="submit" value="Add Students" />

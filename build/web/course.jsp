@@ -125,7 +125,7 @@
                                     <c:choose>
                                     <c:when test="${courses.getIsRunning() eq 1 && tracker == 'teacher'}">
                                         <td><a class="btn btn-info btn-sm editbutton" onclick="" title="Add Exam"><i
-                                                class="glyphicon glyphicon-edit"></i></a> (3)
+                                                class="glyphicon glyphicon-edit"></i></a>
                                         </td>
                                     </c:when>
                                     <c:otherwise>

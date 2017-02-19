@@ -73,7 +73,8 @@ public class StudentPerformanceBatchwise extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String batch = request.getParameter("batch");
+        try{
+            String batch = request.getParameter("batch");
         HttpSession session = request.getSession();
         String tracker = (String) session.getAttribute("tracker");
         Connection conn = (Connection) session.getAttribute("conn");
@@ -85,6 +86,7 @@ public class StudentPerformanceBatchwise extends HttpServlet {
             List<Integer> studentIds = studentExamDao.getStudentByExamIdAndBatch(exam.getExamId(), batch, conn);
             int counter = 0;
             for (Integer i : studentIds){
+                System.out.println("id "+i.intValue());
                 studentPerformance = new StudentPerformance();
                 StudentDao studentDao = new StudentDao();
                 SubmissionDao submissionDao = new SubmissionDao();
@@ -105,9 +107,10 @@ public class StudentPerformanceBatchwise extends HttpServlet {
                         totalSum += submissionDao.getMaxNumAmongWrong(i.intValue(), j.intValue(), exam.getExamId(), conn);
                     }
                     studentPerformance.setSumOfScores(totalSum);
+                    studentPerformances.add(studentPerformance);
                 //}
             }
-            studentPerformances.add(studentPerformance);
+            
             for (StudentPerformance sp : studentPerformances)
                 System.out.println(sp.getStudentRegNo()+" "+sp.getSumOfScores());
             session.setAttribute("batches", studentExamDao.getBatch(exam.getExamId(), conn));
@@ -118,6 +121,11 @@ public class StudentPerformanceBatchwise extends HttpServlet {
         else{
             response.sendRedirect("login.jsp");
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        }
+        
     }
 
     /**

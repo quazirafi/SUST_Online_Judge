@@ -59,6 +59,8 @@ public class QuestionPage extends HttpServlet {
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        try{
         int examId = Integer.parseInt(request.getParameter("examId"));
         ExmDao exmDao = new ExmDao();
 
@@ -138,6 +140,11 @@ public class QuestionPage extends HttpServlet {
         } else {
             response.sendRedirect("login.jsp");
         }
+        }
+        catch(Exception e){
+        response.sendRedirect("login.jsp");
+        };
+        
     }
 
     /**
@@ -151,8 +158,8 @@ public class QuestionPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        int examId = Integer.parseInt(request.getParameter("examId"));
+        try{
+            int examId = Integer.parseInt(request.getParameter("examId"));
         String password = request.getParameter("password");
 
         HttpSession session = request.getSession();
@@ -244,6 +251,11 @@ public class QuestionPage extends HttpServlet {
             rd.forward(request, response);
 
         }
+        }
+        catch(Exception e ){
+            response.sendRedirect("login.jsp");
+        }
+        
 
     }
 

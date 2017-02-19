@@ -69,6 +69,8 @@ public class DeleteQuestion extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        try{
         String qId = request.getParameter("qId");
         QuestionDao questionDao = new QuestionDao();
         HttpSession session = request.getSession();
@@ -76,6 +78,11 @@ public class DeleteQuestion extends HttpServlet {
         Exam exam = (Exam) session.getAttribute("exam");
         questionDao.deleteByQId(Integer.parseInt(qId),conn);
         response.sendRedirect("QuestionPage?examId="+exam.getExamId());
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        }
+        
     }
 
     /**

@@ -50,7 +50,7 @@
                 class="
                 col-sm-4 col-sm-offset-1
                 col-xs-12">
-                <a class="navbar-brand" href="${pageContext.request.contextPath}/">SUST Judge<sup>alpha</sup></a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/login.jsp">SUST Judge<sup>alpha</sup></a>
             </div>
             <div
                 class="

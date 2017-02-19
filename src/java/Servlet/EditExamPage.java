@@ -59,6 +59,8 @@ public class EditExamPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        try{
         String examId = request.getParameter("examId");
         String action = request.getParameter("action");
         System.out.println(examId);
@@ -116,6 +118,11 @@ public class EditExamPage extends HttpServlet {
         else {
             response.sendRedirect("login.jsp");
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        };
+        
     }
 
     /**
@@ -129,7 +136,9 @@ public class EditExamPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int examId = Integer.parseInt(request.getParameter("examId"));
+        
+        try{
+            int examId = Integer.parseInt(request.getParameter("examId"));
         String examTitle = request.getParameter("title");
         String password = request.getParameter("password");
         String date = request.getParameter("date");
@@ -184,6 +193,11 @@ public class EditExamPage extends HttpServlet {
             response.sendRedirect("login.jsp");
         }
 
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        };
+        
     }
 
     /**

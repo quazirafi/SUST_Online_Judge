@@ -54,7 +54,8 @@ public class AddNewExam extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String password = request.getParameter("password");
+        try{
+            String password = request.getParameter("password");
         String title = request.getParameter("title");
         String startTime = request.getParameter("startTime");
         String duration = request.getParameter("duration");
@@ -126,6 +127,11 @@ public class AddNewExam extends HttpServlet {
         else{
             response.sendRedirect("login.jsp");
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        };
+        
     }
 
     /**

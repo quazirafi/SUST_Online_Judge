@@ -61,6 +61,8 @@ public class ExamPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        try{
         int courseId = Integer.parseInt(request.getParameter("courseId"));
         System.out.println("INSIDE EXAMPAEGE.java");
         ArrayList<Exam> exams;
@@ -180,6 +182,11 @@ public class ExamPage extends HttpServlet {
         else {
             response.sendRedirect("login.jsp");
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        }
+        
     }
 
     /**

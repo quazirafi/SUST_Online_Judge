@@ -67,13 +67,19 @@ public class AddQuestionPage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
+        try{
+            HttpSession session = request.getSession();
         String tracker = (String) session.getAttribute("tracker");
         if (tracker.equals("teacher")) {
             response.sendRedirect("AddQuestionPage.jsp");
         } else {
             response.sendRedirect("login.jsp");
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        }
+        
     }
 
     /**
@@ -87,7 +93,8 @@ public class AddQuestionPage extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        try{
         HttpSession session = request.getSession();
         String tracker = (String) session.getAttribute("tracker");
         if (tracker.equals("teacher")) {
@@ -199,6 +206,11 @@ public class AddQuestionPage extends HttpServlet {
         } else {
             response.sendRedirect("login.jsp");
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        }
+        
 
     }
 

@@ -50,7 +50,7 @@
                 class="
                 col-sm-4 col-sm-offset-1
                 col-xs-12">
-                <a class="navbar-brand" href="${pageContext.request.contextPath}/">SUST Judge<sup>alpha</sup></a>
+                <a class="navbar-brand" href="${pageContext.request.contextPath}/login.jsp">SUST Judge<sup>alpha</sup></a>
             </div>
             <div
                 class="
@@ -161,7 +161,7 @@
            
 
             <!-- Modal delete -->
-            <a href="${pageContext.request.contextPath}/courseback">Previous Page</a>
+            
         </div>
         <!-- body container -->
         <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

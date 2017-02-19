@@ -60,7 +60,9 @@ public class EditSubmission extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String submissionId = request.getParameter("submissionId");
+        
+        try{
+            String submissionId = request.getParameter("submissionId");
         String editedMarks = request.getParameter("editedMarks");
         System.out.println("submission id "+submissionId+" "+editedMarks);
         SubmissionDao submissionDao = new SubmissionDao();
@@ -71,6 +73,11 @@ public class EditSubmission extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
            out.println("Successfully edited marks");
         }
+        }
+        catch(Exception e){
+            response.sendRedirect("login.jsp");
+        }
+        
     }
 
     /**
