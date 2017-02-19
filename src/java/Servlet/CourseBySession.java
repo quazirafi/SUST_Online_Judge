@@ -59,7 +59,7 @@ public class CourseBySession extends HttpServlet {
         HttpSession session = request.getSession();
         String tracker = (String) session.getAttribute("tracker");
         if (tracker == null) {
-            response.sendRedirect("course.jsp");
+            response.sendRedirect("login.jsp");
         } else {
             List<Course> courses;
             CourseDao courseDao = new CourseDao();
@@ -71,6 +71,9 @@ public class CourseBySession extends HttpServlet {
                 session.setAttribute("courseSession", Integer.toString(courseSession));
                 request.setAttribute("courses", courses);
                 RequestDispatcher rd = request.getRequestDispatcher("course.jsp");
+                response.setHeader("Cache-Control", "private, no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        response.setDateHeader("Expires", 0);
                 rd.forward(request, response);
             }
             else if (tracker.equals("student")){
@@ -79,6 +82,9 @@ public class CourseBySession extends HttpServlet {
                 session.setAttribute("courseSession", Integer.toString(courseSession));
                 request.setAttribute("courses", courses);
                 RequestDispatcher rd = request.getRequestDispatcher("course.jsp");
+                response.setHeader("Cache-Control", "private, no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        response.setDateHeader("Expires", 0);
                 rd.forward(request, response);
             }
         }

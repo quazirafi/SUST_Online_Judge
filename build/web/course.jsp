@@ -2,9 +2,9 @@
          pageEncoding="utf-8"%>
 <%@page import="Entity.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<% response.setHeader("Cache-Control", "no-cache");
+<% response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
     /*HTTP 1.1*/ response.setHeader("Pragma", "no-cache");
-    /*HTTP 1.0*/ response.setDateHeader("Expires", 0);
+    /*HTTP 1.0*/ response.setDateHeader("Expires", -1);
 %> 
 
 

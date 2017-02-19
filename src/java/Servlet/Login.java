@@ -114,6 +114,17 @@ public class Login extends HttpServlet {
                 }
                 request.setAttribute("courses", courses);
                 RequestDispatcher rd = request.getRequestDispatcher("course.jsp");
+                // Set to expire far in the past.
+  response.setHeader("Expires", "Sat, 6 May 1995 12:00:00 GMT");
+
+  // Set standard HTTP/1.1 no-cache headers.
+  response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
+
+  // Set IE extended HTTP/1.1 no-cache headers (use addHeader).
+  response.addHeader("Cache-Control", "post-check=0, pre-check=0");
+
+  // Set standard HTTP/1.0 no-cache header.
+  response.setHeader("Pragma", "no-cache");
                 rd.forward(request, response);
             }   
         }
@@ -122,6 +133,7 @@ public class Login extends HttpServlet {
          int student_session=studentRegId/1000000;
             student = (Student)studentDao.getStudentByRegnoPassword(studentRegId,password,conn);
             if (student == null){
+                System.out.println("Student null");
                 request.setAttribute("message", "Invalid userid or password");
                 RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
                 rd.forward(request, response);
@@ -138,6 +150,9 @@ public class Login extends HttpServlet {
 //                }
                 request.setAttribute("courses", courses);
                 RequestDispatcher rd = request.getRequestDispatcher("course.jsp");
+                response.setHeader("Cache-Control", "private, no-cache, no-store, must-revalidate"); // HTTP 1.1.
+        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+        response.setDateHeader("Expires", 0);
                 rd.forward(request, response);
             }   
         }
