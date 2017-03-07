@@ -13,7 +13,8 @@
         <title>SUST Judge</title>
         <link href="<c:url value="/resources/css/topbar.css" />"
               rel="stylesheet" type="text/css" />
-
+        <link href="<c:url value="/resources/css/buttonstyles.css"/>"
+	rel="stylesheet" type="text/css" />
         <link href="<c:url value="/resources/css/bootstrap.min.css" />"
               rel="stylesheet" type="text/css" />
         <link href="<c:url value="/resources/css/bootstrap-theme.min.css" />"
@@ -91,19 +92,11 @@
                         </button>
                                  </c:if>
                     </div>
-<!--                    <div class="col-xs-2">
-                        <%--<c:if test="${tracker == 'teacher'}">--%>
-                            <button id="button_add_task" class="btn btn-success col-xs-12" onClick="goToAddTaskPage()">
-                            <i class="glyphicon glyphicon-plus-sign"></i> Add From Previous
-                        </button>
-                            <%--</c:if>--%>
-                    </div>-->
                 </c:when>
             </c:choose>
             </div>       
 
-            <!--	<div class="clearfix"></div> -->
-            <!-- TABLE -->
+            
             <div class="panel">
 
                 <table id="taskTable"
@@ -145,12 +138,10 @@
                                 <td><c:out value="${exams.getStartTime()}" /></td>
                                 <td><c:out value="${exams.getDuration()}" /></td>
                                 <td><c:out value="${exams.getScore()}" /></td>
-                                <td><a href="${pageContext.request.contextPath}/EditExamPage?action=0&examId=${exams.getExamId()}" class="btn btn-info btn-sm removebutton" title="Remove"><i
-                                                    class="glyphicon glyphicon-remove "></i></a>
-                                            <a href="${pageContext.request.contextPath}/EditExamPage?action=1&examId=${exams.getExamId()}" class="btn btn-info btn-sm editbutton" id="editbtn" title="Edit Exam"><i
-                                                    class="glyphicon glyphicon-edit "></i></a>
-                                        </td>
-                                
+                            
+                                <td><button class="addition2" id="output" onclick="goEdit('${exams.getExamId()}')">Edit</button>
+                                    <button class="deletion" id="delete" onclick="goDelete('${exams.getExamId()}')">Delete</button>
+                                </td>
 
                                 <td><c:out value="${exams.getStatus()}" /></td>
                             </tr>
@@ -281,6 +272,14 @@
             });
         });
         
-       
+       function goDelete(examId){
+           var flag = confirm('confirm delete?');
+           if (flag){
+               window.location.href = "EditExamPage?action=0&examId="+examId;
+           }
+       }
+       function goEdit(examId){
+               window.location.href = "EditExamPage?action=1&examId="+examId;
+       }
     </script>
 </html>
