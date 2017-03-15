@@ -118,6 +118,7 @@ public class ExamPage extends HttpServlet {
                 Course course = courseDao.getCourseById(courseId, conn);
                 request.setAttribute("exams", exams);
                 request.setAttribute("courseTitle", course.getTitle());
+                session.setAttribute("courseSession", course.getSession());
                 session.setAttribute("course", course);
                 RequestDispatcher rd = request.getRequestDispatcher("ExamPage.jsp");
                 rd.forward(request, response);
@@ -175,6 +176,7 @@ public class ExamPage extends HttpServlet {
                 Course course = courseDao.getCourseById(courseId, conn);
                 session.setAttribute("exams", exams);
                 session.setAttribute("courseTitle", course.getTitle());
+                session.setAttribute("courseSession", course.getSession());
                 session.setAttribute("course", course);
                 RequestDispatcher rd = request.getRequestDispatcher("ExamPageStudent.jsp");
                 rd.forward(request, response);  

@@ -69,110 +69,105 @@ public class ExmDao {
                     se.printStackTrace();
                 }
             }
-                return exams;
+            return exams;
         } else {
             exam = new Exam();
             //exam.setExamCount(count);
-                        //exam.setTitle("no data available");
-                        //exam.setStartTime("none");
-                        //exam.setDuration(0);
-                        //exam.setScore(0);
-                        //exams.add(exam);
-                        return exams;
+            //exam.setTitle("no data available");
+            //exam.setStartTime("none");
+            //exam.setDuration(0);
+            //exam.setScore(0);
+            //exams.add(exam);
+            return exams;
         }
     }
-    
-    public Exam getExamById(int examId,Connection conn){
+
+    public Exam getExamById(int examId, Connection conn) {
         Exam exam = new Exam();
         try {
             int count = 0;
 
-                    Statement stmt = conn.createStatement();
-                    String sql;
-                    sql = "SELECT * from exam where exam_id=" + examId;
-                    ResultSet rs = stmt.executeQuery(sql);
+            Statement stmt = conn.createStatement();
+            String sql;
+            sql = "SELECT * from exam where exam_id=" + examId;
+            ResultSet rs = stmt.executeQuery(sql);
 
-                    while (rs.next()) {
-                        ++count;
-                        exam = new Exam();
-                        exam.setExamCount(count);
-                        exam.setExamId(rs.getInt("exam_id"));
-                        exam.setTitle(rs.getString("title"));
-                        exam.setPassword(rs.getString("password"));
-                        exam.setStartTime(rs.getString("start_time"));
-                        exam.setDuration(rs.getInt("duration"));
-                        exam.setScore(rs.getInt("score"));
-                    }
+            while (rs.next()) {
+                ++count;
+                exam = new Exam();
+                exam.setExamCount(count);
+                exam.setExamId(rs.getInt("exam_id"));
+                exam.setTitle(rs.getString("title"));
+                exam.setPassword(rs.getString("password"));
+                exam.setStartTime(rs.getString("start_time"));
+                exam.setDuration(rs.getInt("duration"));
+                exam.setScore(rs.getInt("score"));
+            }
 
-                    rs.close();
-                    stmt.close();
-                } catch (Exception se) {
-                    se.printStackTrace();
-                }
+            rs.close();
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
         return exam;
     }
-    
-    public boolean verifyExambystudentId(int student_id,int examId,Connection conn)
-    {
-         int count = 0;
-         try {
-           
 
-                    Statement stmt = conn.createStatement();
-                    String sql;
-                    System.out.println("ExamId"+examId+"studentId"+student_id);
-                    sql="SELECT * from student_exam where student_id = "+student_id+" and exam_id = "+examId;
-                    //sql = "SELECT * from student_exam where exam_id=" + examId+"and student_id="+student_id;
-                    ResultSet rs = stmt.executeQuery(sql);
+    public boolean verifyExambystudentId(int student_id, int examId, Connection conn) {
+        int count = 0;
+        try {
 
-                    while (rs.next()) {
-                        ++count;
-                    
-                    }
+            Statement stmt = conn.createStatement();
+            String sql;
+            System.out.println("ExamId" + examId + "studentId" + student_id);
+            sql = "SELECT * from student_exam where student_id = " + student_id + " and exam_id = " + examId;
+            //sql = "SELECT * from student_exam where exam_id=" + examId+"and student_id="+student_id;
+            ResultSet rs = stmt.executeQuery(sql);
 
-                    rs.close();
-                    stmt.close();
-                } catch (Exception se) {
-                    System.out.println("Ekhane ");
-                    se.printStackTrace();
-                }
-         if(count>0)
-        return true;
-         return false;
-        
+            while (rs.next()) {
+                ++count;
+
+            }
+
+            rs.close();
+            stmt.close();
+        } catch (Exception se) {
+            System.out.println("Ekhane ");
+            se.printStackTrace();
+        }
+        if (count > 0) {
+            return true;
+        }
+        return false;
+
     }
-    public boolean VerifyExamPassword(String password,int examId, Connection conn){
-        
-         int count = 0;
-         try {
-             System.out.println("-->"+examId+"password-->"+password);
-           
 
-                    Statement stmt = conn.createStatement();
-                    String sql;
-                    String realPassword="";
-                    sql = "SELECT password from exam where exam_id = "+examId;
-                    ResultSet rs = stmt.executeQuery(sql);
+    public boolean VerifyExamPassword(String password, int examId, Connection conn) {
 
-                    while (rs.next()) {
-                        realPassword=rs.getString("password").toString();
-                
-                    }        
-                    rs.close();
-                    stmt.close();
-                    
-                    if(realPassword.equals(password))
-                          return true;
-                    
-                    
-                    } catch (Exception se) {
-                    System.out.println("VerifyPassword er shot");
-                    se.printStackTrace();
-                }
-         return false;
-    
+        int count = 0;
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("select * from exam where password = ? and exam_id = ?");
+            stmt.setString(1, password);
+            stmt.setInt(2, examId);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                examId = rs.getInt("exam_id");
+                System.out.println("This is the exam id --> " + examId);
+                count = 1;
+            }
+            stmt.close();
+        } catch (Exception se) {
+            se.printStackTrace();
+        }
+        System.out.println("about to return false");
+        if (count==1){
+            System.out.println("inside count == 1");
+            return true;
+        }
+        else
+            return false;
     }
-    
+
     public void addExam(String password, String title, String startTime, String duration, int score, int courseId, Connection conn) {
         int count = 0;
         PreparedStatement ps;
@@ -189,10 +184,9 @@ public class ExmDao {
         } catch (Exception se) {
             se.printStackTrace();
         }
-         int examId=0;
+        int examId = 0;
         try {
 
-           
             PreparedStatement stmt = conn.prepareStatement("select exam_id from exam where password = ? and start_time = ? and duration = ? and score = ? and title = ?");
             stmt.setString(1, password);
             stmt.setString(2, startTime);
@@ -202,7 +196,7 @@ public class ExmDao {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 examId = rs.getInt("exam_id");
-                System.out.println("This is the exam id --> "+examId);
+                System.out.println("This is the exam id --> " + examId);
             }
             stmt.close();
         } catch (Exception se) {
@@ -210,7 +204,6 @@ public class ExmDao {
         }
         try {
 
-           
             PreparedStatement stmt = conn.prepareStatement("insert into course_exam values(?,?)");
             stmt.setInt(1, courseId);
             stmt.setInt(2, examId);
@@ -219,10 +212,9 @@ public class ExmDao {
         } catch (Exception se) {
             se.printStackTrace();
         }
-        
+
     }
-    
-    
+
     public void updateExam(String password, String title, String startTime, String duration, int score, int examId, Connection conn) {
         int count = 0;
         PreparedStatement ps;
@@ -241,14 +233,14 @@ public class ExmDao {
             se.printStackTrace();
         }
     }
-    
-    public void deleteByExamId(int examId,Connection conn){
-        
+
+    public void deleteByExamId(int examId, Connection conn) {
+
         PreparedStatement ps;
         try {
 
             PreparedStatement stmt = conn.prepareStatement("delete from exam_question where exam_id=?");
-            stmt.setInt(1,examId);
+            stmt.setInt(1, examId);
             stmt.execute();
             stmt.close();
         } catch (Exception se) {
@@ -257,7 +249,7 @@ public class ExmDao {
         try {
 
             PreparedStatement stmt = conn.prepareStatement("delete from course_exam where exam_id=?");
-            stmt.setInt(1,examId);
+            stmt.setInt(1, examId);
             stmt.execute();
             stmt.close();
         } catch (Exception se) {
@@ -266,7 +258,7 @@ public class ExmDao {
         try {
 
             PreparedStatement stmt = conn.prepareStatement("delete from exam where exam_id=?");
-            stmt.setInt(1,examId);
+            stmt.setInt(1, examId);
             stmt.execute();
             stmt.close();
         } catch (Exception se) {

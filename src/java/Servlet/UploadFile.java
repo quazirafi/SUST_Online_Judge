@@ -93,7 +93,7 @@ public class UploadFile extends HttpServlet {
         String id = "";
 
         HttpSession session = request.getSession();
-        String courseSession = (String) session.getAttribute("courseSession");
+        String courseSession = Integer.toString((int)session.getAttribute("courseSession"));
         Course course = (Course) session.getAttribute("course");
         String courseTitle = course.getTitle();
         Exam exam = (Exam) session.getAttribute("exam");

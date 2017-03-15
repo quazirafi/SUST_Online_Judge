@@ -1,0 +1,14 @@
+                                               I  Love  Odd
+Robin is a young boy.He loves to play with numbers. His friend prince has challenged in a game. The game is given a number Robin has to tell is the number 
+is odd or not.
+First line of the input will contain an integer which is the number of cases and it will be maximum 20.For each case there will be a integer number for which robin 
+has to say is it odd or not.
+
+Sample Input
+2
+2
+3
+Sample output
+No
+Yes
+

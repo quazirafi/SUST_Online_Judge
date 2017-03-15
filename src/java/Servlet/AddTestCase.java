@@ -95,7 +95,7 @@ public class AddTestCase extends HttpServlet {
         HttpSession session = request.getSession();
         String tracker = (String) session.getAttribute("tracker");
         if (tracker.equals("teacher")){
-            String courseSession = (String) session.getAttribute("courseSession");
+            String courseSession = Integer.toString((int)session.getAttribute("courseSession"));
         Course course = (Course) session.getAttribute("course");
         Connection conn = (Connection) session.getAttribute("conn");
         String courseTitle = course.getTitle();

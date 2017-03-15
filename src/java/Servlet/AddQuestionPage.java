@@ -103,7 +103,7 @@ public class AddQuestionPage extends HttpServlet {
             int maxFileSize = 1024 * 100000;
             int qId = 0;
             String contentType = request.getContentType();
-            String courseSession = (String) session.getAttribute("courseSession");
+            String courseSession = Integer.toString((int)session.getAttribute("courseSession"));
             Teacher teacher = (Teacher) session.getAttribute("teacher");
             Course course = (Course) session.getAttribute("course");
             Connection conn = (Connection) session.getAttribute("conn");

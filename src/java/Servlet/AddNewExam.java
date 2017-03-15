@@ -112,7 +112,7 @@ public class AddNewExam extends HttpServlet {
                 
                
                 course = courseDao.getCourseById(course.getCourseId(), conn);
-                String courseSession = (String) session.getAttribute("courseSession");
+                String courseSession = Integer.toString((int)session.getAttribute("courseSession"));
                 //String questionPath = "F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\Questions\\" + courseSession + "\\" + course.getTitle() + "\\" + title + "\\";
                 request.setAttribute("exams", exams);
                 request.setAttribute("courseTitle", course.getTitle());

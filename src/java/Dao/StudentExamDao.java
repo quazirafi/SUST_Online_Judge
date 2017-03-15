@@ -34,7 +34,7 @@ public class StudentExamDao {
         PreparedStatement ps;
         int flag = 0;
         try {
-
+            System.out.println("hello");
             PreparedStatement stmt = conn.prepareStatement("select * from student_exam where student_id=? and exam_id=?");
             stmt.setInt(1, sId);
             stmt.setInt(2, eId);
@@ -48,7 +48,7 @@ public class StudentExamDao {
         }
         if (flag == 1) {
             try {
-
+                System.out.println("inside flag == 1");
                 PreparedStatement stmt = conn.prepareStatement("update student_exam set entered=? where student_id=?"
                         + " and exam_id=?");
                 stmt.setInt(1, 1);
@@ -62,7 +62,7 @@ public class StudentExamDao {
         }
         else{
             try {
-
+                System.out.println("inside else");
                 PreparedStatement stmt = conn.prepareStatement("insert into student_exam(student_id,exam_id,allowed,entered,batch) values (?,?,?,?,?)");
                 stmt.setInt(1, sId);
                 stmt.setInt(2, eId);
