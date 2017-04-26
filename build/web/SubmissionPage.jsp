@@ -123,10 +123,11 @@
                             <c:forEach items="${submissions}" var="submissions">
                                 <tr>
                                     <td><c:out value="${submissions.getSubmissionCount()}" /></td>
-                                    <td><button style="border: none;cursor: pointer" data-toggle="modal" 
-                                                    data-target="#myModal" value="${submissions.getQuestionPath()}" 
-                                                    onclick="loadDoc(this.value)">${submissions.getQuestionTitle()}</button>
-                                    </td>
+<!--                                    <td><button style="border: none;cursor: pointer" data-toggle="modal" 
+                                                    data-target="#myModal" value="" 
+                                                    onclick="loadDoc(this.value)"></button>
+                                    </td>-->
+                                    <td>${submissions.getQuestionTitle()}</td>
                                     <td><button style="border: none;cursor: pointer" data-toggle="modal" 
                                                     data-target="#myModal" value="${submissions.getSubmissionFileName()}" 
                                                     onclick="loadDoc(this.value)">Source Code</button>
@@ -152,7 +153,7 @@
         <h4 class="modal-title" id="myModalLabel">Question</h4>
       </div>
       <div class="modal-body">
-           <textarea id="text1" cols="80" rows="20" ></textarea>
+          <textarea id="text1" cols="80" rows="20" readonly></textarea>
       </div>
       <div class="modal-footer">
         

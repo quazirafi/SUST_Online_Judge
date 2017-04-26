@@ -63,11 +63,11 @@
                                 <c:when test="${tracker == 'student'}">
                             <li><a>${student.getRegno()}</a></li>
                             <li><a href="${pageContext.request.contextPath}/ToCourse">Courses</a></li>
-                            <li><a href="${pageContext.request.contextPath}/Logout">Logout</a></li>
+                            
                                 </c:when>
                             </c:choose>
 
-                    <li><a href="Logout">Log out</a></li>
+                    <li><a href="${pageContext.request.contextPath}/Logout">Logout</a></li>
                 </ul>
             </div>
         </div>
@@ -144,8 +144,6 @@
                                 <td><c:out value="${exams.getStartTime()}" /></td>
                                 <td><c:out value="${exams.getDuration()}" /></td>
                                 <td><c:out value="${exams.getScore()}" /></td>
-                                
-
                                 <td><c:out value="${exams.getStatus()}" /></td>
                             </tr>
                         </c:forEach>

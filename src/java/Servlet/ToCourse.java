@@ -75,18 +75,19 @@ public class ToCourse extends HttpServlet {
         Student student = (Student) session.getAttribute("student");
         String tracker = (String) session.getAttribute("tracker");
         Connection conn = (Connection) session.getAttribute("conn");
+        String courseSession = Integer.toString((int)session.getAttribute("courseSession"));
         List<Course> courses = null;
         CourseDao courseDao = new CourseDao();
         if (tracker.equals("teacher")) {
             System.out.println(tracker);
-            courses = courseDao.getCourseByTeacherId(teacher.getTeacherId(), conn, 2012);
+            courses = courseDao.getAllCourseByTeacherId(teacher.getTeacherId(), conn);
             request.setAttribute("courses", courses);
             RequestDispatcher rd = request.getRequestDispatcher("course.jsp");
             rd.forward(request, response);
         }
         else if (tracker.equals("student")){
             System.out.println(tracker);
-            courses = courseDao.getCourseByStudentId(student.getStudentId(), conn, 2012);
+            courses = courseDao.getAllCourseByStudentId(student.getStudentId(), conn);
             request.setAttribute("courses", courses);
             RequestDispatcher rd = request.getRequestDispatcher("course.jsp");
             rd.forward(request, response);

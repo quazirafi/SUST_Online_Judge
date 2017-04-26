@@ -1,0 +1,52 @@
+Tuki, Jha and Robi
+
+We all know about Tuki and Jha. Two greatest astronaut in the history of humankind. Recently they got a call from NASA.
+ NASA wants to send them on a very secret mission. It's all about a mysterious planet. NASA wants to explore that planet. 
+So, they sent Tuki, Jha and Robi ( Not Robi sim. It's a stupid robot) to do that. 
+
+Now, after reaching the planet they want to say hello to that planet.
+ But alas! they can't remember the name
+of the planet. I told you about that stupid robot Robi. right? 
+That robot hit their head with a hammer for some reason. That's the reason of their memory loss.
+
+
+All they know that the name of this planet is a positive integer greater than 0. 
+Now, your task is to help Tuki and Jha. Undoubtedly, 
+they are the greatest astronaut in the history of humankind but not that good at programming. 
+You already printed "Hello world!" in your ugly looking small black console. 
+Now, do that again. But this time, not the world.  
+
+
+It's time say hello to another planet.
+
+
+
+
+
+Hints :
+
+1. After seeing that planet, bad things happening to both Tuki and Jha. Never give up. Some wrong submissions don't matter that much. right?  
+And obviously, we want you to solve that problem. So, the answer is not in long distance.
+
+
+Hints :2  
+
+There is a similarity between the current most junior batch of SUST and this planet.
+
+input
+1
+output
+Hello X!
+
+(Where X is the name of this planet.)
+
+input 
+2
+output
+Hello X!
+
+(Where X is the name of this planet.)
+
+Hello X!
+
+(Where X is the name of this planet.)

@@ -1,8 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-   <% response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
-    /*HTTP 1.1*/ response.setHeader("Pragma", "no-cache");
-    /*HTTP 1.0*/ response.setDateHeader("Expires", -1);
-%> 
+    
 <%@ page import="Entity.*" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -115,10 +112,10 @@
 				class="table table-striped table-bordered table-hover">
 				<thead>
 					<tr>						
-						<th class="col-md-3 col-sm-3 col-xs-3">Ques. Id</th>						
+						<th class="col-md-1 col-sm-1 col-xs-1">Ques. Id</th>						
 						<th class="col-md-3 col-sm-3 col-xs-3">Title</th>
 						<th class="col-md-3 col-sm-3 col-xs-3">Score</th>						
-						<th class="col-md-2 col-sm-2 col-xs-2">Actions</th>
+						<th class="col-md-3 col-sm-3 col-xs-3">Actions</th>
 					</tr>
 				</thead>
 				<tbody>			
@@ -130,7 +127,7 @@
                                                
 						<td>
                                                      <c:if test="${tracker=='teacher'}">
-                                                         <button data-toggle="modal" data-id="${questions.getQuestionId()}" class="addition" id="test">Add Test Case</button><br>
+                                                         <button data-toggle="modal" data-id="${questions.getQuestionId()}" class="addition" id="test">Add Test Case</button>
                                                          <button data-toggle="modal" data-id="${questions.getQuestionId()}" class="addition2" id="output">Add Output File</button>
                                                          <button class="deletion" id="delete" onclick="goDelete('${questions.getQuestionId()}')">Delete</button>
 						</c:if>
@@ -162,7 +159,7 @@
         <h4 class="modal-title" id="myModalLabel">Question</h4>
       </div>
       <div class="modal-body">
-           <textarea id="text1" cols="80" rows="20" ></textarea>
+          <textarea id="text1" cols="80" rows="20" readonly></textarea>
       </div>
       <div class="modal-footer">
         
@@ -256,7 +253,7 @@ function goDelete(qId){
             });
             $(".addition2").click(function(){
                 var id=$(this).data('id');
-                alert(id);
+                //alert(id);
                 document.getElementById('qId2').value=id;
                $('#myModal3').modal('show'); 
             });

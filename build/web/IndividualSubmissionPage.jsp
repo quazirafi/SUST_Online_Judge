@@ -136,7 +136,7 @@
                         <h4 class="modal-title" id="myModalLabel"></h4>
                     </div>
                     <div class="modal-body">
-                        <textarea id="text1" cols="80" rows="20" ></textarea>
+                        <textarea id="text1" cols="80" rows="20" readonly></textarea>
                     </div>
                     <div class="modal-footer">
 
@@ -152,7 +152,7 @@
                         <h4 class="modal-title" id="myModalLabel"></h4>
                     </div>
                     <div class="modal-body">
-                        <textarea id="text2" cols="75" rows="5" ></textarea>
+                        <textarea id="text2" cols="75" rows="5" readonly></textarea>
                     </div>
                     <div class="modal-footer">
 

@@ -1,0 +1,7 @@
+Question 1:
+please add the two numbers and print out the result.
+For example
+1+2
+output 3
+2+3
+output 5
