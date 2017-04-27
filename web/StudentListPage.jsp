@@ -13,6 +13,8 @@
 <title>SUST Judge</title>
 <link href="<c:url value="/resources/css/topbar.css" />"
 	rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/css/footer-distributed.css"/>"
+              rel="stylesheet" type="text/css" />
 <link href="<c:url value="/resources/css/buttonstyles.css"/>"
 	rel="stylesheet" type="text/css" />
 <link href="<c:url value="/resources/css/bootstrap.min.css" />"
@@ -84,9 +86,8 @@
             <form action="StudentListPage" method="post" >
 		<div class="row searchbar">
 			<div class="col-xs-8">
-                            <p class="table-headertext">
-                               
-                            </p>
+                            <p>
+                            Batch Name <input type="text" name="batch" /> </p>
 			</div>
                      <div class="col-xs-2">
                          <button class="deletion3" onclick="removeAll()" type="button">Remove All</button>
@@ -100,7 +101,7 @@
 	<!--	<div class="clearfix"></div> -->
 		<!-- TABLE -->
                 
-                     Batch Name <input type="text" name="batch" /> 
+                     
                      <br>
                      <br>
 		<div class="panel">
@@ -154,7 +155,7 @@
 </div>
 	
 	</div>
-	<!-- body container -->
+	<footer class="footerme">Copyright &copy; CSE, SUST</footer>
 </body>
 
 <script>   

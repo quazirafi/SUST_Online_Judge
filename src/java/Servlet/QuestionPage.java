@@ -129,6 +129,8 @@ public class QuestionPage extends HttpServlet {
                     String courseTitle = course.getTitle();
                     Exam exam = (Exam) session.getAttribute("exam");
                     String examTitle = exam.getTitle();
+                    System.out.println("exam title "+exam.getTitle());
+                    request.setAttribute("exmTitle", exam.getTitle());
                     String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
                     for (Question q : questions) {
                         q.setPath(path + "Q" + q.getQuestionId() + "\\" + q.getQuestionFileName());

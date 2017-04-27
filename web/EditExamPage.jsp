@@ -13,7 +13,8 @@
         <title>SUST Judge</title>
         <link href="<c:url value="/resources/css/topbar.css" />"
               rel="stylesheet" type="text/css" />
-
+        <link href="<c:url value="/resources/css/footer-distributed.css"/>"
+              rel="stylesheet" type="text/css" />
         <link href="<c:url value="/resources/css/bootstrap.min.css" />"
               rel="stylesheet" type="text/css" />
         <link href="<c:url value="/resources/css/bootstrap-theme.min.css" />"
@@ -105,7 +106,6 @@
             <input type="submit"></input>
         </form>
     </div>
-
-
+    <footer class="footerme">Copyright &copy; CSE, SUST</footer>
 </body>
 </html>

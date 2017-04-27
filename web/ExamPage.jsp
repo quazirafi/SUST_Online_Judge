@@ -25,6 +25,8 @@
               rel="stylesheet" type="text/css" />
         <link href="<c:url value="/resources/css/thesis-list.css"/>"
               rel="stylesheet" type="text/css" />
+        <link href="<c:url value="/resources/css/footer-distributed.css"/>"
+              rel="stylesheet" type="text/css" />
 
         <script
             src="<c:url value="/resources/javascript/jquery-1.11.3.min.js" />"
@@ -84,6 +86,9 @@
             </div>
             <c:choose>
                 <c:when test="${course.getIsRunning() eq 1}">
+                    <div class="col-xs-2">
+                        
+                    </div>
                     <div class="col-xs-2">
                         <c:if test="${tracker == 'teacher'}">
 
@@ -258,6 +263,7 @@
             </div>
         </div>
     </div>
+        <footer class="footerme">Copyright &copy; CSE, SUST</footer>
     </body>
 
     <script>

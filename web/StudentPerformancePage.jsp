@@ -26,6 +26,8 @@
 	rel="stylesheet" type="text/css" />
 <link href="<c:url value="/resources/css/buttonstyles.css"/>"
 	rel="stylesheet" type="text/css" />
+<link href="<c:url value="/resources/css/footer-distributed.css"/>"
+              rel="stylesheet" type="text/css" />
 <script
 	src="<c:url value="/resources/javascript/jquery-1.11.3.min.js" />"
 	type="text/javascript"></script>
@@ -89,19 +91,18 @@
                     <div class="col-xs-8">
                     </div>
                     <div class="col-xs-2">
+                        
+                    </div>
+                    <div class="col-xs-2">
                         <c:if test="${tracker == 'teacher'}">
-                        <select id="filter_session" class="form-control">
+                            <select id="filter_session" class="form-control" onchange="go()">
                             <option selected disabled>Choose a Batch</option>
                             <c:forEach items="${batches}" var="batches">
                                 <option value="${batches}">${batches}</option>
                             </c:forEach>
                         </select>
                     </div>
-                    <div class="col-xs-2">
-                        <button onclick="go()" id="button_add_task" class="btn btn-success col-xs-12">
-                            <i class="glyphicon glyphicon-plus-sign"></i> Go
-                        </button>
-                    </div>
+                    
                         </c:if>
                 </div>
 		<div class="panel">
@@ -196,7 +197,7 @@
 </div>
 	
 	</div>
-	<!-- body container -->
+	<footer class="footerme">Copyright &copy; CSE, SUST</footer>
 </body>
 
 <script>   

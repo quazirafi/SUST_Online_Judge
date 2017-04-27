@@ -27,6 +27,8 @@
               rel="stylesheet" type="text/css" />
         <link href="<c:url value="/resources/css/thesis-list.css"/>"
               rel="stylesheet" type="text/css" />
+        <link href="<c:url value="/resources/css/footer-distributed.css"/>"
+              rel="stylesheet" type="text/css" />
 
         <script
             src="<c:url value="/resources/javascript/jquery-1.11.3.min.js" />"
@@ -77,12 +79,26 @@
         </c:when>
         <c:otherwise>
             <div class="container">
+                <!-- THIS -->
+                
+                
+                <!-- THIS -->
+                
+                <!-- NEW -->
                 <div class="row searchbar">
-                    <div class="col-xs-8">
-                    </div>
+            <div class="col-xs-8">
+                <p class="table-headertext">
+                    Session: <span id="course_code">${courseSession}</span>
+                </p>
+            </div>
+                
                     <div class="col-xs-2">
+                        
+                    </div>
+                <div class="col-xs-2">
                         <c:if test="${tracker == 'teacher'}">
-                        <select id="filter_session" class="form-control">
+                        <select id="filter_session" class="form-control" onChange="go()">
+                            <option selected disabled>Choose Session</option>
                             <option value="2010">2010</option>
                             <option value="2011">2011</option>
                             <option value="2012">2012</option>
@@ -90,19 +106,17 @@
                             <option value="2016">2016</option>
                         </select>
                     </div>
-                    <div class="col-xs-2">
-                        <button onclick="go()" id="button_add_task" class="btn btn-success col-xs-12">
-                            <i class="glyphicon glyphicon-plus-sign"></i> Go
-                        </button>
-                    </div>
                         </c:if>
-                </div>
+            
+            </div>  
+                
+                <!-- NEW -->
 
                 <!-- <input type="submit" value="go"> </input> -->
 
 
                 <!-- </form> -->
-                <p>Session : <c:out value="${courseSession}" /> </p>
+                
                 <div class="panel">
                     <table id="courseTable"
                            class="table table-striped table-bordered table-hover">
@@ -140,9 +154,12 @@
                         </tbody>
                     </table>
                 </div>
+                
             </div>
         </c:otherwise>
     </c:choose>
+            
+        <footer class="footerme">Copyright &copy; CSE, SUST</footer>
 
 
 </body>

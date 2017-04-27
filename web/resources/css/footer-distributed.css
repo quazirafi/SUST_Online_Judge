@@ -1,0 +1,11 @@
+ .footerme {
+    padding: 1em;
+    color: white;
+    background-color: #00acc1;
+    clear: left;
+    text-align: center;
+    width: 100%;
+    //margin-top: 200px;
+    bottom: 0px;
+    position: absolute;
+}

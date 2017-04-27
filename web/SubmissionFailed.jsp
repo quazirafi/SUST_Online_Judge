@@ -14,6 +14,9 @@
 <title>SUST Judge</title>
 <link href="<c:url value="/resources/css/topbar.css" />"
 	rel="stylesheet" type="text/css" />
+
+<link href="<c:url value="/resources/css/footer-distributed.css"/>"
+              rel="stylesheet" type="text/css" />
 	
 	<link href="<c:url value="/resources/css/reset.css" />"
 	rel="stylesheet" type="text/css" />
@@ -66,6 +69,6 @@
 		
 	</div>
 	
-
+<footer class="footerme">Copyright &copy; CSE, SUST</footer>
 </body>
 </html>
