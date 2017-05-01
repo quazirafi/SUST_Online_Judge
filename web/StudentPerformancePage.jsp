@@ -100,6 +100,7 @@
                             <c:forEach items="${batches}" var="batches">
                                 <option value="${batches}">${batches}</option>
                             </c:forEach>
+                            <option value="all">Show All</option>
                         </select>
                     </div>
                     

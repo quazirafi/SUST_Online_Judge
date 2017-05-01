@@ -83,7 +83,11 @@ public class StudentPerformanceBatchwise extends HttpServlet {
             ArrayList<StudentPerformance> studentPerformances = new ArrayList<StudentPerformance>();
             StudentPerformance studentPerformance=null;
             StudentExamDao studentExamDao = new StudentExamDao();
-            List<Integer> studentIds = studentExamDao.getStudentByExamIdAndBatch(exam.getExamId(), batch, conn);
+            List<Integer> studentIds = null;
+            if(batch.equals("all"))
+                studentIds = studentExamDao.getStudentByExamId(exam.getExamId(), conn);
+            else
+                studentIds = studentExamDao.getStudentByExamIdAndBatch(exam.getExamId(), batch, conn);
             int counter = 0;
             for (Integer i : studentIds){
                 System.out.println("id "+i.intValue());

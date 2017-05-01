@@ -69,18 +69,24 @@ public class CourseBySession extends HttpServlet {
 
             if (tracker.equals("teacher")) {
                 Teacher teacher = (Teacher) session.getAttribute("teacher");
-                courses = courseDao.getCourseByTeacherId(teacher.getTeacherId(), conn, courseSession);
+                if (courseSession >1000)
+                    courses = courseDao.getCourseByTeacherId(teacher.getTeacherId(), conn, courseSession);
+                else 
+                    courses = courseDao.getAllCourseByTeacherId(teacher.getTeacherId(), conn);
                 session.setAttribute("courseSession", Integer.toString(courseSession));
                 request.setAttribute("courses", courses);
                 RequestDispatcher rd = request.getRequestDispatcher("course.jsp");
                 response.setHeader("Cache-Control", "private, no-cache, no-store, must-revalidate"); // HTTP 1.1.
-        response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-        response.setDateHeader("Expires", 0);
+                response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+                response.setDateHeader("Expires", 0);
                 rd.forward(request, response);
             }
             else if (tracker.equals("student")){
                 Student student = (Student) session.getAttribute("student");
-                courses = courseDao.getCourseByStudentId(student.getStudentId(), conn, courseSession);
+                if (courseSession > 1000)
+                    courses = courseDao.getCourseByStudentId(student.getStudentId(), conn, courseSession);
+                else 
+                    courses = courseDao.getAllCourseByStudentId(student.getStudentId(), conn);
                 session.setAttribute("courseSession", Integer.toString(courseSession));
                 request.setAttribute("courses", courses);
                 RequestDispatcher rd = request.getRequestDispatcher("course.jsp");

@@ -96,7 +96,7 @@
                         
                     </div>
                 <div class="col-xs-2">
-                        <c:if test="${tracker == 'teacher'}">
+                        
                         <select id="filter_session" class="form-control" onChange="go()">
                             <option selected disabled>Choose Session</option>
                             <option value="2010">2010</option>
@@ -104,18 +104,14 @@
                             <option value="2012">2012</option>
                             <option value="2013">2013</option>
                             <option value="2016">2016</option>
+                            <option value="1000">Show All</option>
                         </select>
                     </div>
-                        </c:if>
+                        
             
             </div>  
                 
-                <!-- NEW -->
-
-                <!-- <input type="submit" value="go"> </input> -->
-
-
-                <!-- </form> -->
+                
                 
                 <div class="panel">
                     <table id="courseTable"
@@ -159,7 +155,7 @@
         </c:otherwise>
     </c:choose>
             
-        <footer class="footerme">Copyright &copy; CSE, SUST</footer>
+<footer class="footerme">Copyright &copy; CSE, SUST</footer>
 
 
 </body>

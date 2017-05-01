@@ -91,26 +91,32 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         return;
       out.write("\"\r\n");
       out.write("\trel=\"stylesheet\" type=\"text/css\" />\r\n");
+      out.write("        \r\n");
+      out.write("        <link href=\"");
+      if (_jspx_meth_c_url_4(_jspx_page_context))
+        return;
+      out.write("\"\r\n");
+      out.write("              rel=\"stylesheet\" type=\"text/css\" />\r\n");
       out.write("\r\n");
       out.write("<link href=\"");
-      if (_jspx_meth_c_url_4(_jspx_page_context))
+      if (_jspx_meth_c_url_5(_jspx_page_context))
         return;
       out.write("\"\r\n");
       out.write("\trel=\"stylesheet\" type=\"text/css\" />\r\n");
       out.write("<link href=\"");
-      if (_jspx_meth_c_url_5(_jspx_page_context))
+      if (_jspx_meth_c_url_6(_jspx_page_context))
         return;
       out.write("\"\r\n");
       out.write("\trel=\"stylesheet\" type=\"text/css\" />\r\n");
       out.write("\r\n");
       out.write("<script\r\n");
       out.write("\tsrc=\"");
-      if (_jspx_meth_c_url_6(_jspx_page_context))
+      if (_jspx_meth_c_url_7(_jspx_page_context))
         return;
       out.write("\"\r\n");
       out.write("\ttype=\"text/javascript\"></script>\r\n");
       out.write("<script src=\"");
-      if (_jspx_meth_c_url_7(_jspx_page_context))
+      if (_jspx_meth_c_url_8(_jspx_page_context))
         return;
       out.write("\"\r\n");
       out.write("\ttype=\"text/javascript\"></script>\r\n");
@@ -178,7 +184,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t\t\r\n");
       out.write("\t</div>\r\n");
       out.write("\t\r\n");
-      out.write("\r\n");
+      out.write("<footer class=\"footerme\">Copyright &copy; CSE, SUST</footer>\r\n");
       out.write("</body>\r\n");
       out.write("</html>");
     } catch (Throwable t) {
@@ -274,7 +280,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.UrlTag _jspx_th_c_url_4 = (org.apache.taglibs.standard.tag.rt.core.UrlTag) _jspx_tagPool_c_url_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.UrlTag.class);
     _jspx_th_c_url_4.setPageContext(_jspx_page_context);
     _jspx_th_c_url_4.setParent(null);
-    _jspx_th_c_url_4.setValue("/resources/css/bootstrap.min.css");
+    _jspx_th_c_url_4.setValue("/resources/css/footer-distributed.css");
     int _jspx_eval_c_url_4 = _jspx_th_c_url_4.doStartTag();
     if (_jspx_th_c_url_4.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_4);
@@ -292,7 +298,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.UrlTag _jspx_th_c_url_5 = (org.apache.taglibs.standard.tag.rt.core.UrlTag) _jspx_tagPool_c_url_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.UrlTag.class);
     _jspx_th_c_url_5.setPageContext(_jspx_page_context);
     _jspx_th_c_url_5.setParent(null);
-    _jspx_th_c_url_5.setValue("/resources/css/bootstrap-theme.min.css");
+    _jspx_th_c_url_5.setValue("/resources/css/bootstrap.min.css");
     int _jspx_eval_c_url_5 = _jspx_th_c_url_5.doStartTag();
     if (_jspx_th_c_url_5.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_5);
@@ -310,7 +316,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.UrlTag _jspx_th_c_url_6 = (org.apache.taglibs.standard.tag.rt.core.UrlTag) _jspx_tagPool_c_url_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.UrlTag.class);
     _jspx_th_c_url_6.setPageContext(_jspx_page_context);
     _jspx_th_c_url_6.setParent(null);
-    _jspx_th_c_url_6.setValue("/resources/javascript/jquery-1.11.3.min.js");
+    _jspx_th_c_url_6.setValue("/resources/css/bootstrap-theme.min.css");
     int _jspx_eval_c_url_6 = _jspx_th_c_url_6.doStartTag();
     if (_jspx_th_c_url_6.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_6);
@@ -328,13 +334,31 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
     org.apache.taglibs.standard.tag.rt.core.UrlTag _jspx_th_c_url_7 = (org.apache.taglibs.standard.tag.rt.core.UrlTag) _jspx_tagPool_c_url_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.UrlTag.class);
     _jspx_th_c_url_7.setPageContext(_jspx_page_context);
     _jspx_th_c_url_7.setParent(null);
-    _jspx_th_c_url_7.setValue("/resources/javascript/bootstrap.min.js");
+    _jspx_th_c_url_7.setValue("/resources/javascript/jquery-1.11.3.min.js");
     int _jspx_eval_c_url_7 = _jspx_th_c_url_7.doStartTag();
     if (_jspx_th_c_url_7.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
       _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_7);
       return true;
     }
     _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_7);
+    return false;
+  }
+
+  private boolean _jspx_meth_c_url_8(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:url
+    org.apache.taglibs.standard.tag.rt.core.UrlTag _jspx_th_c_url_8 = (org.apache.taglibs.standard.tag.rt.core.UrlTag) _jspx_tagPool_c_url_value_nobody.get(org.apache.taglibs.standard.tag.rt.core.UrlTag.class);
+    _jspx_th_c_url_8.setPageContext(_jspx_page_context);
+    _jspx_th_c_url_8.setParent(null);
+    _jspx_th_c_url_8.setValue("/resources/javascript/bootstrap.min.js");
+    int _jspx_eval_c_url_8 = _jspx_th_c_url_8.doStartTag();
+    if (_jspx_th_c_url_8.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+      _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_8);
+      return true;
+    }
+    _jspx_tagPool_c_url_value_nobody.reuse(_jspx_th_c_url_8);
     return false;
   }
 
