@@ -144,7 +144,7 @@
                                 <td><c:out value="${exams.getDuration()}" /></td>
                                 <td><c:out value="${exams.getScore()}" /></td>
                             
-                                <td><button class="addition2" id="output" onclick="goEdit('${exams.getExamId()}')">Edit</button>
+                                <td><button data-toggle="modal" data-target="#myModal2" class="addition2" id="output" onclick="setEditForm('${exams.getExamId()}')">Edit</button>
                                     <button class="deletion" id="delete" onclick="goDelete('${exams.getExamId()}')">Delete</button>
                                 </td>
 
@@ -217,7 +217,7 @@
                     <h4 class="modal-title" id="myModalLabel">Edit Exam</h4>
                 </div>
                 <div class="modal-body">
-                    <form class="form-horizontal" role="form" action="AddNewExam" method="get">
+                    <form class="form-horizontal" role="form" action="EditExamPage" method="post">
                   <div class="form-group">
                     <label  class="col-sm-2 control-label">Exam Title</label>
                     <div class="col-sm-10">
@@ -233,7 +233,7 @@
                   <div class="form-group">
                     <label class="col-sm-2 control-label">Start Time</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" name="startTime" />
+                        <input type="text" class="form-control" name="date" />
                     </div>
                   </div>
                   <div class="form-group">
@@ -250,12 +250,12 @@
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <input type="hidden" id="exId"></input>
+                      <input type="hidden" id="examId" name="examId"></input>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                      <button type="submit" class="btn btn-default">Add</button>
+                      <button type="submit" class="btn btn-default">Edit</button>
                     </div>
                   </div>
                 </form>
@@ -263,7 +263,7 @@
             </div>
         </div>
     </div>
-        <footer class="footerme">Copyright &copy; CSE, SUST</footer>
+        <footer class="footerme"><a style="color:white" href="Copyright.jsp">Copyright &copy; CSE, SUST</a></footer>
     </body>
 
     <script>
@@ -286,6 +286,10 @@
        }
        function goEdit(examId){
                window.location.href = "EditExamPage?action=1&examId="+examId;
+       }
+       function setEditForm(examId){
+               alert(examId);
+               document.getElementById('examId').value = examId;
        }
     </script>
 </html>

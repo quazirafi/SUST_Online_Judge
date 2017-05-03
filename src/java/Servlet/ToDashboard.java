@@ -109,6 +109,7 @@ public class ToDashboard extends HttpServlet {
                 System.out.println(sp.getStudentRegNo()+" "+sp.getSumOfScores());
             session.setAttribute("batches", studentExamDao.getBatch(exam.getExamId(), conn));
             request.setAttribute("studentPerformances", studentPerformances);
+            request.setAttribute("selectedBatch", "All");
             RequestDispatcher rd = request.getRequestDispatcher("StudentPerformancePage.jsp");
             rd.forward(request, response);
         }

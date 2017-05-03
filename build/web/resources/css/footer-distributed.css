@@ -3,9 +3,22 @@
     color: white;
     background-color: #00acc1;
     clear: left;
+    color: white; 
     text-align: center;
     width: 100%;
-    //margin-top: 200px;
-    bottom: 0px;
+    //margin-top: 600px;
+    bottom: 0;
     position: absolute;
+}
+ .footerme2 {
+    padding: 1em;
+    color: white;
+    background-color: #00acc1;
+    clear: left;
+    color: white;
+    text-align: center;
+    width: 100%;
+    //margin-top: 600px;
+    bottom: 0;
+    //position: absolute;
 }

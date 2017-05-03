@@ -99,6 +99,6 @@
 
     </div>
 
-<footer class="footerme">Copyright &copy; W3Schools.com</footer>
+<footer class="footerme"><a style="color:white" href="Copyright.jsp">Copyright &copy; CSE, SUST</a></footer>
 </body>
 </html>

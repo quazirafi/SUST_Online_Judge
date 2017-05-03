@@ -89,6 +89,9 @@
 		<!-- TABLE -->
                 <div class="row searchbar">
                     <div class="col-xs-8">
+                        <p class="table-headertext">
+                    Batch: <span id="course_code">${selectedBatch}</span>
+                </p>
                     </div>
                     <div class="col-xs-2">
                         
@@ -106,7 +109,7 @@
                     
                         </c:if>
                 </div>
-		<div class="panel">
+                <div class="panel" style="overflow: auto">
 
 			<table id="taskTable"
                            class="table table-striped table-bordered table-hover">
@@ -198,7 +201,7 @@
 </div>
 	
 	</div>
-	<footer class="footerme">Copyright &copy; CSE, SUST</footer>
+	<footer class="footerme"><a style="color:white" href="Copyright.jsp">Copyright &copy; CSE, SUST</a></footer>
 </body>
 
 <script>   

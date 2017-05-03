@@ -119,6 +119,7 @@ public class StudentPerformanceBatchwise extends HttpServlet {
                 System.out.println(sp.getStudentRegNo()+" "+sp.getSumOfScores());
             session.setAttribute("batches", studentExamDao.getBatch(exam.getExamId(), conn));
             request.setAttribute("studentPerformances", studentPerformances);
+            request.setAttribute("selectedBatch", batch);
             RequestDispatcher rd = request.getRequestDispatcher("StudentPerformancePage.jsp");
             rd.forward(request, response);
         }

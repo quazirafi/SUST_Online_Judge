@@ -2,10 +2,7 @@
          pageEncoding="utf-8"%>
 <%@page import="Entity.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<% response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
-    /*HTTP 1.1*/ response.setHeader("Pragma", "no-cache");
-    /*HTTP 1.0*/ response.setDateHeader("Expires", -1);
-%> 
+
 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -121,7 +118,7 @@
                                 <th class="col-md-1 col-sm-1 col-xs-1">ID</th>
                                 <th class="col-md-2 col-sm-2 col-xs-2">Course Title</th>
                                 <th class="col-md-2 col-sm-2 col-xs-2">Session</th>
-                                <th class="col-md-2 col-sm-2 col-xs-2">Actions(Current exams)</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
@@ -133,18 +130,7 @@
                                             <c:out value="${courses.getTitle()}" />
                                         </a></td>
                                     <td><c:out value="${courses.getSession()}" /></td>
-                                    <c:choose>
-                                    <c:when test="${courses.getIsRunning() eq 1 && tracker == 'teacher'}">
-                                        <td><a class="btn btn-info btn-sm editbutton" onclick="" title="Add Exam"><i
-                                                class="glyphicon glyphicon-edit"></i></a>
-                                        </td>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <td>
-                                            Not Allowed
-                                        </td>
-                                    </c:otherwise>
-                                    </c:choose>
+                                    
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -155,7 +141,7 @@
         </c:otherwise>
     </c:choose>
             
-<footer class="footerme">Copyright &copy; CSE, SUST</footer>
+<footer class="footerme"><a style="color:white" href="Copyright.jsp">Copyright &copy; CSE, SUST</a></footer>
 
 
 </body>

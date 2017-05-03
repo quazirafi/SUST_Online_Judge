@@ -69,6 +69,6 @@
 		
 	</div>
 	
-<footer class="footerme">Copyright &copy; CSE, SUST</footer>
+<footer class="footerme"><a style="color:white" href="Copyright.jsp">Copyright &copy; CSE, SUST</a></footer>
 </body>
 </html>

@@ -201,7 +201,6 @@
                         <form action="AddOutputFile" method="post" enctype="multipart/form-data">
                             <input type="file" name="file" size="50" />
                             <input type="hidden" name="qId2" id="qId2" />
-                            <!--                <input type="hidden" name="type" value="output"/>-->
                             <input type="submit" value="Submit" />
                         </form>
                     </div>
@@ -242,7 +241,7 @@
             </div>
         </div>
     </div>
-    <footer class="footerme">Copyright &copy; CSE, SUST</footer>
+    <footer class="footerme"><a style="color:white" href="Copyright.jsp">Copyright &copy; CSE, SUST</a></footer>
 </body>
 
 <script>

@@ -54,39 +54,22 @@
 	</nav>
 	</div>
 	</nav>
-     <div id="container">
-     
-     	
+	
+        <div id="container" style="text-align: center">
+            <br>
+            <br>
+     	<b>Project supervisor</b><br>
+        Md. Masum<br>
+	Associate Professor<br>
+        <br>
+        <br>
+        <b>Developers</b><br>
+        Noymul Shorot<br>
+	Quazi Rafi<br>
 		
-		<form action="Login" method="post">
-		
-		
-		<label for="name">UserId:</label>
-		
-		<input type="name" id="username" name="user_name">
-		
-		<label for="username">Password:</label>
-		
-		
-		
-		<input id="password"name="password" type="password">
-		
-		<div id="lower">
-		
-		
-		
-		<input type="submit" value="Login">
-		
-		<p id="login_status_message">
-			<c:out value='${message}' />
-		</p>
-		
-		</div>
-		
-		</form>
 		
 	</div>
-                <footer class="footerme"><a style="color:white" href="Copyright.jsp">Copyright &copy; CSE, SUST</a></footer>
+	<footer class="footerme"><a style="color:white" href="Copyright.jsp">Copyright &copy; CSE, SUST</a></footer>
 
 </body>
 </html>

@@ -70,7 +70,7 @@ public class Login extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            int flag = 0;// flag is for detecting weather the input is student's regNo or Teacher's codename 
+            int flag = 0;// flag is for detecting whether the input is student's regNo or Teacher's codename 
 
             String userId = (request.getParameter("user_name")).toString();
             String password = request.getParameter("password");
@@ -104,6 +104,7 @@ public class Login extends HttpServlet {
                     session.setAttribute("conn", conn);
                     session.setAttribute("teacher", teacher);
                     session.setAttribute("tracker", "teacher");
+                    session.setAttribute("courseSession", "All");
                 //previous
                     //session.setAttribute("courseSession", "2012");
                     //courses = courseDao.getCourseByTeacherId(teacher.getTeacherId(), conn, 2012);
@@ -141,6 +142,7 @@ public class Login extends HttpServlet {
                     session.setAttribute("conn", conn);
                     session.setAttribute("student", student);
                     session.setAttribute("tracker", "student");
+                    session.setAttribute("courseSession", "All");
                 //before
                    // session.setAttribute("courseSession", ""+student_session);
                     courses = courseDao.getAllCourseByStudentId(student.getStudentId(), conn);
