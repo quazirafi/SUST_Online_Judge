@@ -1,0 +1,10 @@
+                                            Up of the World!!!!!
+This problem is very much straight forward. You are given string of characters. You have to say how many character(s)
+in that string are upper cased. The maximum length of the string will be 15.
+
+Sample input:
+BanglaDeSH
+LAnd
+Sample output:
+4
+2

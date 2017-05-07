@@ -201,7 +201,7 @@
 </div>
 	
 	</div>
-	<footer class="footerme"><a style="color:white" href="Copyright.jsp">Copyright &copy; CSE, SUST</a></footer>
+	<footer class="footerme2"><a style="color:white" href="Copyright.jsp">Copyright &copy; CSE, SUST</a></footer>
 </body>
 
 <script>   

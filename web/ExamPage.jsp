@@ -288,7 +288,7 @@
                window.location.href = "EditExamPage?action=1&examId="+examId;
        }
        function setEditForm(examId){
-               alert(examId);
+               //alert(examId);
                document.getElementById('examId').value = examId;
        }
     </script>

@@ -151,9 +151,9 @@ public class Login extends HttpServlet {
 //                }
                     request.setAttribute("courses", courses);
                     RequestDispatcher rd = request.getRequestDispatcher("course.jsp");
-                    response.setHeader("Cache-Control", "private, no-cache, no-store, must-revalidate"); // HTTP 1.1.
-                    response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
-                    response.setDateHeader("Expires", 0);
+//                    response.setHeader("Cache-Control", "private, no-cache, no-store, must-revalidate"); // HTTP 1.1.
+//                    response.setHeader("Pragma", "no-cache"); // HTTP 1.0.
+//                    response.setDateHeader("Expires", 0);
                     rd.forward(request, response);
                 }
             }

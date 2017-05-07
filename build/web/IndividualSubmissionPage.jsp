@@ -82,8 +82,21 @@
     <div class="container">
 
 
-        <!--	<div class="clearfix"></div> -->
-        <!-- TABLE -->
+         <div class="row searchbar">
+                    <div class="col-xs-8">
+                        <p class="table-headertext">
+                    Student ID: <span id="course_code">${studentRegno}</span>
+                </p>
+                    </div>
+                    <div class="col-xs-2">
+                        
+                    </div>
+                    <div class="col-xs-2">
+                       
+                    </div>
+                    
+                       
+                </div>
         <div class="panel">
 
             <table id="taskTable"
@@ -113,8 +126,8 @@
                             <td>
                             <c:choose>
                                 <c:when test="${submissions.getVerdict() == 'Wrong'}">
-                                    <button class="addition" onclick="setEdit('${submissions.getSubmissionCount()}')" >Edit</button>
-                                    <button data-toggle="modal" data-target="#myModal2" class="addition2" onclick="submitEdited('${submissions.getSubmissionCount()}','${submissions.getSubmissionId()}')">Submit</button>
+                                    <button class="addition4" onclick="setEdit('${submissions.getSubmissionCount()}')" >Edit</button>
+                                    <button data-toggle="modal" data-target="#myModal2" class="addition5" onclick="submitEdited('${submissions.getSubmissionCount()}','${submissions.getSubmissionId()}')">Submit</button>
                                 </c:when>
                             </c:choose>
                             </td>
@@ -206,7 +219,7 @@
         </div>
         
     </div>
-    <footer class="footerme"><a style="color:white" href="Copyright.jsp">Copyright &copy; CSE, SUST</a></footer>
+    <footer class="footerme2"><a style="color:white" href="Copyright.jsp">Copyright &copy; CSE, SUST</a></footer>
 </body>
 
 <script>

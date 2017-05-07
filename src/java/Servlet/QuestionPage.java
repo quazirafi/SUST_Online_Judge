@@ -130,7 +130,7 @@ public class QuestionPage extends HttpServlet {
                     Exam exam = (Exam) session.getAttribute("exam");
                     String examTitle = exam.getTitle();
                     System.out.println("exam title "+exam.getTitle());
-                    request.setAttribute("exmTitle", exam.getTitle());
+                    session.setAttribute("exmTitle", exam.getTitle());
                     String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
                     for (Question q : questions) {
                         q.setPath(path + "Q" + q.getQuestionId() + "\\" + q.getQuestionFileName());
@@ -201,6 +201,7 @@ public class QuestionPage extends HttpServlet {
                     //Exam exam = (Exam) session.getAttribute("exam");
                     Exam exam = examDao.getExamById(examId, conn);
                     String examTitle = exam.getTitle();
+                    request.setAttribute("exmTitle",examTitle);
                     String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
                     for (Question q : questions) {
                         q.setPath(path + "Q" + q.getQuestionId() + "\\" + q.getQuestionFileName());

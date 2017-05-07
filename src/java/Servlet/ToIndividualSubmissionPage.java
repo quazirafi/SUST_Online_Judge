@@ -69,6 +69,9 @@ public class ToIndividualSubmissionPage extends HttpServlet {
         Exam exam = (Exam) session.getAttribute("exam");
         Connection conn = (Connection) session.getAttribute("conn");
         SubmissionDao submissionDao = new SubmissionDao();
+        StudentDao studentDao = new StudentDao();
+        String studentRegno = Integer.toString(studentDao.getStudentByStudentId(studentId, conn).getRegno());
+        request.setAttribute("studentRegno",studentRegno);
         ArrayList<Submission> submissions = (ArrayList<Submission>)submissionDao.getStudentSubmissions(studentId, exam.getExamId(), conn);
         request.setAttribute("submissions", submissions);
         RequestDispatcher rd = request.getRequestDispatcher("IndividualSubmissionPage.jsp");
