@@ -108,7 +108,7 @@
 
         <!--	<div class="clearfix"></div> -->
         <!-- TABLE -->
-        <div class="panel" style="padding:15px 20px;">
+        <div class="panel" >
 
             <table id="taskTable"
                    class="table table-striped table-bordered table-hover">
