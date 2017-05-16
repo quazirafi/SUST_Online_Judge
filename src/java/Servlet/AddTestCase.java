@@ -85,8 +85,8 @@ public class AddTestCase extends HttpServlet {
         int maxMemory = 1024 * 100000;
         int maxFileSize = 1024 * 100000;
         ServletContext context = request.getSession().getServletContext();
-        String filePath = context.getInitParameter("file-upload");
-        System.out.println(filePath);
+        
+        
         String contentType = request.getContentType();
         String fieldName = "";
         String fileName = "";
@@ -104,7 +104,10 @@ public class AddTestCase extends HttpServlet {
         String examTitle = exam.getTitle();
         Student student = (Student) session.getAttribute("student");
         String finalPath = "F:\\UploadFIles\\Submissions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
-        String questionPath = "F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+        ServletContext servletContext = request.getServletContext();
+        String rootPath = servletContext.getRealPath("/");
+        String filePath = rootPath+"Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+        String questionPath = rootPath + "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
         String fileRename = "";
 
         if (contentType.indexOf("multipart/form-data") >= 0) {

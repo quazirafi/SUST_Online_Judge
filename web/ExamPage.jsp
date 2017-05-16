@@ -102,7 +102,7 @@
             </div>       
 
             
-            <div class="panel">
+            <div class="panel" style="padding:15px 20px;">
 
                 <table id="taskTable"
                        class="table table-striped table-bordered table-hover">

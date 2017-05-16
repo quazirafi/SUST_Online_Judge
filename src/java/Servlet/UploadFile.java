@@ -85,7 +85,9 @@ public class UploadFile extends HttpServlet {
         int maxMemory = 1024 * 100000;
         int maxFileSize = 1024 * 100000;
         ServletContext context = request.getSession().getServletContext();
-        String filePath = context.getInitParameter("file-upload");
+        ServletContext servletContext = request.getServletContext();
+        String rootPath = servletContext.getRealPath("/");
+        String filePath = rootPath+"UploadFiles\\Submissions\\";
         System.out.println(filePath);
         String contentType = request.getContentType();
         String fieldName = "";
@@ -100,8 +102,8 @@ public class UploadFile extends HttpServlet {
         Connection conn = (Connection) session.getAttribute("conn");
         String examTitle = exam.getTitle();
         Student student = (Student) session.getAttribute("student");
-        String finalPath = "F:\\UploadFIles\\Submissions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
-        String questionPath = "F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+        String finalPath = rootPath+"Submissions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+        String questionPath = rootPath+"Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
         String fileRename = "";
         if (exam.getStatus().equals("ongoing")) {
             if (contentType.indexOf("multipart/form-data") >= 0) {

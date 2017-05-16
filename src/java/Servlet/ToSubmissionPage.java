@@ -24,6 +24,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -66,8 +67,10 @@ public class ToSubmissionPage extends HttpServlet {
         Connection conn = (Connection) session.getAttribute("conn");
         String examTitle = exam.getTitle();
         Student student = (Student) session.getAttribute("student");
-        String finalPath = "F:\\UploadFIles\\Submissions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
-        String questionPath = "F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+        ServletContext servletContext = request.getServletContext();
+        String rootPath = servletContext.getRealPath("/");
+        String finalPath = rootPath + "UploadFiles\\Submissions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+        String questionPath = rootPath + "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
 
         SubmissionDao submissionDao = new SubmissionDao();
 

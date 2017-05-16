@@ -25,6 +25,7 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import org.apache.commons.fileupload.FileItem;
@@ -116,7 +117,9 @@ public class AddQuestionPage extends HttpServlet {
             String id = "";
             String fileRename = "";
             String fileNameToBeInserted = "";
-            String filePath = "F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+            ServletContext servletContext = request.getServletContext();
+            String rootPath = servletContext.getRealPath("/");
+            String filePath = rootPath+"Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
             File createDirectory = new File(filePath);
             createDirectory.mkdirs();
             if (contentType.indexOf("multipart/form-data") >= 0) {
@@ -194,8 +197,10 @@ public class AddQuestionPage extends HttpServlet {
 
             //from here 
             List<Question> questions = questionDao.getQuestionByExamId(exam.getExamId(), conn);
-
+            
+            
             String path = "Questions\\" + courseSession + "\\" + courseTitle + "\\" + "exam" + exam.getExamId() + "\\";
+            System.out.println("INSIDE ADD QUESTION PAGE "+path );
             for (Question q : questions) {
                 q.setPath(path + "Q" + q.getQuestionId() + "\\" + q.getQuestionFileName());
                 System.out.println("path --> " + q.getPath());

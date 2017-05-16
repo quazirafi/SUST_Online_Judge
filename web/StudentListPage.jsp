@@ -104,7 +104,7 @@
                      
                      <br>
                      <br>
-		<div class="panel">
+		<div class="panel" style="padding:15px 20px;">
                     
                        
 			<table id="studentTable"

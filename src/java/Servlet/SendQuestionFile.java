@@ -6,6 +6,7 @@
 package Servlet;
 
 import java.io.*;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,20 +47,23 @@ public class SendQuestionFile extends HttpServlet {
         System.out.println("here in sendQuestionFile");
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            ServletContext servletContext = request.getServletContext();
+            String rootPath = servletContext.getRealPath("/");
             String path = request.getParameter("path");
-            File qFile = new File("F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\" + path);
+            System.out.println("Inside Send Question file"+path);
+            File qFile = new File(rootPath+path);
             
             BufferedReader br = null;
             FileReader fr = null;
 
             try {
 
-                fr = new FileReader("F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\" + path);
+                fr = new FileReader(rootPath+path);
                 br = new BufferedReader(fr);
 
                 String sCurrentLine;
 
-                br = new BufferedReader(new FileReader("F:\\Rafi\\My_Projects\\SUST_OnlineJudge\\web\\" + path));
+                br = new BufferedReader(new FileReader(rootPath+path));
 
                 while ((sCurrentLine = br.readLine()) != null) {
                     out.println(sCurrentLine);

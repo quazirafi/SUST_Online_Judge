@@ -84,8 +84,24 @@
                 <!-- NEW -->
                 <div class="row searchbar">
             <div class="col-xs-8">
+                <!-- 
+                
+                
+                
+                -->
+                
+                
                 <p class="table-headertext">
-                    Session: <span id="course_code">${courseSession}</span>
+                    
+                    <c:choose>
+                        <c:when test="${courseSession == '1000'}">
+                            Session: <span id="course_code">All</span>
+                                </c:when>
+                                <c:otherwise>
+                            Session: <span id="course_code">${courseSession}</span>
+                                </c:otherwise>
+                            </c:choose>
+                    
                 </p>
             </div>
                 
@@ -110,7 +126,7 @@
                 
                 
                 
-                <div class="panel">
+                <div class="panel" style="padding:15px 20px;">
                     <table id="courseTable"
                            class="table table-striped table-bordered table-hover">
                         <thead>
